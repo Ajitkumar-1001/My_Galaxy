@@ -1,0 +1,67 @@
+
+/* App.css */
+
+/* Global Styling */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg, #4e3393);
+  color: var(--color-text, #ffffff);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-accent, #5c5db2);
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Smooth Hover Transitions */
+.transition-default {
+  transition: all 0.3s ease-in-out;
+}
+
+/* Fade-in Animation */
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.7s ease-out both;
+}
+
+/* Optional Glow for Hero Elements */
+.shadow-glow {
+  box-shadow: 0 4px 20px rgba(92, 93, 178, 0.4);
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.8s ease-out both;
+}

@@ -1,0 +1,86 @@
+import React, { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { SplitText } from "gsap/SplitText";
+import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import "./Scrambletext.css";
+
+gsap.registerPlugin(SplitText, ScrambleTextPlugin);
+
+export interface ScrambledTextProps {
+  radius?: number;
+  duration?: number;
+  speed?: number;
+  scrambleChars?: string;
+  className?: string;
+  style?: React.CSSProperties;
+  children: React.ReactNode; // Preferably <p> elements or plain text
+}
+
+const ScrambledText: React.FC<ScrambledTextProps> = ({
+  radius = 300,
+  duration = 0.6,
+  speed = 1.2,
+  scrambleChars = "##$$",
+  className = "",
+  style = {},
+  children,
+}) => {
+  const rootRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (!rootRef.current) return;
+
+    const split = SplitText.create(rootRef.current.querySelectorAll("p"), {
+      type: "chars",
+      charsClass: "inline-block will-change-transform align-top",
+    });
+
+    split.chars.forEach((el) => {
+      const c = el as HTMLElement;
+      gsap.set(c, { attr: { "data-content": c.innerHTML } });
+    });
+
+    const handleMove = (e: PointerEvent) => {
+      split.chars.forEach((el) => {
+        const c = el as HTMLElement;
+        const { left, top, width, height } = c.getBoundingClientRect();
+        const dx = e.clientX - (left + width / 2);
+        const dy = e.clientY - (top + height / 2);
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < radius) {
+          gsap.to(c, {
+            overwrite: true,
+            duration: duration * (1 - dist / radius),
+            scrambleText: {
+              text: c.dataset.content || "",
+              chars: scrambleChars,
+              speed,
+            },
+            ease: "none",
+          });
+        }
+      });
+    };
+
+    const el = rootRef.current;
+    el.addEventListener("pointermove", handleMove);
+
+    return () => {
+      el.removeEventListener("pointermove", handleMove);
+      split.revert();
+    };
+  }, [radius, duration, speed, scrambleChars]);
+
+  return (
+    <div
+      ref={rootRef}
+      className={`scrambled-wrapper ${className}`}
+      style={style}
+    >
+      {children}
+    </div>
+  );
+};
+
+export default ScrambledText;
