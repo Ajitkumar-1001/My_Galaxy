@@ -1,328 +1,157 @@
-import React, { useEffect, useRef, useCallback, useMemo } from "react";
-import "./ProfileCard.css";
+import React ,{useMemo, useEffect}from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { User, Mail, University } from 'lucide-react'; // Using lucide-react for icons
 
+// Define the types for the component's props for type safety with TypeScript
 interface ProfileCardProps {
-  avatarUrl: string;
-  iconUrl?: string;
-  grainUrl?: string;
-  behindGradient?: string;
-  innerGradient?: string;
-  showBehindGradient?: boolean;
-  className?: string;
-  enableTilt?: boolean;
-  miniAvatarUrl?: string;
-  name?: string;
-  title?: string;
-  handle?: string;
-  status?: string;
-  contactText?: string;
-  showUserInfo?: boolean;
-  onContactClick?: () => void;
+  name: string;
+  role: string;
+  university: string;
+  degree: string;
+  address: string,
+  location: string,
+  contact: string;
+  mainImageUrl: string;
+  profileImageUrl: string;
+  profileHandle: string;
+  isAvailable: boolean;
 }
 
-const DEFAULT_BEHIND_GRADIENT =
-  "radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)";
-
-const DEFAULT_INNER_GRADIENT =
-  "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)";
-
-const ANIMATION_CONFIG = {
-  SMOOTH_DURATION: 600,
-  INITIAL_DURATION: 1500,
-  INITIAL_X_OFFSET: 70,
-  INITIAL_Y_OFFSET: 60,
-} as const;
-
-const clamp = (value: number, min = 0, max = 100): number =>
-  Math.min(Math.max(value, min), max);
-
-const round = (value: number, precision = 3): number =>
-  parseFloat(value.toFixed(precision));
-
-const adjust = (
-  value: number,
-  fromMin: number,
-  fromMax: number,
-  toMin: number,
-  toMax: number
-): number =>
-  round(toMin + ((toMax - toMin) * (value - fromMin)) / (fromMax - fromMin));
-
-const easeInOutCubic = (x: number): number =>
-  x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
-
-const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "<Placeholder for avatar URL>",
-  iconUrl = "<Placeholder for icon URL>",
-  grainUrl = "<Placeholder for grain URL>",
-  behindGradient,
-  innerGradient,
-  showBehindGradient = true,
-  className = "",
-  enableTilt = true,
-  miniAvatarUrl,
-  name = "Javi A. Torres",
-  title = "Software Engineer",
-  handle = "javicodes",
-  status = "Online",
-  contactText = "Contact",
-  showUserInfo = true,
-  onContactClick,
+// The Profile Card Component
+const ProfileCard: React.FC<ProfileCardProps> = ({
+  name,
+  role,
+  university,
+  address,
+  location,
+  degree,
+  contact,
+  mainImageUrl,
+  profileImageUrl,
+  profileHandle,
+  isAvailable,
 }) => {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const cardRef = useRef<HTMLDivElement>(null);
 
-  const animationHandlers = useMemo(() => {
-    if (!enableTilt) return null;
+  const handleScroll = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
-    let rafId: number | null = null;
+    const control1 = useAnimation(); 
+    const control2 = useAnimation(); 
 
-    const updateCardTransform = (
-      offsetX: number,
-      offsetY: number,
-      card: HTMLElement,
-      wrap: HTMLElement
-    ) => {
-      const width = card.clientWidth;
-      const height = card.clientHeight;
+    const cardvariants = useMemo(() => ({
+      hidden : {opacity:0, y: 20 , z: 30},
+      visible : {opacity:1, y:0,z:0 , transition : {duration:1 , delay:2 , ease:"easeIn", staggerChildren : 0.5}}
+    }),[])
 
-      const percentX = clamp((100 / width) * offsetX);
-      const percentY = clamp((100 / height) * offsetY);
+    const itemvariants = useMemo(()=>({
+      hidden : {opacity : 0, y:30, z: 20},
+      visible : {opacity : 1, y:0 , z: 0, transition: {duration:1, ease:"easeInOut"}}
+    }),[])
 
-      const centerX = percentX - 50;
-      const centerY = percentY - 50;
+    const itemvariants2 = useMemo(() => ({
 
-      const properties = {
-        "--pointer-x": `${percentX}%`,
-        "--pointer-y": `${percentY}%`,
-        "--background-x": `${adjust(percentX, 0, 100, 35, 65)}%`,
-        "--background-y": `${adjust(percentY, 0, 100, 35, 65)}%`,
-        "--pointer-from-center": `${clamp(Math.hypot(percentY - 50, percentX - 50) / 50, 0, 1)}`,
-        "--pointer-from-top": `${percentY / 100}`,
-        "--pointer-from-left": `${percentX / 100}`,
-        "--rotate-x": `${round(-(centerX / 5))}deg`,
-        "--rotate-y": `${round(centerY / 4)}deg`,
-      };
+       hidden : {opacity: 0 , y:40, z:50},
+       visible : {opacity :1 , y:0 , z:0 , transition : {duration : 1.5, ease:"easeOut"}}
+    }), [])
 
-      Object.entries(properties).forEach(([property, value]) => {
-        wrap.style.setProperty(property, value);
-      });
-    };
+    const itemvariants3 = useMemo(() => ({
 
-    const createSmoothAnimation = (
-      duration: number,
-      startX: number,
-      startY: number,
-      card: HTMLElement,
-      wrap: HTMLElement
-    ) => {
-      const startTime = performance.now();
-      const targetX = wrap.clientWidth / 2;
-      const targetY = wrap.clientHeight / 2;
+      hidden : {opacity: 0 , y:40, z:50},
+      visible : {opacity :1 , y:0 , z:0 , transition : {duration : 1.7, ease:"easeOut"}}
+   }), [])
 
-      const animationLoop = (currentTime: number) => {
-        const elapsed = currentTime - startTime;
-        const progress = clamp(elapsed / duration);
-        const easedProgress = easeInOutCubic(progress);
+    useEffect(()=>{
+      
+      const sequence = async() => {
 
-        const currentX = adjust(easedProgress, 0, 1, startX, targetX);
-        const currentY = adjust(easedProgress, 0, 1, startY, targetY);
+        await control1.start("visible");
+        await new Promise((res)=> setTimeout(res,1000));
+        await control2.start("visible"); 
+    
 
-        updateCardTransform(currentX, currentY, card, wrap);
-
-        if (progress < 1) {
-          rafId = requestAnimationFrame(animationLoop);
-        }
-      };
-
-      rafId = requestAnimationFrame(animationLoop);
-    };
-
-    return {
-      updateCardTransform,
-      createSmoothAnimation,
-      cancelAnimation: () => {
-        if (rafId) {
-          cancelAnimationFrame(rafId);
-          rafId = null;
-        }
-      },
-    };
-  }, [enableTilt]);
-
-  const handlePointerMove = useCallback(
-    (event: PointerEvent) => {
-      const card = cardRef.current;
-      const wrap = wrapRef.current;
-
-      if (!card || !wrap || !animationHandlers) return;
-
-      const rect = card.getBoundingClientRect();
-      animationHandlers.updateCardTransform(
-        event.clientX - rect.left,
-        event.clientY - rect.top,
-        card,
-        wrap
-      );
-    },
-    [animationHandlers]
-  );
-
-  const handlePointerEnter = useCallback(() => {
-    const card = cardRef.current;
-    const wrap = wrapRef.current;
-
-    if (!card || !wrap || !animationHandlers) return;
-
-    animationHandlers.cancelAnimation();
-    wrap.classList.add("active");
-    card.classList.add("active");
-  }, [animationHandlers]);
-
-  const handlePointerLeave = useCallback(
-    (event: PointerEvent) => {
-      const card = cardRef.current;
-      const wrap = wrapRef.current;
-
-      if (!card || !wrap || !animationHandlers) return;
-
-      animationHandlers.createSmoothAnimation(
-        ANIMATION_CONFIG.SMOOTH_DURATION,
-        event.offsetX,
-        event.offsetY,
-        card,
-        wrap
-      );
-      wrap.classList.remove("active");
-      card.classList.remove("active");
-    },
-    [animationHandlers]
-  );
-
-  useEffect(() => {
-    if (!enableTilt || !animationHandlers) return;
-
-    const card = cardRef.current;
-    const wrap = wrapRef.current;
-
-    if (!card || !wrap) return;
-
-    const pointerMoveHandler = handlePointerMove as EventListener;
-    const pointerEnterHandler = handlePointerEnter as EventListener;
-    const pointerLeaveHandler = handlePointerLeave as EventListener;
-
-    card.addEventListener("pointerenter", pointerEnterHandler);
-    card.addEventListener("pointermove", pointerMoveHandler);
-    card.addEventListener("pointerleave", pointerLeaveHandler);
-
-    const initialX = wrap.clientWidth - ANIMATION_CONFIG.INITIAL_X_OFFSET;
-    const initialY = ANIMATION_CONFIG.INITIAL_Y_OFFSET;
-
-    animationHandlers.updateCardTransform(initialX, initialY, card, wrap);
-    animationHandlers.createSmoothAnimation(
-      ANIMATION_CONFIG.INITIAL_DURATION,
-      initialX,
-      initialY,
-      card,
-      wrap
-    );
-
-    return () => {
-      card.removeEventListener("pointerenter", pointerEnterHandler);
-      card.removeEventListener("pointermove", pointerMoveHandler);
-      card.removeEventListener("pointerleave", pointerLeaveHandler);
-      animationHandlers.cancelAnimation();
-    };
-  }, [
-    enableTilt,
-    animationHandlers,
-    handlePointerMove,
-    handlePointerEnter,
-    handlePointerLeave,
-  ]);
-
-  const cardStyle = useMemo(
-    () =>
-      ({
-        "--icon": iconUrl ? `url(${iconUrl})` : "none",
-        "--grain": grainUrl ? `url(${grainUrl})` : "none",
-        "--behind-gradient": showBehindGradient
-          ? (behindGradient ?? DEFAULT_BEHIND_GRADIENT)
-          : "none",
-        "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
-      }) as React.CSSProperties,
-    [iconUrl, grainUrl, showBehindGradient, behindGradient, innerGradient]
-  );
-
-  const handleContactClick = useCallback(() => {
-    onContactClick?.();
-  }, [onContactClick]);
+      }
+      sequence();
+    },[control1,control2])
 
   return (
-    <div
-      ref={wrapRef}
-      className={`pc-card-wrapper ${className}`.trim()}
-      style={cardStyle}
-    >
-      <section ref={cardRef} className="pc-card">
-        <div className="pc-inside">
-          <div className="pc-shine" />
-          <div className="pc-glare" />
-          <div className="pc-content pc-avatar-content">
+    // Outermost container to center the card and provide a background
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-4 font-sans font-bold">
+      <div
+        className="w-full max-w-xl min-h-xl p-[1px] bg-gradient-to-br from-black-900 via-gray-800 to-white-900  shadow-xl"
+        
+      >
+        {/* Top section with name and role */}
+        <motion.div className="p-6 text-center" variants={cardvariants as any} 
+        initial="hidden"
+        animate ={control1}
+        viewport = {{once:true}}>
+          <motion.h1 className="text-3xl font-extrabold bg-gradient-to-t from-blue-600 to-blue-300 bg-clip-text text-transparent" variants={itemvariants as any}>{university}</motion.h1>
+          <motion.p className="text-md bg-gradient-to-t from-white to-blue-650 bg-clip-text text-transparent mt-1" variants={itemvariants as any}>{degree}</motion.p>
+          <motion.p className="text-md text-white mt-2 tracking-widest" variants={itemvariants as any}>{address}</motion.p>
+          <motion.p className="text-md text-white mt-2 tracking-widest" variants={itemvariants as any}>{location}</motion.p>
+          <motion.p className='text-md bg-gradient-to-t from-white to-blue-400 bg-clip-text text-transparent' variants={itemvariants as any}>{contact}</motion.p>
+        </motion.div>
+
+     
+        <motion.div 
+          className="px-4" 
+          variants={cardvariants as any} 
+         initial="hidden"
+         animate ={control1}
+         viewport = {{once:true}}
+     
+        >
+          <motion.img
+            variants={itemvariants as any}
+            src={mainImageUrl}
+            alt={`${name}'s photo`}
+            className="w-full z-20 h-80 object-cover rounded-[2rem] shadow-lg"
+            // Fallback in case the image fails to load
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
+            }}
+          />
+        </motion.div>
+
+        {/* Bottom section with profile info and CTA */}
+        <motion.div className="p-6 flex items-center justify-between" variants={cardvariants as any} initial="hidden" animate={control1}>
+          <motion.div className="flex items-center gap-3" variants={itemvariants2 as any}>
             <img
-              className="avatar"
-              src={avatarUrl}
-              alt={`${name || "User"} avatar`}
-              loading="lazy"
+              src={profileImageUrl}
+              alt={name}
+              className="w-12 h-12 p-[3px] rounded-full  bg-gradient-to-r from-blue-300 via-blue-700 to-white object-cover"
               onError={(e) => {
-                const target = e.target as HTMLImageElement;
-                target.style.display = "none";
+                (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
               }}
             />
-            {showUserInfo && (
-              <div className="pc-user-info">
-                <div className="pc-user-details">
-                  <div className="pc-mini-avatar">
-                    <img
-                      src={miniAvatarUrl || avatarUrl}
-                      alt={`${name || "User"} mini avatar`}
-                      loading="lazy"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.opacity = "0.5";
-                        target.src = avatarUrl;
-                      }}
-                    />
-                  </div>
-                  <div className="pc-user-text">
-                    <div className="pc-handle">@{handle}</div>
-                    <div className="pc-status">{status}</div>
-                  </div>
+            <div>
+              <p className="font-semibold text-white">@{profileHandle}</p>
+              {isAvailable && (
+                <div className="flex items-center gap-1.5 mt-1">
+                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                  <p className="text-xs text-green-400">Available</p>
                 </div>
-                <button
-                  className="pc-contact-btn"
-                  onClick={handleContactClick}
-                  style={{ pointerEvents: "auto" }}
-                  type="button"
-                  aria-label={`Contact ${name || "user"}`}
-                >
-                  {contactText}
-                </button>
-              </div>
-            )}
-          </div>
-          <div className="pc-content">
-            <div className="pc-details">
-              <h3>{name}</h3>
-              <p>{title}</p>
+              )}
             </div>
-          </div>
-        </div>
-      </section>
+          </motion.div>
+
+          <motion.a 
+            onClick={() => handleScroll("contact")}
+            className="bg-gray-200 text-gray-900 font-semibold px-5 py-2.5 rounded-lg shadow-md flex items-center gap-2"
+            variants={itemvariants3 as any}
+            
+          >
+            <Mail size={16} />
+            Hire Me
+          </motion.a>
+        </motion.div>
+      </div>
     </div>
   );
 };
-
-const ProfileCard = React.memo(ProfileCardComponent);
 
 export default ProfileCard;
