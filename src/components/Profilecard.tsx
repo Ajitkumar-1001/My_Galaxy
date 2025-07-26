@@ -1,6 +1,7 @@
-import React ,{useMemo, useEffect}from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React ,{useState,useMemo, useEffect, useRef ,useCallback}from 'react';
+import { isHTMLElement, motion, useAnimation } from 'framer-motion';
 import { User, Mail, University } from 'lucide-react'; // Using lucide-react for icons
+import { tr } from 'framer-motion/client';
 
 // Define the types for the component's props for type safety with TypeScript
 interface ProfileCardProps {
@@ -15,6 +16,7 @@ interface ProfileCardProps {
   profileImageUrl: string;
   profileHandle: string;
   isAvailable: boolean;
+  // className : string,
 }
 
 // The Profile Card Component
@@ -30,6 +32,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   profileImageUrl,
   profileHandle,
   isAvailable,
+  // className
 }) => {
 
   const handleScroll = (sectionId: string) => {
@@ -38,9 +41,29 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       section.scrollIntoView({ behavior: "smooth" });
     }
   };
-
+    const [isHovered , setIsHovered] = useState<boolean>(false);
     const control1 = useAnimation(); 
     const control2 = useAnimation(); 
+    const control3 = useAnimation();
+
+    const hoverGlow = useMemo(() => ({
+      hidden: { scale: 1 },
+      visible: {
+        scale: 1.1,
+        boxShadow: "0 0 15px #f5f5f5, 0 0 25px #3b82f6, 0 0 40px #331FC5",
+        transition: { duration: 0.5, ease: "easeIn" }
+      }
+    }), []);
+
+    const handleHover = useCallback(()=>{
+      control3.start("visible");
+
+    },[control3]);
+
+
+    const img = useRef<HTMLImageElement|null>(null);
+    
+
 
     const cardvariants = useMemo(() => ({
       hidden : {opacity:0, y: 20 , z: 30},
@@ -71,17 +94,24 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         await control1.start("visible");
         await new Promise((res)=> setTimeout(res,1000));
         await control2.start("visible"); 
+
+        if (isHovered === true) { 
+          await control3.start("visible");
+        }
+        else{ 
+          control3.start("hidden")
+        }
     
 
       }
       sequence();
-    },[control1,control2])
+    },[control1,control2,control3])
 
   return (
     // Outermost container to center the card and provide a background
-    <div className="min-h-screen bg-transparent flex items-center justify-center p-4 font-sans font-bold">
+    <div className="min-h-screen bg-transparent  flex items-center justify-center p-4 font-sans font-bold">
       <div
-        className="w-full max-w-xl min-h-xl p-[1px] bg-gradient-to-br from-black-900 via-gray-800 to-white-900  shadow-xl"
+        className="w-full max-w-xl min-h-xl p-[1px] rounded-xl bg-gradient-to-br from-black-900 via-gray-800 to-white-900  shadow-xl"
         
       >
         {/* Top section with name and role */}
@@ -106,10 +136,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
      
         >
           <motion.img
+           
             variants={itemvariants as any}
             src={mainImageUrl}
             alt={`${name}'s photo`}
-            className="w-full z-20 h-80 object-cover rounded-[2rem] shadow-lg"
+            className="w-full z-20 h-90 object-cover rounded-[2rem] shadow-lg"
             // Fallback in case the image fails to load
             onError={(e) => {
               (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
@@ -119,11 +150,18 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
         {/* Bottom section with profile info and CTA */}
         <motion.div className="p-6 flex items-center justify-between" variants={cardvariants as any} initial="hidden" animate={control1}>
-          <motion.div className="flex items-center gap-3" variants={itemvariants2 as any}>
-            <img
+          <motion.div className="flex items-center gap-3 animate-spinSlow" variants={itemvariants2 as any}>
+            <motion.img
+            variants={hoverGlow as any}
+             ref = {img}
+             onMouseEnter={()=>{ setIsHovered(true);}}
+             onMouseLeave={()=>{setIsHovered(false);}}
+             initial="hidden"
+             animate = {isHovered ? "visible" : "hidden"}
+              
               src={profileImageUrl}
               alt={name}
-              className="w-12 h-12 p-[3px] rounded-full  bg-gradient-to-r from-blue-300 via-blue-700 to-white object-cover"
+              className="w-14 h-14 p-[3px] rounded-full  bg-gradient-to-r from-blue-300 via-blue-700 to-white object-cover "
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
               }}

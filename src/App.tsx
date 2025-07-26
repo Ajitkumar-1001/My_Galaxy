@@ -7,7 +7,7 @@ import Galaxy from './components/Galaxy';
 import Particles from './components/particles';
 import {  motion, useAnimation } from 'framer-motion';
 import Projects from './pages/Project';
-import Experience from './pages/Experience';
+// import Experience from './pages/Experience';
 // import SplashCursor from './components/Splashcursor';
 import './App.css';
 import Contact from './pages/Contact';
@@ -145,7 +145,7 @@ function App() {
             <Navbar />
             <Hero />
             <About />
-            <Experience />
+          
             <Skills />
             <Projects />
             <Contact />
