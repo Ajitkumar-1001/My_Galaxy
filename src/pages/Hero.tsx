@@ -2,7 +2,8 @@ import React, { useMemo, useEffect , useRef} from 'react';
 import ProfileCard from '../components/Profilecard.tsx';
 import TextType from '../components/Texttype.tsx';
 import {motion, useAnimation, useInView} from "framer-motion";
-
+import { DownloadCloudIcon, DownloadIcon, } from 'lucide-react';
+import { EyeOpenIcon } from '@radix-ui/react-icons';
 
 const Hero: React.FC = () => {
 
@@ -116,29 +117,34 @@ const Hero: React.FC = () => {
             I’m a passionate engineer driven by curiosity, with roots in Mechanical Engineering and a thriving ambition in the world of Data Science, Machine Learning, and Artificial Intelligence.
             </span>
           </h6>
+           <h6 className='font-bold font-sans text-xl relative mt-2 bg-gradient-to-t from-gray-700 to-white bg-clip-text text-transparent brightness-170 capitalize'>
+            Actively looking for full time opportunities in Machine learning engineer, data scientist roles, I would appreciate you to explore my works! down below 
+
+           </h6>
         </motion.div>
          
-         <div>
-
-         </div>
+        
 
 
         {/* CTA Buttons */}
-        <motion.div className="mt-8 flex flex-wrap gap-4" variants={middleware as any}>
+        <motion.div className="mt-8 flex md: flex-rows items-center flex-wrap gap-4" variants={middleware as any}>
           <motion.a
             variants={controlprops2 as any} 
             href="#projects"
-            className="bg-indigo-600 text-white px-6 py-3 font-sans font-bold shadow-3xl rounded-md hover:bg-indigo-500 hover:scale-110 transition duration-300 shadow-md"
+            className="bg-transparent text-white relative flex flex-row items-center gap-2 border border-white-400 px-6 py-3 font-sans font-bold shadow-3xl rounded-md hover:scale-110 transition duration-300 shadow-md"
           >
-            View Projects
+            <EyeOpenIcon className='relative mx-2 w-8 h-8 rounded-2xl shadow-3xl'></EyeOpenIcon>
+            <h2 className='relative mx-auto bg-gradient-to-t from-blue-400 to-blue-900 bg-clip-text text-transparent brightness-200 text-xl hover:text-white '>Projects</h2>
           </motion.a>
           <motion.a
             variants={controlprops2 as any} 
             href="/Ajitkumar_Resume.pdf"
             target="_blank"
-            className="border font-sans font-bold border-indigo-600 text-indigo-600 px-6 py-3 rounded-md hover:bg-indigo-500 hover:text-white hover:scale-110 transition duration-300 shadow-3xl" 
+            className="flex flex-row border font-sans font-bold border-white-400 text-white px-6 py-3 rounded-md  hover:text-white hover:scale-110 transition duration-300 shadow-3xl" 
           >
-            Download Resume
+           <DownloadIcon className='relative mx-2 w-8 h-8 rounded-2xl shadow-3xl '></DownloadIcon>
+           <h2 className='text-xl relative bg-gradient-to-br from-blue-500 to-blue-950 bg-clip-text text-transparent brightness-200  hover:text-white mx-auto'> Resume</h2>
+           
           </motion.a>
         </motion.div>
       </motion.div>
@@ -153,8 +159,9 @@ const Hero: React.FC = () => {
           address='25 Callodine Avenue, Buffalo'
           location='New York'
           contact='+1-(716)-249-9240'
+          // className='border rounded-xl shadow-3xl border-white-500'
 
-          degree='Master of Science in Data Science'
+          degree='Master of Science'
           mainImageUrl="/Users/ajit/Desktop/Portfolio/my-portfolio/src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
           profileImageUrl="/Users/ajit/Desktop/Portfolio/my-portfolio/src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
           profileHandle="ajitkumar"
