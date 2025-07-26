@@ -1,6 +1,6 @@
-# React + TypeScript + Vite
+My Galaxy
 
-THIS REPOSITORY HAS FILES AND FOLDERS FOR MY PERSONAL( PROFESSIONAL ) PORTFOLIO.
+ portfolio of mine with a galaxy and space theme focused!
 
 
 
