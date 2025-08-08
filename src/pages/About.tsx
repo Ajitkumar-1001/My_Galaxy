@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, {  useEffect, useMemo, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
 
 const About: React.FC = () => {

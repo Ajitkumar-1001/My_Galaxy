@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 const Experience: React.FC = () => {
   const { control1 } = useAnimateElement();
   const containerVariant = useMemo(()=>(containerprops_fade),[]);
-  const contentVariant = useMemo(()=>(containerprops_fade),[]);
+  const contentVariant = useMemo(()=>(contentprops_fade),[]);
 
   return (
     <section
