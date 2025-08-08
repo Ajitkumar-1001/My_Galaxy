@@ -66,7 +66,7 @@ const About: React.FC = () => {
       // controls.stop("hover");
 
     }
-  }, [inView]);
+  }, [inView,controls]);
 
   const cards = [
     {

@@ -51,7 +51,7 @@ const Contact: React.FC = () => {
 
   useEffect(() => {
     if (inView) controls.start("visible");
-  }, [inView, controls]);
+  }, [inView]);
 
   return (
     <section
