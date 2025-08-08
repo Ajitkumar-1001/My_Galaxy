@@ -1,69 +1,90 @@
-import React ,{useMemo} from "react";
+import React ,{useMemo, useEffect,useRef} from "react";
 import { experience_content } from "../data/data";
-import { containerprops_fade, contentprops_fade } from "../data/animate";
+import { containerprops_fade, Containerhide, contentprops_fade, motionVariant,contentMotionVariant } from "../data/animate";
 import { useAnimateElement } from "../data/controls"; // make sure this name matches the actual export
-import { motion } from "framer-motion";
+import { motion , useInView} from "framer-motion";
 
 const Experience: React.FC = () => {
-  const { control1 } = useAnimateElement();
+  const { control1,control2 } = useAnimateElement();
   const containerVariant = useMemo(()=>(containerprops_fade),[]);
   const contentVariant = useMemo(()=>(contentprops_fade),[]);
+  const motionContainr = useMemo(()=>(motionVariant),[]);
+  const motionContent = useMemo(()=>(contentMotionVariant),[]); 
+  const hideContainer = useMemo(()=> (Containerhide),[]);
+  const sectionref = useRef(null); 
+  const threshold:any = 0.3; 
+  const inView = useInView(sectionref,threshold); 
+
+
+  useEffect(()=> { 
+
+    if(inView){ 
+        control1.start("visible");
+        control2.start("visible");
+    }
+    else{
+        control1.start("hidden");
+        control2.start("hidden");
+    };
+
+  },[inView]);
 
   return (
     <section
+      ref = { sectionref}
       id="experience"
       className="min-h-screen flex flex-col justify-center items-center bg-transparent p-15 mt-10"
     >
-      <div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8">
+      <motion.div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8" variants={hideContainer} initial="hidden" animate={control1}>
         <div className="text-center mb-12">
           <h1 className="text-xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-900 to-blue-300 bg-clip-text text-transparent">
             Experience
           </h1>
         </div>
 
-        <div className="flex flex-col gap-6 space-y-5">
+        <motion.div className="flex flex-col gap-6 space-y-5" variants ={containerVariant}>
           {experience_content.map((exp) => (
             <motion.div
               key={exp.id}
-              variants={containerVariant}
+              variants={motionContainr}
               initial="hidden"
               animate={control1}
               className="w-full rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
             >
               <div className="flex flex-row items-start gap-4">
-                <motion.div className="shrink-0" variants={contentVariant}>
-                  <img
+                <motion.div className="shrink-0" variants={containerVariant}>
+                  <motion.img variants={contentVariant}
                     src={exp.logo}
                     alt={`${exp.company_name} logo`}
                     className="w-30 h-30 rounded-3xl object-contain shadow-3xl"
                   />
                 </motion.div>
 
-                <motion.div className="flex-1" variants={contentVariant}>
-                  <h2 className="text-2xl font-sans text-center font-bold bg-gradient-to-br from-blue-950 to-sky-900 brightness-200 bg-clip-text text-transparent">
+                <motion.div className="flex-1" variants={motionContainr}>
+                  <motion.h2 className="text-2xl font-sans text-center font-bold bg-gradient-to-br from-blue-950 to-sky-900 brightness-200 bg-clip-text text-transparent" variants={motionContent}>
                     {exp.company_name}
-                  </h2>
+                  </motion.h2>
 
-                  <div className="mt-1 font-sans text-center font-bold text-sm text-gray-300">
+                  <motion.div className="mt-1 font-sans text-center font-bold text-sm text-gray-300" variants={motionContainr}>
                     {exp.period_Start} — {exp.period_end}
-                  </div>
+                  </motion.div>
 
-                  <div className="mt-3">
+                  <motion.div className="mt-3" variants={motionContainr}>
                     <ul className="list-none space-y-1">
-                      <li className="text-xl brightness-190 text-center font-sans font-bold bg-gradient-to-tr from-gray-500 to-white-500 bg-clip-text text-transparent">
+                      <motion.li className="text-xl brightness-190 text-center font-sans font-bold bg-gradient-to-tr from-gray-500 to-white-500 bg-clip-text text-transparent" variants={motionContent}>
                         {exp.role}
-                      </li>
+                      </motion.li>
                     </ul>
-                    <p className="mt-2 text-center text-base font-sans font-semibold bg-gradient-to-br from-gray-500 to-white bg-clip-text text-transparent brightness-150">
+                    <motion.p className="mt-2 text-center text-base font-sans font-semibold bg-gradient-to-br from-gray-500 to-white bg-clip-text text-transparent brightness-150" variants={motionContent}>
                       {exp.role_description}
-                    </p>
-                  </div>
+                    </motion.p>
+                  </motion.div>
                 </motion.div>
               </div>
             </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

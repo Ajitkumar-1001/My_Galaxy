@@ -76,7 +76,7 @@ const Projects: React.FC = () => {
       }
     };
     animate();
-  }, [inView, controls]);
+  }, [inView]);
 
   const parentVariant : any = useMemo(
     () => ({
