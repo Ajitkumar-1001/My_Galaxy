@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Hero from './pages/Hero';
 import About from './pages/About';
 import Navbar from './components/navbar';
@@ -7,10 +7,11 @@ import Galaxy from './components/Galaxy';
 import Particles from './components/particles';
 import {  motion, useAnimation } from 'framer-motion';
 import Projects from './pages/Project';
-// import Experience from './pages/Experience';
+import Experience from './pages/Experience';
 // import SplashCursor from './components/Splashcursor';
 import './App.css';
 import Contact from './pages/Contact';
+import Footer from './components/Footer';
 
 
 
@@ -41,14 +42,14 @@ function App() {
     }
   }), []);
 
-  const welcome3 = useMemo(() => ( {
-    hidden: { opacity: 0, scale: 0.2 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
-    }
-  }), []);
+  // const welcome3 = useMemo(() => ( {
+  //   hidden: { opacity: 0, scale: 0.2 },
+  //   visible: {
+  //     opacity: 1,
+  //     scale: 1,
+  //     transition: { duration: 0.8, ease: "easeOut" }
+  //   }
+  // }), []);
  
 
   useEffect(() => {
@@ -132,12 +133,15 @@ function App() {
         <>
           <div className="fixed inset-0 z-0">
             <Particles
-              particleCount={1000}
-              particleColors={["#ffffff", "#1e90ff", "#3d4ae9", "#d3d3d3"]}
+              particleCount={1200}
+              particleSpread={20}
+              particleColors={["#ffffff", "#1ffff", "#3f3f3f", "#fefefe"]}
               moveParticlesOnHover={true}
               particleBaseSize={50}
-              speed={0.15}
-              className="w-full h-full"
+              speed={0.25}
+              cameraDistance={10}
+              disableRotation = {false}
+              className="w-full h-full brightness-200 "
             />
           </div>
 
@@ -145,10 +149,11 @@ function App() {
             <Navbar />
             <Hero />
             <About />
-          
+            <Experience />
             <Skills />
             <Projects />
             <Contact />
+            <Footer />
           </div>
         </>
       )}

@@ -1,7 +1,6 @@
 import React ,{useState,useMemo, useEffect, useRef ,useCallback}from 'react';
-import { isHTMLElement, motion, useAnimation } from 'framer-motion';
-import { User, Mail, University } from 'lucide-react'; // Using lucide-react for icons
-import { tr } from 'framer-motion/client';
+import { motion, useAnimation } from 'framer-motion';
+import {  Mail} from 'lucide-react'; // Using lucide-react for icons
 
 // Define the types for the component's props for type safety with TypeScript
 interface ProfileCardProps {
@@ -22,7 +21,7 @@ interface ProfileCardProps {
 // The Profile Card Component
 const ProfileCard: React.FC<ProfileCardProps> = ({
   name,
-  role,
+  // role,
   university,
   address,
   location,
@@ -119,11 +118,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         initial="hidden"
         animate ={control1}
         viewport = {{once:true}}>
-          <motion.h1 className="text-3xl font-extrabold bg-gradient-to-t from-blue-600 to-blue-300 bg-clip-text text-transparent" variants={itemvariants as any}>{university}</motion.h1>
-          <motion.p className="text-md bg-gradient-to-t from-white to-blue-650 bg-clip-text text-transparent mt-1" variants={itemvariants as any}>{degree}</motion.p>
-          <motion.p className="text-md text-white mt-2 tracking-widest" variants={itemvariants as any}>{address}</motion.p>
-          <motion.p className="text-md text-white mt-2 tracking-widest" variants={itemvariants as any}>{location}</motion.p>
-          <motion.p className='text-md bg-gradient-to-t from-white to-blue-400 bg-clip-text text-transparent' variants={itemvariants as any}>{contact}</motion.p>
+          <motion.h1 className="text-3xl font-extrabold bg-gradient-to-t from-blue-600 to-blue-300 bg-clip-text text-transparent " variants={itemvariants as any}>{university}</motion.h1>
+          <motion.p className="text-md bg-gradient-to-t from-white to-blue-650 bg-clip-text text-transparent mt-1 " variants={itemvariants as any}>{degree}</motion.p>
+          <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{address}</motion.p>
+          <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{location}</motion.p>
+          <motion.p className='text-md bg-gradient-to-t from-white to-blue-400 bg-clip-text text-transparent ' variants={itemvariants as any}>{contact}</motion.p>
         </motion.div>
 
      
@@ -133,6 +132,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
          initial="hidden"
          animate ={control1}
          viewport = {{once:true}}
+         
      
         >
           <motion.img
@@ -140,7 +140,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             variants={itemvariants as any}
             src={mainImageUrl}
             alt={`${name}'s photo`}
-            className="w-full z-20 h-90 object-cover rounded-[2rem] shadow-lg"
+            className="w-full z-20 h-90 object-cover rounded-[2rem] shadow-lg "
             // Fallback in case the image fails to load
             onError={(e) => {
               (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
@@ -149,8 +149,8 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         </motion.div>
 
         {/* Bottom section with profile info and CTA */}
-        <motion.div className="p-6 flex items-center justify-between" variants={cardvariants as any} initial="hidden" animate={control1}>
-          <motion.div className="flex items-center gap-3 animate-spinSlow" variants={itemvariants2 as any}>
+        <motion.div className="p-6 flex items-center justify-between " variants={cardvariants as any} initial="hidden" animate={control1}>
+          <motion.div className="flex items-center gap-3  " variants={itemvariants2 as any}>
             <motion.img
             variants={hoverGlow as any}
              ref = {img}
@@ -161,7 +161,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               
               src={profileImageUrl}
               alt={name}
-              className="w-14 h-14 p-[3px] rounded-full  bg-gradient-to-r from-blue-300 via-blue-700 to-white object-cover "
+              className="w-14 h-14 p-[3px] rounded-full  bg-gradient-to-r animate-pulse from-blue-300 via-blue-700 to-white object-cover "
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
               }}
@@ -179,8 +179,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
           <motion.a 
             onClick={() => handleScroll("contact")}
-            className="bg-gray-200 text-gray-900 font-semibold px-5 py-2.5 rounded-lg shadow-md flex items-center gap-2"
+            className="bg-gray-200 text-gray-900 font-semibold px-5 py-2.5 rounded-lg shadow-md flex items-center gap-2 animate-pulse"
             variants={itemvariants3 as any}
+            
             
           >
             <Mail size={16} />

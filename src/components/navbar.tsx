@@ -1,16 +1,22 @@
-import React from "react";
+import React ,{useState} from "react";
+import { FaAlignJustify } from 'react-icons/fa';
+import { Menu } from "lucide-react";
+
 
 const Navbar: React.FC = () => {
+
+  const [ismobile, setIsMobile] = useState<boolean>(false);
 
   const handleScroll = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
+      setIsMobile(false);
     }
   };
 
   return (
-    <header className="fixed flex flex-col md:flex-row top-0 left-0 w-full z-50 bg-inherit-shadow-md px-6 py-4">
+    <header className=" fixed flex flex-col md:flex-row top-0 left-0 w-full z-50 bg-inherit-shadow-md px-6 py-4">
       <div className="mt-3 ml-9 w-full flex flex-row">
         <h1 onClick={() => handleScroll("hero")} className="text-xl font-bold bg-gradient-to-br from-blue-300 to-blue-500 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-650 hover:to-white hover:bg-clip-text hover:text-transparent hover:scale-130 transition duration-300">
           AK
@@ -24,12 +30,12 @@ const Navbar: React.FC = () => {
             >
               About
             </li>
-            {/* <li
+            <li
               className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("experience")}
             >
               Experience
-            </li> */}
+            </li>
             <li
               className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("skills")}
@@ -51,7 +57,18 @@ const Navbar: React.FC = () => {
             </li>
           </ul>
         </div>
+
+        
       </div>
+
+      <div className="md:hidden z-50">
+        { ismobile ? (
+          <FaAlignJustify className="w-8 h-8 bg-gradient-to-tr from-gray-500 to-white-900 bg-clip-" onClick={() => setIsMobile(false)}/> ): (<Menu className="w-8 h-8 bg-gradient-to-tr from-gray-500 to-white-900" onClick={() => setIsMobile(true)}/>
+          )}
+
+      </div>
+
+
     </header>
   );
 };

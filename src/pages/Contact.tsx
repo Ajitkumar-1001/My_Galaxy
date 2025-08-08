@@ -1,117 +1,124 @@
-import React, {useMemo, useState, useRef, useCallback, useEffect} from "react";
-import { GitHubLogoIcon , LinkedInLogoIcon,  EnvelopeOpenIcon} from "@radix-ui/react-icons";
-import {motion, useAnimation , useInView} from "framer-motion";
-import { GiDuration } from "react-icons/gi";
+import React, { useMemo, useEffect, useRef } from "react";
+import { GitHubLogoIcon, LinkedInLogoIcon, EnvelopeOpenIcon } from "@radix-ui/react-icons";
+import { motion, useAnimation, useInView } from "framer-motion";
+
 
 
 const Contact: React.FC = () => {
+  const contactRef = useRef(null);
+  const threshold : any = 0.3;
+  const inView = useInView(contactRef, threshold);
+  const controls = useAnimation();
 
-  const controls = useMemo(()=>Array.from({length:3},() =>useAnimation()),[]);
+  const parentVariant : any = useMemo(() => ({
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.3,
+      },
+    },
+  }), []);
 
-  const parentControl = useMemo(()=>(useAnimation()),[]);
-
-  const parentprop : any = useMemo(() =>({
-    hidden : {scale: 0},
-    visible : {scale : 1, transition:{duration:1, ease: "easeOut", staggerChildren: 0.5}}
-  }),[])
-
+  const childVariant : any = useMemo(() => ({
+    hidden: { opacity: 0, y: 40, scale: 0.9 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  }), []);
 
   const glowColors = [
-    ["#f5f5f5", "#3b82f6", "#331FC5"],  
-    ["#ffffff", "#3b56f6", "#341FC5"],  
-    ["#e0e0ff", "#3a55f5", "#321FC5"]  
+    ["#f5f5f5", "#3b82f6", "#331FC5"],
+    ["#ffffff", "#3b56f6", "#341FC5"],
+    ["#e0e0ff", "#3a55f5", "#321FC5"],
   ];
 
-  const hoverVariant = useMemo(
-  () =>
-    glowColors.map(([a, b, c], _i) => ({
-      hidden: { scale: 1 },
-      visible: {
-        scale: 1.2,
-        boxShadow: `0 0 15px ${a}, 0 0 25px ${b}, 0 0 35px ${c}`,
-        transition: { duration: 0.8, ease: "easeIn" },
-      },
-    })),
-  []
-);
-
-
-  const handleHover = useCallback(()=>{
-   controls.forEach((con)=>{
-    con.start("visible");
-   });
-  },[controls]);
-
-  const handleLeave = useCallback(()=>{
-    controls.forEach((con)=>{
-      con.start("hidden");
-    });
-  },[controls]);
+  const iconVariants : any = glowColors.map(([a, b, c]) => ({
+    rest: { scale: 1, boxShadow: "none" },
+    hover: {
+      scale: 1.2,
+      boxShadow: `0 0 15px ${a}, 0 0 25px ${b}, 0 0 35px ${c}`,
+      transition: { duration: 0.2, ease: "easeInOut" },
+    },
+  }));
 
   useEffect(() => {
-    const sequence = async()=>{
-      await parentControl.start("visible");
+    if (inView) controls.start("visible");
+  }, [inView, controls]);
 
-      for ( const con of controls){ 
-        await con.start("visible");
-      }};
-
-      sequence();
-      
-      
-  },[parentControl]);
- 
-   
-   
   return (
     <section
       id="contact"
-      className="min-h-screen m-10 py-20 px-6 bg-inherit text-white flex flex-col md:flex-col items-center justify-center" >
-      <div className="max-w-3xl mx-auto text-center space-y-8">
-        <h2 className="text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent">Contact Me</h2>
+      ref={contactRef}
+      className="min-h-screen py-24 px-6 flex flex-col items-center justify-center"
+    >
+      <motion.div
+        className="max-w-3xl text-center space-y-8"
+        variants={parentVariant}
+        initial="hidden"
+        animate={controls}
+      >
+        <motion.h2
+          className="text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
+          variants={childVariant}
+        >
+          Contact Me
+        </motion.h2>
 
-        <p className="text-xl font-sans font-bold leading-relaxed bg-gradient-to-t from-white to-gray-600 bg-clip-text text-transparent">
-          Whether you're interested in collaborating, hiring, or just want to connect —
-          feel free to reach out. I'm always open to new opportunities and meaningful discussions in the world of AI, machine learning, and full-stack development.
-        </p>
+        <motion.p
+          className="text-2xl leading-relaxed font-bold bg-gradient-to-tr from-white to-gray-600 bg-clip-text text-transparent brightness-120"
+          variants={childVariant}
+        >
+          Whether you're interested in collaborating, hiring, or just want to connect —feel free to reach out. I'm always open to new opportunities in AI, machine learning, and full-stack development.
+        </motion.p>
 
-        <motion.div className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-6" variants={parentprop as any} initial="hidden" animate={parentControl} >
-          <motion.a   variants={hoverVariant[0] as any} onMouseEnter={handleHover} onMouseLeave={handleLeave}
-            href="mailto:senthil5@buffalo.edu"
-            className="rounded-2xl hover:bg-indigo-500  border rounded-2xl border-blue-600 text-white font-semibold px-6 py-3 rounded-md transition"
-          >
-            <EnvelopeOpenIcon className="w-8 h-8 rounded-2xl shadow-3xl bg-gradient-to-t from-blue-400 to-indigo-600 bg-clip"></EnvelopeOpenIcon>
-          </motion.a>
-          <motion.a
-            variants={hoverVariant[1] as any}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleLeave}
-            href="https://www.linkedin.com/in/ajit-kumar-558693114/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border rounded-2xl border-blue-600 hover:bg-indigo-600 text-indigo-400 hover:text-white font-semibold px-6 py-3 rounded-md transition"
-          >
-            <LinkedInLogoIcon className="w-8 h-8 rounded-2xl shadow-3xl "></LinkedInLogoIcon>
-          </motion.a>
-          <motion.a variants={hoverVariant[2] as any} onMouseEnter={handleHover} onMouseLeave={handleLeave}
-            href="https://github.com/ajitkumar-1001"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-blue-600 hover:bg-indigo-600 text-indigo-400 hover:text-white font-semibold px-6 py-3 rounded-md transition"
-          >
-            <GitHubLogoIcon className="w-8 h-8 rounded-2xl shadow-3xl">
-
-            </GitHubLogoIcon>
-          </motion.a>
+        <motion.div
+          className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-6"
+          variants={childVariant}
+        >
+          {[{
+            href: "mailto:senthil5@buffalo.edu",
+            Icon: EnvelopeOpenIcon,
+            variant: iconVariants[0]
+          }, {
+            href: "https://www.linkedin.com/in/ajit-kumar-558693114/",
+            Icon: LinkedInLogoIcon,
+            variant: iconVariants[1]
+          }, {
+            href: "https://github.com/ajitkumar-1001",
+            Icon: GitHubLogoIcon,
+            variant: iconVariants[2]
+          }].map(({ href, Icon, variant }, i) => (
+            <motion.a
+              key={i}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border border-blue-600 text-indigo-400 hover:text-white font-semibold px-6 py-3 rounded-2xl transition"
+              variants={variant}
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+            >
+              <Icon className="w-8 h-8" />
+            </motion.a>
+          ))}
         </motion.div>
-      </div>
-      
+      </motion.div>
+
+    
     </section>
 
-
-
-  
-  );
+        
+        );
+    
 };
 
 export default Contact;

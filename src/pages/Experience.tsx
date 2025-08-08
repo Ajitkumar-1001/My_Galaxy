@@ -1,104 +1,71 @@
-import React ,{useEffect, useState, useRef, useMemo} from "react";
-import { motion, useAnimation } from "framer-motion";
+import React ,{useMemo} from "react";
+import { experience_content } from "../data/data";
+import { containerprops_fade, contentprops_fade } from "../data/animate";
+import { useAnimateElement } from "../data/controls"; // make sure this name matches the actual export
+import { motion } from "framer-motion";
 
-
-const ExperienceData = { 
-
-
-}
 const Experience: React.FC = () => {
-    const controls = useAnimation(); 
-    const containerref = useRef<HTMLDivElement>(null);
+  const { control1 } = useAnimateElement();
+  const containerVariant = useMemo(()=>(containerprops_fade),[]);
+  const contentVariant = useMemo(()=>(contentprops_fade),[]);
 
+  return (
+    <section
+      id="experience"
+      className="min-h-screen flex flex-col justify-center items-center bg-transparent p-15 mt-10"
+    >
+      <div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h1 className="text-xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-900 to-blue-300 bg-clip-text text-transparent">
+            Experience
+          </h1>
+        </div>
 
-    
+        <div className="flex flex-col gap-6 space-y-5">
+          {experience_content.map((exp) => (
+            <motion.div
+              key={exp.id}
+              variants={containerVariant}
+              initial="hidden"
+              animate={control1}
+              className="w-full rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
+            >
+              <div className="flex flex-row items-start gap-4">
+                <motion.div className="shrink-0" variants={contentVariant}>
+                  <img
+                    src={exp.logo}
+                    alt={`${exp.company_name} logo`}
+                    className="w-30 h-30 rounded-3xl object-contain shadow-3xl"
+                  />
+                </motion.div>
 
-    return (
+                <motion.div className="flex-1" variants={contentVariant}>
+                  <h2 className="text-2xl font-sans text-center font-bold bg-gradient-to-br from-blue-950 to-sky-900 brightness-200 bg-clip-text text-transparent">
+                    {exp.company_name}
+                  </h2>
 
-        <section id="experience" className="min-h-screen w-full flex flex-col justify-center items-center bg-transparent  py-2 overflow-hidden">
-            <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="text-center mb-12">
-                    <h1 className="text-xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-500 to-indigo-500 bg-clip-text text-transparent">Experience</h1>
+                  <div className="mt-1 font-sans text-center font-bold text-sm text-gray-300">
+                    {exp.period_Start} — {exp.period_end}
+                  </div>
 
-                </div>
-            
-
-                <div className="w-full relative ">
-                    <div className="flex">
-                <div className="flex-shrink-0 w-full p-2">
-                    <div className="relative bg-gradient-to-br from-white-500 to-gray-500 rounded-2xl flex flex-row overflow-hidden transition-all border bg-gradient-to-br from-white-500 to-gray-500 p-[2px] bg-clip-padding duration-300 ">
-                        <div className="relative z-10  w-1/3 flex flex-col items-center m-3">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> icon </h2>
-                        </div>
-                        <div className="relative z-10 md:w-2/3 px-30 w-full ">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-
-                        </div>
-                    </div>
-                    
-                    
-  
-                    </div>
-                    </div>
-                </div>
-                
-                
-                <div className="w-full relative ">
-                    <div className="flex">
-                <div className="flex-shrink-0 w-full p-2">
-                    <div className="relative bg-gradient-to-br from-white-500 to-gray-500 rounded-2xl flex flex-row overflow-auto transition-all border bg-gradient-to-br from-white-500 to-gray-500 p-[2px] bg-clip-padding duration-300 ">
-                        <div className="relative w-1/3 flex flex-col items-center m-3">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> icon </h2>
-                        </div>
-                        <div className="relative md:w-2/3 px-30 w-full ">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-
-                        </div>
-                    </div>
-                    
-                    
-  
-                    </div>
-                    </div>
-                </div>
-                
-                <div className="w-full relative ">
-                    <div className="flex">
-                <div className="flex-shrink-0 w-full p-2">
-                    <div className="relative bg-gradient-to-br from-white-500 to-gray-500 rounded-2xl flex flex-row overflow-auto transition-all border bg-gradient-to-br from-white-500 to-gray-500 p-[2px] bg-clip-padding duration-300 ">
-                        <div className="relative w-1/3 flex flex-col items-center m-3">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> icon </h2>
-                        </div>
-                        <div className="relative md:w-2/3 px-30 w-full ">
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-                            <h2 className="text-5xl font-bold font-sans text-white-500"> content</h2>
-
-                        </div>
-                    </div>
-                    
-                    
-  
-                    </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-
-
-
-    );
-
+                  <div className="mt-3">
+                    <ul className="list-none space-y-1">
+                      <li className="text-xl brightness-190 text-center font-sans font-bold bg-gradient-to-tr from-gray-500 to-white-500 bg-clip-text text-transparent">
+                        {exp.role}
+                      </li>
+                    </ul>
+                    <p className="mt-2 text-center text-base font-sans font-semibold bg-gradient-to-br from-gray-500 to-white bg-clip-text text-transparent brightness-150">
+                      {exp.role_description}
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Experience;
