@@ -2,7 +2,7 @@ import React, { useMemo, useEffect , useRef} from 'react';
 import ProfileCard from '../components/Profilecard.tsx';
 import TextType from '../components/Texttype.tsx';
 import {motion, useAnimation, useInView} from "framer-motion";
-import { DownloadCloudIcon, DownloadIcon, } from 'lucide-react';
+import {  DownloadIcon, } from 'lucide-react';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
 
 const Hero: React.FC = () => {
@@ -32,7 +32,7 @@ const Hero: React.FC = () => {
   }),[])
   
   const controlprops2 = useMemo(() => ({
-    hidden: { opacity: 0, scale: 0.2 , rotate: 360},
+    hidden: { opacity: 0, scale: 0.1 , rotate: 360},
     visible: {
       opacity: 1,
       scale: 1,
@@ -60,7 +60,7 @@ const Hero: React.FC = () => {
 
     <section id = "hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
       {/* Left: Intro Text */}
-      <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
+      <motion.div  className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
           Hi, I am  <h2 className='text-5xl font-sans font-extrabold'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR","even","AJIT!","sometimes..","Ak!"]}
@@ -151,7 +151,7 @@ const Hero: React.FC = () => {
 
       {/* Right: Profile Card */}
     
-      <motion.div className="w-full md:w-1/2 flex justify-center text-indigo-500 font-bold" variants={controlprops2 as any} initial="hidden" animate={control1}>
+      <motion.div className="w-full md:w-1/2 flex justify-center text-indigo-500 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
         <ProfileCard
           name="Ajitkumar"
           role="Data Scientist / ML Engineer"

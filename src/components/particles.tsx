@@ -91,7 +91,7 @@ const fragment = /* glsl */ `
 
 const Particles: React.FC<ParticlesProps> = ({
   particleCount = 330,
-  particleSpread = 12,
+  particleSpread = 25,
   speed = 0.5,
   particleColors,
   moveParticlesOnHover = false,
@@ -129,8 +129,8 @@ const Particles: React.FC<ParticlesProps> = ({
 
     const handleMouseMove = (e: MouseEvent) => {
       const rect = container.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+      const x = ((e.clientX - rect.left) / rect.width) * 3 - 1;
+      const y = -(((e.clientY - rect.top) / rect.height) * 3 - 1);
       mouseRef.current = { x, y };
     };
 

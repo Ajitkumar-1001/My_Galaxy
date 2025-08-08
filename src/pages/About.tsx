@@ -28,7 +28,7 @@ const About: React.FC = () => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.7,
+        duration: 0.7,  
         ease: "easeOut",
       },
     },
@@ -43,24 +43,27 @@ const About: React.FC = () => {
       transition : {duration : 0.4 , ease: "easeInOut"}
 
     },
-    
+
     
   }), []);
 
-  const handleHover = useCallback(()=>{
-    controls.start("hover");
-  },[controls])
+  // const handleHover = useCallback(()=>{
+  //   controls.start("hover");
+  // },[controls])
 
-  const handleMover = useCallback(()=>{
-    controls.start("rest");
-  },[controls])
+  // const handleMover = useCallback(()=>{
+  //   controls.start("rest");
+  // },[controls])
 
 
   useEffect(() => {
     if (inView) {controls.start("visible");
-      handleHover();}
+      controls.start("hover");
+      // controls.stop("rest"); 
+    }
     else {controls.start("hidden");
-      handleMover();
+      controls.start("rest");
+      // controls.stop("hover");
 
     }
   }, [inView]);
@@ -83,12 +86,12 @@ const About: React.FC = () => {
     },
     {
       title: "Education",
-      text: `Pursuing a Master of Science in Data Science at the University at Buffalo, with a strong focus on machine learning, deep learning, and statistical modeling. Also holds a Bachelor's in Mechanical Engineering from Anna University (Sri Sai Ram Engineering College).`,
+      text: `Pursuing a Master of Science  at the University at Buffalo, with a strong focus on machine learning, deep learning, and statistical modeling. Also holds a Bachelor's in Mechanical Engineering from Anna University (Sri Sai Ram Engineering College).`,
       gradient: "from-white-200 via-gray-600 to-blue-800",
     },
     {
       title: "Coursework",
-      text: `Through hands-on projects and advanced coursework, I’ve gained expertise in building scalable ML systems, analyzing large datasets, and applying AI techniques to real-world challenges.`,
+      text: `Through hands-on projects and advanced coursework, I have gained expertise in building scalable ML systems, analyzing large datasets, and applying AI techniques to real-world challenges.`,
       gradient: "from-white via-gray-500 to-indigo-900",
     },
     {
@@ -116,9 +119,9 @@ const About: React.FC = () => {
             key={idx}
             className="relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl"
             variants={childVariant}
-            onMouseEnter={handleHover}
-            onMouseLeave={handleMover}
-            
+            initial= "hidden"
+            animate = "visible"
+            whileHover="hover"
             
           >
             {/* BACKGROUND GRADIENT LAYER */}

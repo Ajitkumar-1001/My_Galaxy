@@ -6,15 +6,15 @@ const skills = {
   "Tools & Frameworks": ["React", "Tailwind CSS", "FastAPI", "Streamlit", "Docker", "AWS", "Git & GitHub","Github Actions(CI/CD)"],
 };
 
-const proficiency = { 
-  "Advanced" : ["Python","SQL","Git & GitHub"],
-  "Intermediate" : ["Typescript","R","PyTorch","React","FastAPI","Streamlit","Scikit-learn"]
-};
+// const proficiency = { 
+//   "Advanced" : ["Python","SQL","Git & GitHub"],
+//   "Intermediate" : ["Typescript","R","PyTorch","React","FastAPI","Streamlit","Scikit-learn"]
+// };
 
-const Proficiencycodes = { 
-  "Advanced" : "green-950",
-  "Intermediate" : "yellow-950"
-};
+// const Proficiencycodes = { 
+//   "Advanced" : "green-950",
+//   "Intermediate" : "yellow-950"
+// };
 
 const categoryColors = {
   "Languages": "from-blue-500 to-white-400",
@@ -50,7 +50,7 @@ const Skills : React.FC=()=> {
         className={`rounded-2xl p-[2px] bg-gradient-to-br ${categoryColors[category as keyof typeof categoryColors]} shadow-xl`}
       >
         <div className="bg-black/80 backdrop-blur-md p-6 rounded-2xl h-full">
-          <h3 key={category} className={`text-2xl font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent mb-4 text-center`}>
+          <h3 key={category} className={`text-2xl brightness-120  font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent mb-4 text-center`}>
             {category}
           </h3>
           <div className="flex flex-wrap gap-3 justify-center">
