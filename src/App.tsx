@@ -12,7 +12,7 @@ import Experience from './pages/Experience';
 import './App.css';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
-
+import BgMusicButton from './components/Audio';
 
 
 
@@ -131,6 +131,7 @@ function App() {
         </div>
       ) : (
         <>
+          
           <div className="fixed inset-0 z-0">
             <Particles
               particleCount={1200}
@@ -146,14 +147,18 @@ function App() {
           </div>
 
           <div className="relative z-10">
+
             <Navbar />
+            <BgMusicButton src="src/assets/Vidaamuyarchi Teaser - MassTamilan.mp3" />
             <Hero />
             <About />
             <Experience />
             <Skills />
             <Projects />
+            
             <Contact />
             <Footer />
+
           </div>
         </>
       )}
