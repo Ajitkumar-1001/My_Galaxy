@@ -164,8 +164,8 @@ const Hero: React.FC = () => {
           // className='border rounded-xl shadow-3xl border-white-500'
 
           degree='Master of Science'
-          mainImageUrl="/Users/ajit/Desktop/Portfolio/my-portfolio/src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
-          profileImageUrl="/Users/ajit/Desktop/Portfolio/my-portfolio/src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
+          mainImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
+          profileImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG" 
           profileHandle="ajitkumar"
           isAvailable={true} 
 
