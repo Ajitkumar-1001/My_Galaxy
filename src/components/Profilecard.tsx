@@ -1,4 +1,4 @@
-import React ,{useState,useMemo, useEffect, useRef ,useCallback}from 'react';
+import React ,{useState,useMemo, useEffect, useRef }from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import {  Mail} from 'lucide-react'; // Using lucide-react for icons
 
@@ -54,10 +54,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       }
     }), []);
 
-    const handleHover = useCallback(()=>{
-      control3.start("visible");
+    // const handleHover = useCallback(()=>{
+    //   control3.start("visible");
 
-    },[control3]);
+    // },[control3]);
 
 
     const img = useRef<HTMLImageElement|null>(null);

@@ -22,13 +22,13 @@ const Hero: React.FC = () => {
     
       y: 0,
       scale : 1,
-      transition: { duration: 1.2, ease: "easeIn", delay: 0.5, staggerChildren: 0.5 }
+      transition: { duration: 1.2, ease: "easeIn", delay: 0.3, staggerChildren: 0.5 }
     }
   }), []);
 
   const middleware = useMemo(()=>({
     hidden : { opacity:0, y:30, scale:0.8},
-    visible : { opacity : 1, y:0, scale:1, transition : {delay:0.8 ,duration : 2.4, ease:"easeInOut"}}
+    visible : { opacity : 1, y:0, scale:1, transition : {delay:0.5 ,duration : 2.1, ease:"easeInOut"}}
   }),[])
   
   const controlprops2 = useMemo(() => ({
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
       opacity: 1,
       scale: 1,
       rotate : 0,
-      transition: { delay: 0.2, duration: 1.2, ease: "easeIn" }
+      transition: { delay: 0.2, duration: 0.9, ease: "easeIn" }
     }
   }), []);
   
@@ -45,12 +45,14 @@ const Hero: React.FC = () => {
   useEffect(()=>{
 
     const contain = async()=>{
+      if(onView){
       await control1.start("visible");
       await new Promise((res)=> setTimeout(res,1000));
       await control2.start("visible");
-    }
+    }; }
+
     contain();
-  },[control1,control2]);
+  },[onView,control1,control2]);
 
   
   
@@ -58,7 +60,7 @@ const Hero: React.FC = () => {
   return (
 
 
-    <section id = "hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
+    <section ref = {secView} id = "hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
       {/* Left: Intro Text */}
       <motion.div  className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>

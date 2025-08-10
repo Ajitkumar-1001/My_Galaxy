@@ -1,34 +1,39 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Props = { src: string; loop?: boolean; className?: string };
 
 export default function AutoPlayMusic({ src, loop = true, className }: Props) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const [isMuted, setIsMuted] = useState(false); // we WANT sound first
+  const [isMuted, setIsMuted] = useState(false); 
 
   useEffect(() => {
     const el = audioRef.current;
     if (!el) return;
 
     (async () => {
+
+    //  await new Promise((r)=> setTimeout(r,1200)); 
       try {
-        // Try to start with sound
+   
         el.muted = false;
         el.volume = 1;
-        await el.play();           // may be blocked by autoplay policy
+        
+        await el.play();          
         setIsMuted(false);
       } catch {
-        // Fallback: autoplay muted
+      
         el.muted = true;
         el.volume = 0;
         try {
+        //   await new Promise((r)=> setTimeout(r,1200)); 
           await el.play();
           setIsMuted(true);
         } catch {
-          // Rare: even muted blocked — unlock on first gesture
+         
           const unlock = () => {
             el.muted = false;
             el.volume = 1;
+            new Promise((r)=> setTimeout(r,1200)); 
             el.play().catch(() => {});
             window.removeEventListener("pointerdown", unlock);
             window.removeEventListener("keydown", unlock);
@@ -48,7 +53,7 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
 
     if (isMuted) {
       el.muted = false;
-      fadeVolume(el, 1, 300);
+      fadeVolume(el, 1, 500);
       setIsMuted(false);
     } else {
       fadeVolume(el, 0, 250, () => { el.muted = true; });
@@ -62,7 +67,7 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
       <button
         onClick={toggle}
         aria-label={isMuted ? "Unmute background music" : "Mute background music"}
-        className={`fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border bg-white/90 backdrop-blur px-4 py-2 shadow hover:bg-white active:scale-95 ${className ?? ""}`}
+        className={`fixed bottom-4 right-4 z-50 inline-flex items-center gap-2 rounded-full border bg-black/100 backdrop-blur px-4 py-2 shadow hover:bg-white/50 active:scale-95 ${className ?? ""}`}
       >
         {isMuted ? "🔈 Unmute" : "🔇 Mute"}
       </button>

@@ -1,12 +1,12 @@
 "use client";
 
-import { ElementType, useEffect, useRef, useState, createElement } from "react";
+import { type ElementType, useEffect, useRef, useState, createElement } from "react";
 import { gsap } from "gsap";
 
 
-type componentprops = { 
-  props : React.ReactNode;
-};
+// type componentprops = { 
+//   props : React.ReactNode;
+// };
 
 interface TextTypeProps {
   className?: string;
@@ -105,7 +105,7 @@ const TextType = ({
   useEffect(() => {
     if (!isVisible) return;
 
-    let timeout: NodeJS.Timeout;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const currentText = textArray[currentTextIndex];
     const processedText = reverseMode
@@ -186,7 +186,7 @@ const TextType = ({
       className: `inline-block whitespace-pre-wrap tracking-tight ${className}`,
       ...props,
     },
-    <span className="inline" style={{ color: getCurrentTextColor() }}>
+    <span className="inline" style={{ color: getCurrentTextColor() as string }}>
       {displayedText}
     </span>,
     showCursor && (
