@@ -149,7 +149,7 @@ function App() {
           <div className="relative z-10">
 
             <Navbar />
-            <BgMusicButton src="../../Vidaamuyarchi Teaser - MassTamilan.mp3" />
+            <BgMusicButton src="../../Hayden Folker - Adrift.mp3" />
             <Hero />
             <About />
             <Experience />

@@ -67,7 +67,7 @@ const Hero: React.FC = () => {
           Hi, I am  <h2 className='text-5xl font-sans font-extrabold'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR","even","AJIT!","sometimes..","Ak!"]}
             typingSpeed={75}
-            pauseDuration={1500}
+            pauseDuration={3500}
 /></span>
             
           </h2>
@@ -81,7 +81,7 @@ const Hero: React.FC = () => {
                 text={["Machine Learning", "Deep Learning", "Artificial Intelligence", "Web Applications!"]}
                 className='text-bold font-sans'
                 typingSpeed={75}
-                pauseDuration={1500}
+                pauseDuration={2500}
                 showCursor={true}
                 cursorCharacter="|"
               />
@@ -94,7 +94,7 @@ const Hero: React.FC = () => {
               text={["Recruiters,","Managers,","Visitors,","Colleagues,"]}
               className='text-bold font-sans '
               typingSpeed={75}
-              pauseDuration={1500}
+              pauseDuration={2500}
               showCursor={true}
               cursorCharacter="|"
             /></span></h2>
@@ -103,14 +103,14 @@ const Hero: React.FC = () => {
                 text={["Mechanical Machines","Automobiles","Design Principles","Thermal Engineering","Finite Element Analysis"]}
                 className='text-bold font-sans '
                 typingSpeed={75}
-                pauseDuration={1500}
+                pauseDuration={3000}
                 showCursor={true}
                 cursorCharacter="|"
               /></span>{"  "} <br></br>To the Logic's of :{"  "}<span className='bg-gradient-to-r from-indigo-500 to-blue-300 bg-clip-text text-transparent font-extrabold brightness-130'><TextType
               text={["Neural Networks","Supervised Learning","Unsupervised Learning","Data Processing","Hyperparameter Fine Tuning"]}
               className='text-bold font-sans '
               typingSpeed={75}
-              pauseDuration={1500}
+              pauseDuration={3000}
               showCursor={true}
               cursorCharacter="|"
             /></span> {"  "}<br></br><br></br> 

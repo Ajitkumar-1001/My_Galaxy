@@ -32,10 +32,10 @@ interface TextTypeProps {
 const TextType = ({
   text,
   as: Component = "div",
-  typingSpeed = 50,
+  typingSpeed = 100,
   initialDelay = 0,
-  pauseDuration = 2000,
-  deletingSpeed = 30,
+  pauseDuration = 3000,
+  deletingSpeed = 25,
   loop = true,
   className = "",
   showCursor = true,
