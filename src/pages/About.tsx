@@ -1,11 +1,15 @@
-import React, {  useEffect, useMemo, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { Containerhide } from "../data/animate";
 
 const About: React.FC = () => {
+
   const secRef = useRef(null);
-  const controls = useAnimation();
+  const control1 = useAnimation();
+  const control2 = useAnimation();
   const threshold: any = 0.3;
   const inView = useInView(secRef, threshold);
+  const hideContainer = useMemo(() => (Containerhide), []);
 
   const parentVariant: any = useMemo(() => ({
     hidden: { opacity: 0, scale: 0.8 },
@@ -16,19 +20,19 @@ const About: React.FC = () => {
         duration: 0.8,
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.3,
+        staggerChildren: 0.7,
       },
     },
   }), []);
 
   const childVariant: any = useMemo(() => ({
-    hidden: { opacity: 0, y: 40, scale: 0.8},
+    hidden: { opacity: 0, y: 40, scale: 0.8 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.7,  
+        duration: 0.7,
         ease: "easeOut",
       },
     },
@@ -37,14 +41,14 @@ const About: React.FC = () => {
       boxShadow: "0 0 15px #3b82f6, 0 0 30px #8b5cf6, 0 0 45px #a855f7",
       transition: { duration: 0.4, ease: "easeOut" }
     },
-    rest : { 
-      scale : 1,
-      boxshadow : "0 0 0 #ffffff",
-      transition : {duration : 0.4 , ease: "easeInOut"}
+    rest: {
+      scale: 1,
+      boxshadow: "0 0 0 #ffffff",
+      transition: { duration: 0.4, ease: "easeInOut" }
 
     },
 
-    
+
   }), []);
 
   // const handleHover = useCallback(()=>{
@@ -57,16 +61,17 @@ const About: React.FC = () => {
 
 
   useEffect(() => {
-    if (inView) {controls.start("visible");
-      controls.start("hover");
-      // controls.stop("rest"); 
-    }
-    else {controls.start("hidden");
-      controls.start("rest");
-      // controls.stop("hover");
 
+    if (inView) {
+      control1.start("visible");
+      control2.start("visible");
     }
-  }, [inView,controls]);
+    else {
+      control1.start("hidden");
+      control2.start("hidden");
+    };
+
+  }, [inView, control1, control2]);
 
   const cards = [
     {
@@ -103,31 +108,30 @@ const About: React.FC = () => {
 
   return (
     <section id="about" ref={secRef} className="min-h-screen flex flex-col justify-center bg-transparent py-10">
-      <h1 className="text-4xl font-extrabold font-sans mx-auto my-20 text-center bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent cursor-pointer">
+      <motion.div className="relative" variants={hideContainer} initial="hidden" animate={control1}>
+       <motion.h1 className="text-4xl font-extrabold font-sans mx-auto my-20 text-center bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent cursor-pointer" variants={parentVariant} initial="hidden" animate={control2}>
         About
-      </h1>
+      </motion.h1>
 
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-2 gap-10 px-10 md:px-20"
+        className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 md:px-20"
         variants={parentVariant as any}
-        initial="hidden"
-        animate={controls}
-      
+        // initial="hidden"
+        // animate={control2}
+
       >
         {cards.map((card, idx) => (
           <motion.div
             key={idx}
             className="relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl"
-            variants={childVariant}
-            initial= "hidden"
-            animate = "visible"
+            variants={childVariant as any}
             whileHover="hover"
-            
+
           >
-            {/* BACKGROUND GRADIENT LAYER */}
+
             <div className={`absolute inset-0 z-0 bg-gradient-to-tl ${card.gradient} rounded-[18px] brightness-120 opacity-50`} />
 
-            {/* FOREGROUND CONTENT */}
+
             <div className="relative z-10 bg-black/100 backdrop-blur-sm rounded-2xl p-6 h-full flex flex-col justify-between transition-shadow duration-300 ">
               <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent text-center mb-2">
                 {card.title}
@@ -139,7 +143,8 @@ const About: React.FC = () => {
           </motion.div>
         ))}
       </motion.div>
-    </section>
+    </motion.div>
+    </section >
   );
 };
 

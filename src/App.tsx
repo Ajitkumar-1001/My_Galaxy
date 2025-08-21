@@ -38,7 +38,7 @@ function App() {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" }
+      transition: { duration: 0.3, ease: "easeOut" }
     }
   }), []);
 
@@ -56,16 +56,16 @@ function App() {
     if (welcomeScreen) {
       const runWelcome = async () => {
         await control1.start("visible");
-        await new Promise((res)=>setTimeout(res,2000));
+        await new Promise((res)=>setTimeout(res,500));
         await control2.start("visible");
-        await new Promise((res)=> setTimeout(res,2000));
+        await new Promise((res)=> setTimeout(res,500));
         await control3.start("visible");
          
 
         setTimeout(() => {
           sessionStorage.setItem('hasVisited', 'true');
           setWelcomeScreen(false);
-        }, 3000);
+        }, 1500);
       };
       runWelcome();
     }
