@@ -66,7 +66,7 @@ const Contact: React.FC = () => {
         animate={controls}
       >
         <motion.h2
-          className="sm:text-xl md:text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
+          className="sm:text-2xl md:text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
           variants={childVariant}
         >
           Contact Me
@@ -80,7 +80,7 @@ const Contact: React.FC = () => {
         </motion.p>
 
         <motion.div
-          className="flex flex-col sm:flex-row justify-center items-center gap-6 mt-6"
+          className="flex flex-col  justify-center items-center gap-6 mt-6"
           variants={childVariant}
         >
           {[{
