@@ -66,14 +66,14 @@ const Contact: React.FC = () => {
         animate={controls}
       >
         <motion.h2
-          className="text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
+          className="sm:text-xl md:text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
           variants={childVariant}
         >
           Contact Me
         </motion.h2>
 
         <motion.p
-          className="text-2xl leading-relaxed font-bold bg-gradient-to-tr from-white to-gray-600 bg-clip-text text-transparent brightness-120"
+          className="sm:text-lg md:text-2xl leading-relaxed font-bold bg-gradient-to-tr from-white to-gray-600 bg-clip-text text-transparent brightness-120"
           variants={childVariant}
         >
           Whether you're interested in collaborating, hiring, or just want to connect —feel free to reach out. I'm always open to new opportunities in AI, machine learning, and full-stack development.
