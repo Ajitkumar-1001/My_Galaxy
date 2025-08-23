@@ -15,7 +15,7 @@ const Navbar: React.FC = () => {
   };
 
   useEffect(()=>{
-    // Close mobile menu when screen size changes
+
     const handleResize = () => {
       if (window.innerWidth >= 768) {
         setIsMobile(false);
