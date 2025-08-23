@@ -167,11 +167,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               }}
             />
             <div>
-              <p className="font-semibold text-white">@{profileHandle}</p>
+              <p className="text-xs md:text-sm font-semibold text-white">@{profileHandle}</p>
               {isAvailable && (
-                <div className="flex items-center gap-1.5 mt-1">
-                  <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                  <p className="text-xs text-green-400">Available</p>
+                <div className="flex items-center gap-1 md:gap-1.5 mt-1">
+                  <span className="md:w-2 md:h-2 w-1 h-1 bg-green-400 rounded-full animate-pulse"></span>
+                  <p className="text-xs md:text-sm text-green-400">Available</p>
                 </div>
               )}
             </div>
@@ -179,7 +179,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
           <motion.a 
             onClick={() => handleScroll("contact")}
-            className="bg-gray-200 text-gray-900 font-semibold px-5 py-2.5 rounded-lg shadow-md flex items-center gap-2 animate-pulse"
+            className="bg-gray-200 text-gray-900 font-semibold px-5 py-2.5  rounded-lg shadow-lg  flex items-center sm:gap-4 md:gap-2 animate-pulse"
             variants={itemvariants3 as any}
             
             

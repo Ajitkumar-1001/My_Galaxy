@@ -1,7 +1,7 @@
 import React ,{useMemo, useEffect,useRef} from "react";
 import { experience_content } from "../data/data";
 import { containerprops_fade, Containerhide, contentprops_fade, motionVariant,contentMotionVariant } from "../data/animate";
-import { useAnimateElement } from "../data/controls"; // make sure this name matches the actual export
+import { useAnimateElement } from "../data/controls"; 
 import { motion , useInView} from "framer-motion";
 
 const Experience: React.FC = () => {
@@ -37,7 +37,7 @@ const Experience: React.FC = () => {
     >
       <motion.div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8" variants={hideContainer} initial="hidden" animate={control1}>
         <div className="text-center mb-12">
-          <h1 className="text-xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-900 to-blue-300 bg-clip-text text-transparent">
+          <h1 className="text-2xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-900 to-blue-300 bg-clip-text text-transparent">
             Experience
           </h1>
         </div>
