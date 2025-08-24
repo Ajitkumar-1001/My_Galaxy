@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
   },[])
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md shadow-lg px-6 py-4">
+    <header className="fixed top-0 left-0 w-full z-50 bg-transparent shadow-lg px-6 py-4">
       <div className="flex items-center justify-between">
         <h1 onClick={() => handleScroll("hero")} className="text-xl font-bold bg-gradient-to-br from-blue-300 to-blue-500 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent hover:scale-110 transition duration-300 cursor-pointer">
           AK
@@ -70,7 +70,7 @@ const Navbar: React.FC = () => {
           </ul>
         </nav>
 
-        {/* Mobile Menu Button */}
+       
         <button
           onClick={() => setIsMobile(!ismobile)}
           className="md:hidden p-2 text-white hover:text-blue-400 transition-colors duration-300"
@@ -90,7 +90,7 @@ const Navbar: React.FC = () => {
           ? 'max-h-96 opacity-100 visible' 
           : 'max-h-0 opacity-0 invisible'
       } overflow-hidden`}>
-        <nav className="py-4 border-t border-gray-700/50 mt-4">
+        <nav className="py-4 border-t bg-black/80 backdrop-blur border-gray-700/50 mt-4">
           <ul className="space-y-4">
             <li>
               <button

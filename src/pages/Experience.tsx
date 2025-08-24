@@ -37,7 +37,7 @@ const Experience: React.FC = () => {
     >
       <motion.div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8" variants={hideContainer} initial="hidden" animate={control1}>
         <div className="text-center mb-12">
-          <h1 className="text-2xl md:text-4xl font-bold font-sans bg-gradient-to-tr from-blue-900 to-blue-300 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold font-sans bg-gradient-to-tr from-blue-400 to-indigo-500 bg-clip-text text-transparent">
             Experience
           </h1>
         </div>
@@ -49,9 +49,9 @@ const Experience: React.FC = () => {
               variants={motionContainr}
               initial="hidden"
               animate={control1}
-              className="w-full rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
+              className="w-full flex flex-col rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
             >
-              <div className="flex flex-row items-start gap-4">
+              <div className="flex flex-col md:flex-row sm:items-center sm:justify-center md:items-start gap-4">
                 <motion.div className="shrink-0" variants={containerVariant}>
                   <motion.img variants={contentVariant}
                     src={exp.logo}
@@ -60,7 +60,7 @@ const Experience: React.FC = () => {
                   />
                 </motion.div>
 
-                <motion.div className="flex-1" variants={motionContainr}>
+                <motion.div className="flex-1 " variants={motionContainr}>
                   <motion.h2 className="text-2xl font-sans text-center font-bold bg-gradient-to-br from-blue-950 to-sky-900 brightness-200 bg-clip-text text-transparent" variants={motionContent}>
                     {exp.company_name}
                   </motion.h2>
@@ -71,7 +71,7 @@ const Experience: React.FC = () => {
 
                   <motion.div className="mt-3" variants={motionContainr}>
                     <ul className="list-none space-y-1">
-                      <motion.li className="text-xl brightness-190 text-center font-sans font-bold bg-gradient-to-tr from-gray-500 to-white-500 bg-clip-text text-transparent" variants={motionContent}>
+                      <motion.li className="text-xl brightness-190 text-center font-sans font-bold bg-gradient-to-tr from-blue-500 via-white-500 to-blue-900 bg-clip-text text-transparent" variants={motionContent}>
                         {exp.role}
                       </motion.li>
                     </ul>

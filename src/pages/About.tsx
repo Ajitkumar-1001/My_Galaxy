@@ -91,7 +91,7 @@ const About: React.FC = () => {
     },
     {
       title: "Education",
-      text: `Pursuing a Master of Science  at the University at Buffalo, with a strong focus on machine learning, deep learning, and statistical modeling. Also holds a Bachelor's in Mechanical Engineering from Anna University (Sri Sai Ram Engineering College).`,
+      text: `Pursuing a Master of Science in Data Science at the University at Buffalo, with a strong focus on machine learning, deep learning, and statistical modeling. Also holds a Bachelor's in Mechanical Engineering from Anna University (Sri Sai Ram Engineering College).`,
       gradient: "from-white-200 via-gray-600 to-blue-800",
     },
     {

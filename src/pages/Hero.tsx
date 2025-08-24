@@ -175,7 +175,7 @@ const Hero: React.FC = () => {
           contact='+1-(716)-249-9240'
           // className= 'p-4 sm:p-6 md:p-4'
 
-          degree='Master of Science'
+          degree='Master of Science in Data Science'
           mainImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG"
           profileImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG"
           profileHandle="ajitkumar"
