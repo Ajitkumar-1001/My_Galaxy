@@ -1,5 +1,5 @@
 import React ,{useState,useEffect} from "react";
-import { FaAlignJustify } from 'react-icons/fa';
+// import { FaAlignJustify } from 'react-icons/fa';
 import { Menu, X } from "lucide-react";
 
 const Navbar: React.FC = () => {
