@@ -51,7 +51,7 @@ const Experience: React.FC = () => {
               animate={control1}
               className="w-full flex flex-col rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
             >
-              <div className="flex flex-col md:flex-row sm:items-center sm:justify-center md:items-start gap-4">
+              <div className="flex flex-col items-center justify-center mx-auto gap-6 md:flex-row md:items-start md:mx-6 md:gap-6 ">
                 <motion.div className="shrink-0" variants={containerVariant}>
                   <motion.img variants={contentVariant}
                     src={exp.logo}
