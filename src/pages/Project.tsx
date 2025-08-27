@@ -121,7 +121,7 @@ const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className="min-h-screen py-28 flex flex-col items-center justify-start"
+      className=" min-h-screen py-28 flex flex-col items-center justify-start"
     >
       <motion.div
         ref={sectionRef}
@@ -146,6 +146,7 @@ const Projects: React.FC = () => {
               key={index}
               variants={childVariant as  any }
               whileHover={{ scale: 1.02 }}
+              // className="border-2 rounded-2xl"
             >
               <SpotlightCard
                 className="min-h-55 bg-transparent"
@@ -153,7 +154,7 @@ const Projects: React.FC = () => {
                 spotlightColor="rgba(255, 255, 255, 0.15)"
               >
                 <div
-                  className="h-full bg-transparent rounded-xl shadow-lg p-6 transition-transform duration-300"
+                  className="h-full bg-transparent rounded-xl shadow-2xl p-6 transition-transform duration-300"
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
                 >
