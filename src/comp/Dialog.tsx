@@ -1,7 +1,7 @@
 import { Button } from "../components/ui/button";
 import {
   Dialog,
-  DialogClose,
+//   DialogClose,
   DialogContent,
  
   DialogTrigger,
@@ -25,7 +25,7 @@ export default function DialogDemo({source,className,title="Project Preview"}:De
         </DialogTrigger>
         <DialogContent className="sm:max-w-10xl md:max-w-8xl backdrop-blur bg-transparent">
             <div className="flex flex-col items-center p-2 mx-auto max-w-10xl w-full">
-                <iframe className="flex flex-col items-center" width={1600} height={700} src={source} ></iframe>
+                <iframe className="flex flex-col items-center" width={1600} height={700} src={source} title={title} ></iframe>
             </div>
         
         

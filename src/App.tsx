@@ -13,8 +13,8 @@ import './App.css';
 import Contact from './pages/Contact';
 import Footer from './comp/Footer';
 import BgMusicButton from './comp/Audio';
-import { Routes , Route } from 'react-router-dom';
-import NotFound from './comp/Notfound';
+// import { Routes , Route } from 'react-router-dom';
+// import NotFound from './comp/Notfound';
 
 // import RotatingGlobe from './components/RotatingGlobe';
 
