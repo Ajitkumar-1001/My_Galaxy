@@ -4,7 +4,7 @@ import TextType from '../comp/Texttype.tsx';
 import { motion, useAnimation, useInView } from "framer-motion";
 import { DownloadIcon, } from 'lucide-react';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
-import About from './About.tsx';
+
 
 const Hero: React.FC = () => {
 
@@ -68,8 +68,8 @@ const Hero: React.FC = () => {
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
           Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
-            typingSpeed={75}
-            pauseDuration={3500}
+            typingSpeed={30}
+            pauseDuration={1000}
           /></span>
 
           </h2>

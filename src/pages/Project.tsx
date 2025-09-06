@@ -4,6 +4,7 @@ import { motion, useAnimation, useInView } from "framer-motion";
 import DialogDemo from "../comp/Dialog";
 
 
+
 const projects: any = [
   {
     title: "Smart Loan Predictor",
@@ -11,8 +12,9 @@ const projects: any = [
       "Built a Production complete Full-stack end-to-end ML application that predicts the approval rate of Loan , provides a automated LLM generated report according to the response....",
     tech: ["Python", "Typescript", "React", "Tailwindcss", "Sci-kit Learn", "FastAPI", "Docker", "Dagshub", "MLflow",],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
-    demo: "Demo coming soon....",
-    source: "http://localhost:5174/blogs/featured/blog-2"
+    demo: "Live coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-2",
+    demo2: "../../public/clip.mp4",
   },
   {
     title: "MIDAS Skin Cancer Detection",
@@ -20,8 +22,9 @@ const projects: any = [
       "Developed a CNN-based image classifier alongside a colleague for identifying melanoma using the standford skin cancer dataset. Achieved 85%+ accuracy with SE,CBAM blocks and LR scheduler.",
     tech: ["PyTorch", "CNN", "RestNet", "Transformers", "Distil-BERT", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
-    demo: "Demo coming soon....",
-    source: "http://localhost:5174/blogs/featured/blog-1"
+    demo: "Live coming soon...",
+    source: "http://localhost:5174/blogs/featured/blog-1",
+    demo2: "../../public/clip.mp4",
   },
   {
     title: "CovDet",
@@ -29,8 +32,9 @@ const projects: any = [
       "An Application where you upload your chest x-ray images, it detects if the sample is a COVID-19 affected or other lung disease!, useful medical application for both patient and doctors",
     tech: ["PyTorch", "CNN", "RestNet", "ConvNext", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
-    demo: "Demo coming soon....",
-    source: "http://localhost:5174/blogs/featured/blog-3"
+    demo: "Live coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-3",
+    demo2: "../../public/clip.mp4",
   },
   {
     title: "BlogPosts",
@@ -38,16 +42,18 @@ const projects: any = [
       "A Blogs, Journals and detailed Description of all my and upcoming works!, in a blog fashion with AI summarizer!",
     tech: ["React", "TailwindCSS", "TypeScript"],
     link: "https://github.com/Ajitkumar-1001/My_Galaxy",
-    demo: "Demo Coming Soon!!",
-    source: "http://localhost:5174/blogs/"
+    demo: "http://localhost:5174/blogs/featured/blog-6",
+    source: "http://localhost:5174/blogs/",
+    demo2: "../../public/clip.mp4",
   }, {
     title: "Jersey City Citibike rides Prediction",
     description:
       "Built an end-to-end MLops pipeline using real-time Citi Bike data with preprocessing in Hopsworks, tracked via MLflow, and deployed on Streamlit,Integrated CI/CD to fetch and load Daily data and updates in model.",
     tech: ["Python", "MLflow", "Hopsworks", "Streamlit", "Github Actions"],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
-    demo: "Demo coming soon....",
-    source: "http://localhost:5174/blogs/featured/blog-5"
+    demo: "Live coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-5",
+    demo2:"../../public/clip.mp4",
   },
   {
     title: "New York City Taxi-rides Prediciton",
@@ -55,8 +61,9 @@ const projects: any = [
       "Built an end-to-end ML pipeline using real-time NYC data with preprocessing in Hopsworks, tracked via MLflow, and deployed on Streamlit.",
     tech: ["Python", "Github Actions", "MLflow", "Hopsworks", "Streamlit"],
     link: "https://github.com/Ajitkumar-1001/AppliedML_NYC_taxidata",
-    demo: "Demo coming soon....",
-    source: "http://localhost:5174/blogs/featured/blog-6"
+    demo: "Live coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-6",
+    demo2: "../../public/clip.mp4",
   }
 
 ];
@@ -186,9 +193,12 @@ const Projects: React.FC = () => {
                       </span>
                     ))}
                   </div>
-                  <div className="flex flex-wrap justify-center mb-2 items-center">
+                  <div className="flex flex-row items-center justify-center gap-2 mb-2 items-center">
                     <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-white rounded-full" source={project.source}/>
+                      <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source}/>
+                    </div>
+                    <div className="flex justify-center mb-2">
+                      <DialogDemo className="text-indigo-500 bg-transparent border-indigo-200 border-2 rounded-full" button="View Demo" source={project.demo2}/>
                     </div>
                   </div>
                   <div className="flex flex-col items-center">
@@ -206,11 +216,11 @@ const Projects: React.FC = () => {
                           ref={demoref}
                           onMouseEnter={() => setDemo(project.demo)}
                           onMouseLeave={() =>
-                            setDemo("Click here to Demo me!!")
+                            setDemo("Click here for Live!!")
                           }
                           className="text-sm font-semibold font-sans bg-gradient-to-r from-blue-600 to-gray-300 bg-clip-text text-transparent text-center"
                         >
-                          {demo}
+                         {demo}
                         </h2>
                       )}
                     </div>
