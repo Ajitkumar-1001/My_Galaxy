@@ -197,7 +197,7 @@ const Skills: React.FC = () => {
             viewport={{ once: true }}
             className={`rounded-2xl p-[2px] bg-gradient-to-br ${categoryColors[category as keyof typeof categoryColors]} shadow-xl`}
           >
-            <div className="bg-black/80 backdrop-blur-md p-6 rounded-2xl h-full">
+            <div className="bg-black/90 backdrop-blur-xl p-6 rounded-2xl h-full">
               <h3
                 className={`text-3xl brightness-120 font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent mb-4 text-center`}
               >
