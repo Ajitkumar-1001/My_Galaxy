@@ -1,9 +1,10 @@
 import React, { useMemo, useEffect, useRef } from 'react';
-import ProfileCard from '../components/Profilecard.tsx';
-import TextType from '../components/Texttype.tsx';
+import ProfileCard from '../comp/Profilecard.tsx';
+import TextType from '../comp/Texttype.tsx';
 import { motion, useAnimation, useInView } from "framer-motion";
 import { DownloadIcon, } from 'lucide-react';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
+import About from './About.tsx';
 
 const Hero: React.FC = () => {
 
@@ -60,8 +61,8 @@ const Hero: React.FC = () => {
 
   return (
 
-
-    <section ref={secView} id="hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
+    
+    <section  ref={secView} id="hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
@@ -186,6 +187,8 @@ const Hero: React.FC = () => {
       </motion.div>
 
     </section>
+  
+
   );
 };
 

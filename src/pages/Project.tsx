@@ -1,54 +1,62 @@
-import React ,{useMemo,useEffect,useState,useRef } from "react";
-import SpotlightCard from "../components/Spotlightcard";
-import {motion,useAnimation,useInView} from "framer-motion";
+import React, { useMemo, useEffect, useState, useRef } from "react";
+import SpotlightCard from "../comp/Spotlightcard";
+import { motion, useAnimation, useInView } from "framer-motion";
+import DialogDemo from "../comp/Dialog";
 
-const projects = [
+
+const projects: any = [
   {
     title: "Smart Loan Predictor",
     description:
       "Built a Production complete Full-stack end-to-end ML application that predicts the approval rate of Loan , provides a automated LLM generated report according to the response....",
-    tech: ["Python", "Typescript", "React","Tailwindcss","Sci-kit Learn","FastAPI","Docker","Dagshub","MLflow",],
+    tech: ["Python", "Typescript", "React", "Tailwindcss", "Sci-kit Learn", "FastAPI", "Docker", "Dagshub", "MLflow",],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
-    demo: "Demo coming soon...."
+    demo: "Demo coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-2"
   },
   {
     title: "MIDAS Skin Cancer Detection",
     description:
       "Developed a CNN-based image classifier alongside a colleague for identifying melanoma using the standford skin cancer dataset. Achieved 85%+ accuracy with SE,CBAM blocks and LR scheduler.",
-    tech: ["PyTorch", "CNN","RestNet","Transformers","Distil-BERT","Hyperparameter Tuning","Explainable AI", "Data Augmentation"],
+    tech: ["PyTorch", "CNN", "RestNet", "Transformers", "Distil-BERT", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
-    demo : "Demo coming soon...."
+    demo: "Demo coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-1"
   },
   {
     title: "CovDet",
     description:
       "An Application where you upload your chest x-ray images, it detects if the sample is a COVID-19 affected or other lung disease!, useful medical application for both patient and doctors",
-    tech: ["PyTorch", "CNN","RestNet","ConvNext","Hyperparameter Tuning","Explainable AI", "Data Augmentation"],
+    tech: ["PyTorch", "CNN", "RestNet", "ConvNext", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
-    demo : "Demo coming soon...."
+    demo: "Demo coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-3"
   },
   {
-    title: "My Galaxy(Portfolio)!",
+    title: "BlogPosts",
     description:
-      "Responsive and animated portfolio built with React, Tailwind CSS, and TypeScript. Features section-based routing and smooth transitions.",
-    tech: ["React", "Tailwind", "TypeScript"],
+      "A Blogs, Journals and detailed Description of all my and upcoming works!, in a blog fashion with AI summarizer!",
+    tech: ["React", "TailwindCSS", "TypeScript"],
     link: "https://github.com/Ajitkumar-1001/My_Galaxy",
-    demo : "Welcome to my Galaxy already!!!"
-  },{
+    demo: "Demo Coming Soon!!",
+    source: "http://localhost:5174/blogs/"
+  }, {
     title: "Jersey City Citibike rides Prediction",
     description:
       "Built an end-to-end MLops pipeline using real-time Citi Bike data with preprocessing in Hopsworks, tracked via MLflow, and deployed on Streamlit,Integrated CI/CD to fetch and load Daily data and updates in model.",
-    tech: ["Python", "MLflow", "Hopsworks", "Streamlit","Github Actions"],
+    tech: ["Python", "MLflow", "Hopsworks", "Streamlit", "Github Actions"],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
-    demo : "Demo coming soon...."
+    demo: "Demo coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-5"
   },
   {
     title: "New York City Taxi-rides Prediciton",
     description:
       "Built an end-to-end ML pipeline using real-time NYC data with preprocessing in Hopsworks, tracked via MLflow, and deployed on Streamlit.",
-    tech: ["Python","Github Actions", "MLflow", "Hopsworks", "Streamlit"],
+    tech: ["Python", "Github Actions", "MLflow", "Hopsworks", "Streamlit"],
     link: "https://github.com/Ajitkumar-1001/AppliedML_NYC_taxidata",
-    demo : "Demo coming soon...."
+    demo: "Demo coming soon....",
+    source: "http://localhost:5174/blogs/featured/blog-6"
   }
 
 ];
@@ -58,12 +66,12 @@ const Projects: React.FC = () => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
   const [demo, setDemo] = useState<string>("Click Here to demo me!!");
 
-  const threshold:any = 0.3;
+  const threshold: any = 0.3;
 
   const demoref = useRef<HTMLHeadingElement | null>(null);
 
   const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, threshold );
+  const inView = useInView(sectionRef, threshold);
 
   const controls = useAnimation();
 
@@ -78,7 +86,7 @@ const Projects: React.FC = () => {
     animate();
   }, [inView]);
 
-  const parentVariant : any = useMemo(
+  const parentVariant: any = useMemo(
     () => ({
       hidden: {
         opacity: 0,
@@ -98,7 +106,7 @@ const Projects: React.FC = () => {
     []
   );
 
-  const childVariant : any = useMemo(
+  const childVariant: any = useMemo(
     () => ({
       hidden: {
         opacity: 0,
@@ -121,32 +129,36 @@ const Projects: React.FC = () => {
   return (
     <section
       id="projects"
-      className=" min-h-screen py-28 flex flex-col items-center justify-start"
+      className=" min-h-screen py-20 flex flex-col items-center justify-start"
     >
       <motion.div
         ref={sectionRef}
-        variants={parentVariant  as any}
+        variants={parentVariant as any}
         initial="hidden"
         animate={controls}
         className="max-w-8xl mx-auto px-10 mt-3 text-center"
       >
         <motion.h2
-          variants={childVariant  as any}
-          className="text-4xl font-bold bg-gradient-to-tr from-blue-500 to-indigo-200 bg-clip-text text-transparent mb-12"
+          variants={childVariant as any}
+          className="text-4xl font-bold bg-gradient-to-tr from-blue-500 to-indigo-200 bg-clip-text text-transparent mb-3"
         >
           Projects
         </motion.h2>
 
+        {/* <motion.h2 variants={childVariant  as any} className="text-lg font-sans font-bold bg-gradient-to-t from-indigo-200 to-transparent bg-clip-text text-transparent text-center ">For More projects...</motion.h2>
+          <motion.a variants={childVariant  as any} href="https://www.google.com" className="inline-flex items-center p-2 justify-center bg-gradient-to-t from-indigo-500 to-indigo-200 bg-clip-text text-transparent bg-transparent border border-indigo-200 rounded-full mb-5">Visit Blogspot</motion.a> */}
+
+
         <motion.div
-          variants={parentVariant  as any}
-          className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"
+          variants={parentVariant as any}
+          className="grid gap-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-10"
         >
-          {projects.map((project, index) => (
+          {projects.map((project:any, index:number) => (
             <motion.div
               key={index}
-              variants={childVariant as  any }
+              variants={childVariant as any}
               whileHover={{ scale: 1.02 }}
-              // className="border-2 rounded-2xl"
+            // className="border-2 rounded-2xl"
             >
               <SpotlightCard
                 className="min-h-55 bg-transparent"
@@ -165,7 +177,7 @@ const Projects: React.FC = () => {
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center mb-4">
-                    {project.tech.map((tech, idx) => (
+                    {project.tech.map((tech:any, idx:number) => (
                       <span
                         key={idx}
                         className="bg-indigo-200 text-indigo-800 text-xs px-3 py-1 rounded-full"
@@ -173,6 +185,11 @@ const Projects: React.FC = () => {
                         {tech}
                       </span>
                     ))}
+                  </div>
+                  <div className="flex flex-wrap justify-center mb-2 items-center">
+                    <div className="flex justify-center mb-2">
+                      <DialogDemo className="text-white rounded-full" source={project.source}/>
+                    </div>
                   </div>
                   <div className="flex flex-col items-center">
                     <a

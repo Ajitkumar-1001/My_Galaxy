@@ -1,19 +1,22 @@
 import { useEffect, useMemo, useState } from 'react';
 import Hero from './pages/Hero';
 import About from './pages/About';
-import Navbar from './components/navbar';
+import Navbar from './comp/navbar';
 import Skills from './pages/Skills';
-import Galaxy from './components/Galaxy';
-import Particles from './components/particles';
+import Galaxy from './comp/Galaxy';
+import Particles from './comp/particles';
 import {  motion, useAnimation } from 'framer-motion';
 import Projects from './pages/Project';
 import Experience from './pages/Experience';
 // import SplashCursor from './components/Splashcursor';
 import './App.css';
 import Contact from './pages/Contact';
-import Footer from './components/Footer';
-import BgMusicButton from './components/Audio';
+import Footer from './comp/Footer';
+import BgMusicButton from './comp/Audio';
+import { Routes , Route } from 'react-router-dom';
+import NotFound from './comp/Notfound';
 
+// import RotatingGlobe from './components/RotatingGlobe';
 
 
 function App() {
@@ -144,19 +147,27 @@ function App() {
               disableRotation = {false}
               className="w-full h-full brightness-200 "
             />
+            
           </div>
 
           <div className="relative z-10">
 
             <Navbar />
+            {/* <RotatingGlobe /> */}
             <BgMusicButton src="../../Hayden Folker - Adrift.mp3" />
             <Hero />
             <About />
             <Experience />
             <Skills />
             <Projects />
-            
             <Contact />
+            
+            
+           
+              
+
+         
+            
             <Footer />
 
           </div>
