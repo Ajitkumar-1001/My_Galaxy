@@ -21,15 +21,15 @@ import BgMusicButton from './comp/Audio';
 
 function App() {
 
-
+  const [welcomeScreen, setWelcomeScreen] = useState<boolean>(() => {
+    return sessionStorage.getItem('hasVisited') !== 'true';
+  });
 
   const control1 = useAnimation();
   const control2 = useAnimation();
   const control3 = useAnimation();
 
-  const [welcomeScreen, setWelcomeScreen] = useState<boolean>(() => {
-    return sessionStorage.getItem('hasVisited') !== 'true';
-  });
+
 
   const welcome = useMemo(() => ({
     hidden: { },
@@ -53,6 +53,7 @@ function App() {
   //     transition: { duration: 0.8, ease: "easeOut" }
   //   }
   // }), []);
+ 
  
 
   useEffect(() => {
@@ -106,7 +107,7 @@ function App() {
               className="text-4xl subpixel-antialiased md:text-6xl text-border-2 font-sans text-white font-extrabold text-center"
               variants={welcome2 as any}
             >
-              <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>Welcome</span> to <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>My Galaxy!</span>
+              <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>Welcome</span> to <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>My Galaxy</span>
             </motion.h1>
 
             
@@ -116,7 +117,7 @@ function App() {
               initial="hidden"
               animate={control2}
             >
-              A space to host my <span className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>Personal</span> <span className='text-white'>/</span> <span className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent'>Professional</span> works !!
+              A space to host my <span className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>Personal</span> <span className='text-white'>/</span> <span className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent'>Professional</span> works.
             </motion.h5>
          
            <motion.h5
@@ -161,13 +162,6 @@ function App() {
             <Skills />
             <Projects />
             <Contact />
-            
-            
-           
-              
-
-         
-            
             <Footer />
 
           </div>
