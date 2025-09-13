@@ -55,7 +55,7 @@ const Contact: React.FC = () => {
 
   return (
     <section
-     
+      id ="contact"
       ref={contactRef}
       className="min-h-screen py-24 px-6 flex flex-col items-center justify-center"
     >
