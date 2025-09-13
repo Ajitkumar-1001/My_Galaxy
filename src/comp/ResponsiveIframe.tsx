@@ -8,7 +8,7 @@ export interface Props {
 
 
 
-export default function ResponsiveIframe({src,ratio=16/9,className}:Props) {
+export default function ResponsiveIframe({src,ratio=21/9,className}:Props) {
 
 
     const style = { aspectRatio: `${ratio}` }; 
