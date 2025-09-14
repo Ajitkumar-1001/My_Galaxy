@@ -6,7 +6,7 @@ import {
  
   DialogTrigger,
 } from "../components/ui/dialog";
-import ResponsiveIframe, { type Props } from "./ResponsiveIframe";
+import ResponsiveIframe from "./ResponsiveIframe";
 
 
 
