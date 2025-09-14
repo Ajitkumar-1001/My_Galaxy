@@ -19,7 +19,7 @@ export default function ResponsiveIframe({src,ratio=21/16,className}:Props) {
       style={style}
     >
       <iframe
-        className="absolute inset-0 h-full sw-full border-0"
+        className="absolute inset-0 h-full w-full border-0"
         src={src}
      
         loading="lazy"
