@@ -13,7 +13,7 @@ const projects: any = [
     tech: ["Python", "Typescript", "React", "Tailwindcss", "Sci-kit Learn", "FastAPI", "Docker", "Dagshub", "MLflow",],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
     demo: "Live coming soon....",
-    source: "https://blogspot-ajit.vercel.app/blogs/featured/blog-2",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-2",
     demo2: "../.././clip.mp4",
   },
   {
@@ -23,7 +23,7 @@ const projects: any = [
     tech: ["PyTorch", "CNN", "RestNet", "Transformers", "Distil-BERT", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
     demo: "Live coming soon...",
-    source: "https://blogspot-ajit.vercel.app/blogs/featured/blog-1",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-1",
     demo2: "../.././clip.mp4",
   },
   {
@@ -33,7 +33,7 @@ const projects: any = [
     tech: ["PyTorch", "CNN", "RestNet", "ConvNext", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
     demo: "Live coming soon....",
-    source: "https://blogspot-ajit.vercel.app/blogs/featured/blog-3",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-3",
     demo2: "../.././clip.mp4",
   },
   {
@@ -43,7 +43,7 @@ const projects: any = [
     tech: ["React", "TailwindCSS", "TypeScript"],
     link: "https://github.com/Ajitkumar-1001/My_Galaxy",
     demo: "https://blogspot-ajit.vercel.app",
-    source: "https://blogspot-ajit.vercel.app/blogs",
+    source: "https://blog.ajitkumar.io/blogs/",
     demo2: "../.././clip.mp4",
   }, {
     title: "Jersey City Citibike rides Prediction",
@@ -52,7 +52,7 @@ const projects: any = [
     tech: ["Python", "MLflow", "Hopsworks", "Streamlit", "Github Actions"],
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
     demo: "Live coming soon....",
-    source: "https://blogspot-ajit.vercel.app/blogs/featured/blog-5",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-5",
     demo2:"../.././clip.mp4",
   },
   {
@@ -62,7 +62,7 @@ const projects: any = [
     tech: ["Python", "Github Actions", "MLflow", "Hopsworks", "Streamlit"],
     link: "https://github.com/Ajitkumar-1001/AppliedML_NYC_taxidata",
     demo: "Live coming soon....",
-    source: "https://blogspot-ajit.vercel.app/blogs/featured/blog-6",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-6",
     demo2: "../.././clip.mp4",
   }
 
