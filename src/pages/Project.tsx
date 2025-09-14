@@ -195,10 +195,10 @@ const Projects: React.FC = () => {
                   </div>
                   <div className="flex flex-row items-center justify-center gap-2 mb-2 items-center">
                     <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source}/>
+                      <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source} ratio={20/16}/>
                     </div>
                     <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-indigo-500 bg-transparent border-indigo-200 border-2 rounded-full" button="View Demo" source={project.demo2}/>
+                      <DialogDemo className="text-indigo-500 bg-transparent border-indigo-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
                     </div>
                   </div>
                   <div className="flex flex-col items-center">

@@ -6,7 +6,7 @@ import {
  
   DialogTrigger,
 } from "../components/ui/dialog";
-import ResponsiveIframe from "./ResponsiveIframe";
+import ResponsiveIframe, { type Props } from "./ResponsiveIframe";
 
 
 
@@ -15,10 +15,11 @@ export interface Demolinks {
     className?: string, 
     title?: string,
     button?: string,
+    ratio?:number,
 
 }
 
-export default function DialogDemo({source,className,button}:Demolinks) {
+export default function DialogDemo({source,className,button,ratio}:Demolinks) {
   return (
     
       <Dialog>
@@ -28,7 +29,7 @@ export default function DialogDemo({source,className,button}:Demolinks) {
         </DialogTrigger>
         <DialogContent className="sm:max-w-7xl md:max-w-10xl backdrop-blur bg-transparent">
             <div className="flex flex-col items-center p-2 mx-auto max-w-10xl w-full">
-                <ResponsiveIframe src={source} />
+                <ResponsiveIframe src={source} ratio={ratio} />
             </div>
         
         
