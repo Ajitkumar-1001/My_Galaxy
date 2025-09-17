@@ -33,7 +33,7 @@ const Experience: React.FC = () => {
     <section
       ref = {sectionref}
       id ="experience"
-      className="min-h-screen flex flex-col justify-center items-center bg-transparent p-15 mt-10"
+      className="min-h-screen flex flex-col justify-center items-center bg-transparent p-3 w-full  mt-10"
     >
       <motion.div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8" variants={hideContainer} initial="hidden" animate={control1}>
         <div className="text-center mb-12">
