@@ -27,9 +27,9 @@ export default function DialogDemo({source,className,button,ratio}:Demolinks) {
         <DialogTrigger asChild>
           <Button className={`w-25 h-8 bg-gradient-to-tr from-indigo-500 to-blue-800 ${className ?? ' '}`} variant="outline">{button}</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-7xl md:max-w-10xl backdrop-blur bg-transparent h-[80vh] md:h-auto">
-            <div className="flex flex-col items-center p-2 mx-auto max-w-10xl w-full h-full">
-                <ResponsiveIframe src={source} ratio={ratio} />
+        <DialogContent className="sm:max-w-7xl md:max-w-10xl backdrop-blur bg-transparent max-h-[90dvh] overflow-hidden flex flex-col">
+            <div className="flex flex-col items-center flex-1 min-h-0 w-full">
+                <ResponsiveIframe src={source} ratio={ratio} className="h-[75dvh] md:h-auto" />
             </div>
         
         
