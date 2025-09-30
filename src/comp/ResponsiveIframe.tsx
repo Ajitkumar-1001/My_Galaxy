@@ -15,7 +15,7 @@ export default function ResponsiveIframe({src,ratio=21/16,className}:Props) {
 
   return (
     <div
-      className={`relative w-full h-[75vh] md:h-full overflow-hidden max-w-6xl rounded-xl ${className}`}
+      className={`relative w-full h-full overflow-hidden max-w-6xl rounded-xl ${className}`}
       style={style}
     >
       <iframe
