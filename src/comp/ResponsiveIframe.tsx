@@ -15,11 +15,11 @@ export default function ResponsiveIframe({src,ratio=21/16,className}:Props) {
 
   return (
     <div
-      className={`relative w-full inset-0 w-full h-[75%] h-full overflow-hidden max-w-6xl rounded-xl ${className}`}
+      className={`relative w-full h-[75vh] md:h-full overflow-hidden max-w-6xl rounded-xl ${className}`}
       style={style}
     >
       <iframe
-        className="absolute inset-0 w-full h-full md:h-full h-[75%] border-0"
+        className="absolute inset-0 w-full h-full border-0"
         src={src}
 
         loading="lazy"
