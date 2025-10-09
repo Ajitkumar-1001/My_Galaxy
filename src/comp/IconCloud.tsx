@@ -9,76 +9,61 @@ interface IconCloudProps {
 }[];
   className?: string;
   size?: number;
+  rotationSpeed?: number;
 }
 
-const IconCloud: React.FC<IconCloudProps> = ({ icons, className = "", size = 300}) => {
+const IconCloud: React.FC<IconCloudProps> = ({ 
+  icons, 
+  className = "", 
+  size = 300,
+  rotationSpeed = 0.0015
+}) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [positions, setPositions] = useState<Array<{ x: number; y: number; z: number; scale: number }>>([]);
+  const [positions, setPositions] = useState<Array<{ x: number; y: number; z: number; originalX: number; originalY: number; originalZ: number }>>([]);
   const [, forceUpdate] = useState({});
-  const rotationRef = useRef({ x: 0, y: 0 });
-  const mouseRef = useRef({ x: 0, y: 0 });
+  const rotationRef = useRef(0);
   const animationFrameRef = useRef<number | null>(null);
 
-  // Generate sphere positions for icons
+  // Generate evenly distributed sphere positions like continents on a globe
   useEffect(() => {
-    const radius = size / 2 - 0.5;
+    const radius = size * 0.45; // Optimal radius for no collisions
     const newPositions = icons.map((_, index) => {
-      const phi = Math.acos(-1 + (2 * index) / icons.length);
-      const theta = Math.sqrt(icons.length * Math.PI) * phi;
+      // Create evenly distributed points using spherical coordinates
+      const numIcons = icons.length;
       
+      // Use spiral distribution for even spacing
+      const y = 1 - (index / (numIcons - 1)) * 2; // Y from 1 to -1
+      const radiusAtY = Math.sqrt(1 - y * y);
+      const theta = Math.sqrt(numIcons * Math.PI) * Math.asin(y);
+      
+      const x = Math.cos(theta) * radiusAtY * radius;
+      const z = Math.sin(theta) * radiusAtY * radius;
+      const yPos = y * radius;
+
       return {
-        x: radius * Math.cos(theta) * Math.sin(phi),
-        y: radius * Math.sin(theta) * Math.sin(phi),
-        z: radius * Math.cos(phi),
-        scale: 1 + Math.random() * 0.4, // Random scale between 0.8 and 1.2
+        x,
+        y: yPos,
+        z,
+        originalX: x,
+        originalY: yPos,
+        originalZ: z,
       };
     });
     setPositions(newPositions);
   }, [icons, size]);
 
-  // Handle mouse and touch movement for interactive rotation
+
+  // Perfect spherical rotation animation loop
   useEffect(() => {
-    const handleMove = (clientX: number, clientY: number) => {
-      if (!containerRef.current) return;
-      
-      const rect = containerRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      
-      mouseRef.current.x = (clientX - centerX) / rect.width;
-      mouseRef.current.y = (clientY - centerY) / rect.height;
-    };
-
-    const handleMouseMove = (event: MouseEvent) => {
-      handleMove(event.clientX, event.clientY);
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      if (event.touches.length > 0) {
-        handleMove(event.touches[0].clientX, event.touches[0].clientY);
-      }
-    };
-
-    document.addEventListener('mousemove', handleMouseMove);
-    document.addEventListener('touchmove', handleTouchMove, { passive: true });
-    
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove);
-      document.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, []);
-
-  // Animation loop
-  useEffect(() => {
-    let lastTime = 0;
     let isVisible = true;
+    let startTime = performance.now();
 
     // Use Intersection Observer to pause animation when not visible
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible = entry.isIntersecting;
         if (isVisible && !animationFrameRef.current) {
-          lastTime = performance.now();
+          startTime = performance.now();
           animationFrameRef.current = requestAnimationFrame(animate);
         }
       },
@@ -95,16 +80,9 @@ const IconCloud: React.FC<IconCloudProps> = ({ icons, className = "", size = 300
         return;
       }
 
-      const deltaTime = lastTime === 0 ? 0 : (currentTime - lastTime) / 1000;
-      lastTime = currentTime;
-
-      // Enhanced auto rotation - more noticeable revolving motion
-      rotationRef.current.x += deltaTime * 0.5;
-      rotationRef.current.y += deltaTime * 0.8;
-
-      // Mouse influence (reduced for better performance)
-      rotationRef.current.x += mouseRef.current.y * deltaTime * 0.3;
-      rotationRef.current.y += mouseRef.current.x * deltaTime * 0.3;
+      // Calculate rotation based on time elapsed for consistent speed
+      const elapsed = currentTime - startTime;
+      rotationRef.current = elapsed * rotationSpeed;
 
       // Force re-render to update transforms
       forceUpdate({});
@@ -112,7 +90,7 @@ const IconCloud: React.FC<IconCloudProps> = ({ icons, className = "", size = 300
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    lastTime = performance.now();
+    startTime = performance.now();
     animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
@@ -122,85 +100,122 @@ const IconCloud: React.FC<IconCloudProps> = ({ icons, className = "", size = 300
         animationFrameRef.current = null;
       }
     };
-  }, []);
+  }, [rotationSpeed]);
 
-  const getTransform = (position: { x: number; y: number; z: number; scale: number }, index: number) => {
-    const time = Date.now() * 0.001;
+  const getTransform = (position: { x: number; y: number; z: number; originalX: number; originalY: number; originalZ: number }) => {
+    // Globe rotation ONLY around X and Z axes (NO Y-axis rotation)
+    const rotation = rotationRef.current;
     
-    // Apply rotation
-    const cosX = Math.cos(rotationRef.current.x);
-    const sinX = Math.sin(rotationRef.current.x);
-    const cosY = Math.cos(rotationRef.current.y);
-    const sinY = Math.sin(rotationRef.current.y);
+    // Start with original position
+    let rotatedX = position.originalX;
+    let rotatedY = position.originalY;
+    let rotatedZ = position.originalZ;
     
-    // Rotate around Y axis
-    let x = position.x * cosY - position.z * sinY;
-    let z = position.x * sinY + position.z * cosY;
+    // Rotation around X axis (up/down tilt)
+    const rotationX = rotation;
+    const cosX = Math.cos(rotationX);
+    const sinX = Math.sin(rotationX);
+    const tempY = rotatedY;
+    const tempZ = rotatedZ;
+    rotatedY = tempY * cosX - tempZ * sinX;
+    rotatedZ = tempY * sinX + tempZ * cosX;
     
-    // Rotate around X axis
-    let y = position.y * cosX - z * sinX;
-    z = position.y * sinX + z * cosX;
+    // Rotation around Z axis (roll/twist)
+    const rotationZ = rotation * 0.6; // Different speed for Z axis
+    const cosZ = Math.cos(rotationZ);
+    const sinZ = Math.sin(rotationZ);
+    const tempX = rotatedX;
+    const tempY2 = rotatedY;
+    rotatedX = tempX * cosZ - tempY2 * sinZ;
+    rotatedY = tempX * sinZ + tempY2 * cosZ;
 
-    // Add slight floating animation
-    y += Math.sin(time + index) * 5;
-    x += Math.cos(time * 0.7 + index) * 3;
-
-    // Calculate depth-based scale and opacity
-    const depth = (z + size / 2) / size;
-    const scale = position.scale * (0.6 + depth * 0.4);
-    const opacity = 0.3 + depth * 0.7;
-
+    // Calculate depth based on Z position (front to back)
+    const maxRadius = size * 0.45;
+    const normalizedZ = (rotatedZ + maxRadius) / (2 * maxRadius);
+    const depth = Math.max(0, Math.min(1, normalizedZ));
+    
+    // Visibility based on position relative to viewer
+    const opacity = Math.max(0.2, Math.min(1, depth * 1.1));
+    const scale = 0.7 + depth * 0.3; // Less dramatic scaling
+    const blur = (1 - depth) * 6; // Moderate blur for depth
+    
+    // Convert 3D position to 2D screen coordinates
+    const screenX = rotatedX + size / 2;
+    const screenY = rotatedY + size / 2;
+    
     return {
-      x: x + size / 2,
-      y: y + size / 2,
+      x: screenX,
+      y: screenY,
       scale,
       opacity,
-      zIndex: Math.floor(depth * 100),
+      blur,
+      zIndex: Math.floor(depth * 1000),
     };
   };
 
   return (
     <div
       ref={containerRef}
-      className={`relative mx-auto cursor-pointer ${className}`}
+      className={`relative mx-auto ${className}`}
       style={{ width: size, height: size }}
     >
-      {icons.map((iconData, index) => {
-        if (!positions[index]) return null;
-        
-        const transform = getTransform(positions[index], index);
-        const Icon = iconData.icon;
-        
-        return (
-          <motion.div
-            key={`${iconData.name}-${index}`}
-            className="absolute flex flex-col items-center pointer-events-none select-none"
-            style={{
-              left: transform.x,
-              top: transform.y,
-              transform: `translate(-50%, -50%) scale(${transform.scale})`,
-              opacity: transform.opacity,
-              zIndex: transform.zIndex,
-            }}
-            whileHover={{ scale: transform.scale * 1.2 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            <Icon 
-              className="text-blue-400 drop-shadow-lg" 
-              size={48 + Math.floor(transform.scale * 8)}
-            />
-            <span 
-              className="text-xs text-blue-300 mt-1 font-medium whitespace-nowrap"
-              style={{ fontSize: `${12 + transform.scale * 4}px` }}
+      {/* Render icons in depth order (back to front) */}
+      {icons
+        .map((iconData, index) => ({ iconData, index, transform: positions[index] ? getTransform(positions[index]) : null }))
+        .filter(item => item.transform !== null)
+        .sort((a, b) => (a.transform?.zIndex || 0) - (b.transform?.zIndex || 0))
+        .map(({ iconData, index, transform }) => {
+          if (!transform) return null;
+          
+          const Icon = iconData.icon;
+          const baseIconSize = 72; // Slightly smaller to prevent collisions
+          const iconSize = baseIconSize * transform.scale; // Size varies with depth
+          
+          return (
+            <motion.div
+              key={`${iconData.name}-${index}`}
+              className="absolute flex flex-col items-center pointer-events-none select-none"
+              style={{
+                left: transform.x,
+                top: transform.y,
+                transform: `translate(-50%, -50%) scale(${transform.scale})`,
+                opacity: transform.opacity,
+                zIndex: transform.zIndex,
+                filter: `blur(${transform.blur}px)`,
+              }}
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: transform.opacity, scale: transform.scale }}
+              transition={{ 
+                type: "spring", 
+                stiffness: 300, 
+                damping: 30,
+                delay: index * 0.05 // Stagger animation
+              }}
             >
-              {iconData.name}
-            </span>
-          </motion.div>
-        );
-      })}
+              <Icon 
+                className="text-blue-400 drop-shadow-lg" 
+                size={iconSize}
+              />
+              <span 
+                className="text-sm text-blue-300/90 mt-2 font-semibold whitespace-nowrap drop-shadow-lg"
+                style={{ 
+                  fontSize: `${12 + transform.scale * 4}px`, // Text size scales with depth
+                  textShadow: '0 0 12px rgba(59, 130, 246, 0.7)'
+                }}
+              >
+                {iconData.name}
+              </span>
+            </motion.div>
+          );
+        })}
       
-      {/* Center glow effect */}
-      {/* <div className="absolute top-1/2 left-1/2 w-32 h-32 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-r from-blue-500/20 to-indigo-500/20 blur-xl pointer-events-none" /> */}
+      {/* Enhanced center glow effect */}
+      {/* <div className="absolute top-1/2 left-1/2 w-40 h-40 -translate-x-1/2 -translate-y-1/2 rounded-full border border-blue-500/20 bg-gradient-radial from-blue-500/5 to-transparent pointer-events-none flex flex-col items-center justify-center backdrop-blur-sm">
+        <div className="absolute inset-0 rounded-full border border-blue-400/10 animate-pulse"></div>
+        <h1 className="text-lg font-bold text-transparent bg-gradient-to-r from-blue-400 via-blue-300 to-blue-500 bg-clip-text drop-shadow-lg text-center leading-tight">
+          Building with
+        </h1>
+      </div> */}
     </div>
   );
 };
