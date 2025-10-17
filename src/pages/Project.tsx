@@ -147,7 +147,7 @@ const Projects: React.FC = () => {
       >
         <motion.h2
           variants={childVariant as any}
-          className="text-4xl font-bold bg-gradient-to-tr from-blue-500 to-indigo-200 bg-clip-text text-transparent mb-3"
+          className="text-4xl font-bold bg-gradient-to-tr from-blue-500 to-indigo-600 bg-clip-text text-transparent mb-3 brightness-120"
         >
           Projects
         </motion.h2>

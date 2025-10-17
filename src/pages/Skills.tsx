@@ -398,7 +398,7 @@ const Skills: React.FC = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold mt-12 bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent"
+        className="text-4xl font-bold mt-12 bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent brightness-110"
       >
         Skills
       </motion.h2>
@@ -434,7 +434,7 @@ const Skills: React.FC = () => {
                 
                 {/* Orbiting skill icons - Inner ring */}
                 <OrbitingCircles radius={140} duration={35} path={true}>
-                  {skills.slice(0, skills.length > 4 ? 4 : skills.length).map((skill) => {
+                  {skills.slice(0, skills.length > 3 ? 4 : skills.length).map((skill) => {
                     const IconComponent = skill.icon;
                     return (
                       <div

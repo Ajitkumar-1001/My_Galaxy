@@ -37,7 +37,7 @@ const Experience: React.FC = () => {
     >
       <motion.div className="w-full max-w-6xl mx-auto px-4 mt-10 sm:px-6 lg:px-8" variants={hideContainer} initial="hidden" animate={control1}>
         <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold font-sans bg-gradient-to-tr from-blue-400 to-indigo-500 bg-clip-text text-transparent">
+          <h1 className="text-4xl font-bold font-sans bg-gradient-to-tr from-blue-400 to-indigo-500 bg-clip-text text-transparent brightness-120">
             Experience
           </h1>
         </div>

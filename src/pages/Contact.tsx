@@ -65,8 +65,9 @@ const Contact: React.FC = () => {
         initial="hidden"
         animate={controls}
       >
+        
         <motion.h1
-          className="text-4xl font-bold bg-gradient-to-br from-gray-300 to-blue-600 bg-clip-text text-transparent"
+          className="text-4xl font-extrabold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent brightness-120"
           variants={childVariant}
         >
           Contact Me

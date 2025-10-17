@@ -66,7 +66,7 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
+          Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
             typingSpeed={30}
             pauseDuration={1000}
@@ -78,7 +78,7 @@ const Hero: React.FC = () => {
         <motion.div className='flex flex-row items-center' variants={middleware as any}>
           <h2 className="mt-6 sm:text-lg md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide">
             My <span className='text-indigo-300'>Fields</span> of <span className='text-blue-400'>Interests</span>:{" "}
-            <span className='text-blue-300'>
+            <span className='text-blue-300 brightness-110'>
               <TextType
                 text={["Machine Learning", "Deep Learning", "Artificial Intelligence", "Web Applications!"]}
                 className='text-bold font-sans'
