@@ -383,11 +383,11 @@ const skillCategories = {
   ],
 } as const;
 
-const categoryColors = {
-  "Languages": "from-blue-500 to-white-400",
-  "ML / AI": "from-blue-400 to-gray-500",
-  "Tools & Frameworks": "from-white-400 to-blue-500",
-};
+// const categoryColors = {
+//   Languages: "from-blue-500 to-white-400",
+//   "ML / AI": "from-blue-400 to-gray-500",
+//   "Tools & Frameworks": "from-white-400 to-blue-500",
+// } as const;
 
 const Skills: React.FC = () => {
   const isMobile = useMobile(1024); // Use 1024px as breakpoint for lg screens
@@ -420,9 +420,9 @@ const Skills: React.FC = () => {
               viewport={{ once: true }}
               className="flex flex-col items-center space-y-8 px-4 py-8"
             >
-              <h3 className={`text-3xl font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent text-center`}>
+              {/* <h3 className={`text-3xl font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent text-center`}>
                 {category}
-              </h3>
+              </h3> */}
               
               <div className="relative flex h-[420px] w-[420px] items-center justify-center overflow-visible">
                 {/* Center circle with category description */}
@@ -433,7 +433,7 @@ const Skills: React.FC = () => {
                 </div>
                 
                 {/* Orbiting skill icons - Inner ring */}
-                <OrbitingCircles radius={110} duration={35} path={true}>
+                <OrbitingCircles radius={140} duration={35} path={true}>
                   {skills.slice(0, skills.length > 4 ? 4 : skills.length).map((skill) => {
                     const IconComponent = skill.icon;
                     return (
@@ -442,7 +442,7 @@ const Skills: React.FC = () => {
                         className="relative flex  items-center justify-center  hover:scale-110 transition-all duration-200 group shadow-md"
                         title={skill.name}
                       >
-                        <IconComponent className="h-14 w-14 text-blue-200 group-hover:text-white transition-colors duration-200" />
+                        <IconComponent className="h-10 w-10 text-blue-200 group-hover:text-white transition-colors duration-200" />
                         {/* Tooltip */}
                         <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-800/90 backdrop-blur text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50 shadow-lg border border-blue-400/20">
                           {skill.name}
@@ -455,7 +455,7 @@ const Skills: React.FC = () => {
                 
                 {/* Outer ring for remaining skills */}
                 {skills.length > 4 && (
-                  <OrbitingCircles radius={190} duration={45} reverse path={true}>
+                  <OrbitingCircles radius={220} duration={100} reverse path={true}>
                     {skills.slice(4).map((skill) => {
                       const IconComponent = skill.icon;
                       return (
@@ -464,7 +464,7 @@ const Skills: React.FC = () => {
                           className="relative flex items-center justify-center  hover:scale-110 transition-all duration-200 group shadow-md"
                           title={skill.name}
                         >
-                         <IconComponent className="h-14 w-14 text-blue-200 group-hover:text-white transition-colors duration-200" />
+                         <IconComponent className="h-12 w-12 text-blue-200 group-hover:text-white transition-colors duration-200" />
                           {/* Tooltip */}
                           <div className="absolute -top-12 left-1/2 transform -translate-x-1/2 px-3 py-1 bg-gray-800/90 backdrop-blur text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none whitespace-nowrap z-50 shadow-lg border border-blue-400/20">
                             {skill.name}
@@ -498,9 +498,9 @@ const Skills: React.FC = () => {
               viewport={{ once: true }}
               className="flex flex-col items-center space-y-10"
             >
-              <h3 className={`text-2xl font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent text-center`}>
+              {/* <h3 className={`text-2xl font-bold bg-gradient-to-t ${categoryColors[category as keyof typeof categoryColors]} bg-clip-text text-transparent text-center`}>
                 {category}
-              </h3>
+              </h3> */}
               
               <div className="relative w-72 h-72 flex items-center justify-center ">
                 {/* Center circle */}

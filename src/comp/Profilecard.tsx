@@ -108,9 +108,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
   return (
     // Outermost container to center the card and provide a background
-    <div className="min-h-screen bg-transparent  flex items-center justify-center p-4 font-sans font-bold">
+    <div className="min-h-screen bg-transparent flex items-center justify-center p-4 font-sans font-bold relative z-20">
       <div
-        className="w-full max-w-xl min-h-xl p-[1px] rounded-xl bg-gradient-to-br from-black-900 via-gray-800 to-white-900  shadow-xl"
+        className="w-full max-w-xl min-h-xl p-[1px] rounded-xl bg-gradient-to-br from-black-900 via-gray-800 to-white-900 shadow-xl relative z-20"
         
       >
         {/* Top section with name and role */}
@@ -140,7 +140,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
             variants={itemvariants as any}
             src={mainImageUrl}
             alt={`${name}'s photo`}
-            className="w-full z-20 h-90 object-cover rounded-[2rem] shadow-lg "
+            className="w-full  h-90 object-cover rounded-[2rem] shadow-lg "
             // Fallback in case the image fails to load
             onError={(e) => {
               (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;

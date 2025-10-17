@@ -71,8 +71,10 @@ export function Globe({
 
   useEffect(() => {
     const onResize = () => {
-      if (canvasRef.current) {
-        width = canvasRef.current.offsetWidth
+      if (canvasRef.current && canvasRef.current.parentElement) {
+        const container = canvasRef.current.parentElement
+        const size = Math.min(container.offsetWidth, container.offsetHeight)
+        width = size
       }
     }
 
@@ -101,13 +103,13 @@ export function Globe({
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
+        "relative mx-auto aspect-square w-full h-full max-w-full max-h-full overflow-hidden",
         className
       )}
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
+          "w-full h-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
         )}
         ref={canvasRef}
         onPointerDown={(e) => {

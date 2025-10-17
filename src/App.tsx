@@ -13,6 +13,7 @@ import './App.css';
 import Contact from './pages/Contact';
 import Footer from './comp/Footer';
 import BgMusicButton from './comp/Audio';
+import LazyGlobe from './components/LazyGlobe';
 // import { Routes , Route } from 'react-router-dom';
 // import NotFound from './comp/Notfound';
 
@@ -154,8 +155,43 @@ function App() {
           <div className="relative z-10">
 
             <Navbar />
-            {/* <RotatingGlobe /> */}
             <BgMusicButton src="../../Hayden Folker - Adrift.mp3" />
+            
+            {/* Floating Globe - Centered and responsive */}
+            <div className="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
+              <div className="w-[85vh] h-[85vh] sm:w-[75vh] sm:h-[75vh] md:w-[85vmin] md:h-[85vmin] lg:w-[85vmin] lg:h-[85vmin] flex items-center justify-center">
+              <LazyGlobe 
+                className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-500" 
+                config={{
+                  width: 1200,
+                  height: 1200,
+                  devicePixelRatio: 2,
+                  phi: 1,
+                  theta: 0.2,
+                  dark: 1,
+                  diffuse: 0.1,
+                  mapSamples: 24000,
+                  mapBrightness: 1.0,
+                  baseColor: [0.1, 0.2, 0.3],
+                  markerColor: [0.2, 0.4, 0.6],
+                  glowColor: [0.2, 0.3, 0.5],
+                  markers: [
+                    { location: [14.5995, 120.9842], size: 0.03 },
+                    { location: [19.076, 72.8777], size: 0.05 },
+                    { location: [23.8103, 90.4125], size: 0.04 },
+                    { location: [30.0444, 31.2357], size: 0.04 },
+                    { location: [39.9042, 116.4074], size: 0.05 },
+                    { location: [-23.5505, -46.6333], size: 0.05 },
+                    { location: [19.4326, -99.1332], size: 0.05 },
+                    { location: [40.7128, -74.006], size: 0.06 },
+                    { location: [34.6937, 135.5022], size: 0.04 },
+                    { location: [41.0082, 28.9784], size: 0.04 },
+                  ]
+                }}
+              />
+              </div>
+            </div>
+            
             <Hero />
             <About />
             <Experience />
