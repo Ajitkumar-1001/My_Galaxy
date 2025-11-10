@@ -1,33 +1,27 @@
 import React ,{useMemo, useEffect,useRef} from "react";
 import { experience_content } from "../data/data";
 import { containerprops_fade, Containerhide, contentprops_fade, motionVariant,contentMotionVariant } from "../data/animate";
-import { useAnimateElement } from "../data/controls"; 
-import { motion , useInView} from "framer-motion";
+import { motion , useInView, useAnimation} from "framer-motion";
 
 const Experience: React.FC = () => {
-  const { control1,control2 } = useAnimateElement();
+  const control1 = useAnimation();
+  const control2 = useAnimation();
+
   const containerVariant = useMemo(()=>(containerprops_fade),[]);
   const contentVariant = useMemo(()=>(contentprops_fade),[]);
   const motionContainr = useMemo(()=>(motionVariant),[]);
-  const motionContent = useMemo(()=>(contentMotionVariant),[]); 
+  const motionContent = useMemo(()=>(contentMotionVariant),[]);
   const hideContainer = useMemo(()=> (Containerhide),[]);
-  const sectionref = useRef(null); 
-  const threshold:any = 0.3; 
-  const inView = useInView(sectionref,threshold); 
+  const sectionref = useRef(null);
+  const threshold:any = 0.3;
+  const inView = useInView(sectionref,threshold);
 
-
-  useEffect(()=> { 
-
-    if(inView){ 
-        control1.start("visible");
-        control2.start("visible");
+  useEffect(() => {
+    if (inView) {
+      control1.start("visible");
+      control2.start("visible");
     }
-    else{
-        control1.start("hidden");
-        control2.start("hidden");
-    };
-
-  },[inView]);
+  }, [inView, control1, control2]);
 
   return (
     <section

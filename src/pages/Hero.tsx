@@ -177,8 +177,8 @@ const Hero: React.FC = () => {
           // className= 'p-4 sm:p-6 md:p-4'
 
           degree='Master of Science in Data Science'
-          mainImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG"
-          profileImageUrl="../../892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG"
+          mainImageUrl="../../DCECC804-932B-4050-893F-334D8DD056E1 2.JPG"
+          profileImageUrl="../../DCECC804-932B-4050-893F-334D8DD056E1 2.JPG"
           profileHandle="ajitkumar"
           isAvailable={true}
 

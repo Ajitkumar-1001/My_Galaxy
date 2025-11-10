@@ -14,7 +14,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-2",
-    demo2: "../.././clip.mp4",
+    demo2: "",
   },
   {
     title: "MIDAS Skin Cancer Detection",
@@ -24,7 +24,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
     demo: "Live coming soon...",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-1",
-    demo2: "../.././clip.mp4",
+    demo2: "",
   },
   {
     title: "CovDet",
@@ -34,7 +34,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-3",
-    demo2: "../.././clip.mp4",
+    demo2: "",
   },
   {
     title: "BlogPosts",
@@ -44,7 +44,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/My_Galaxy",
     demo: "https://blogspot-ajit.vercel.app",
     source: "https://blog.ajitkumar.io/blogs/",
-    demo2: "../.././clip.mp4",
+    demo2: "",
   }, {
     title: "Jersey City Citibike rides Prediction",
     description:
@@ -53,7 +53,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/citibike_mlops",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-5",
-    demo2:"../.././clip.mp4",
+    demo2:"",
   },
   {
     title: "New York City Taxi-rides Prediciton",
@@ -63,7 +63,7 @@ const projects: any = [
     link: "https://github.com/Ajitkumar-1001/AppliedML_NYC_taxidata",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-6",
-    demo2: "../.././clip.mp4",
+    demo2: "",
   }
 
 ];
@@ -83,15 +83,8 @@ const Projects: React.FC = () => {
   const controls = useAnimation();
 
   useEffect(() => {
-    const animate = async () => {
-      if (inView) {
-        await controls.start("visible");
-      } else {
-        await controls.start("hidden");
-      }
-    };
-    animate();
-  }, [inView]);
+    if (inView) controls.start("visible");
+  }, [inView, controls]);
 
   const parentVariant: any = useMemo(
     () => ({
@@ -103,10 +96,10 @@ const Projects: React.FC = () => {
         opacity: 1,
         scale: 1,
         transition: {
-          duration: 0.6,
+          duration: 0.2,
           ease: "easeOut",
           when: "beforeChildren",
-          staggerChildren: 0.3,
+          staggerChildren: 0.1,
         },
       },
     }),
@@ -125,7 +118,7 @@ const Projects: React.FC = () => {
         y: 0,
         scale: 1,
         transition: {
-          duration: 0.8,
+          duration: 0.3,
           ease: "easeOut",
         },
       },
