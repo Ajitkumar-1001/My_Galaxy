@@ -7,6 +7,7 @@ const About: React.FC = () => {
   const secRef = useRef(null);
   const control1 = useAnimation();
   const control2 = useAnimation();
+  const control3 = useAnimation();
   const threshold: any = 0.3;
   const inView = useInView(secRef, threshold);
   const hideContainer = useMemo(() => (Containerhide), []);
@@ -17,10 +18,10 @@ const About: React.FC = () => {
       opacity: 1,
       scale: 1,
       transition: {
-        duration: 0.8,
+        duration: 0.3,
         ease: "easeOut",
         when: "beforeChildren",
-        staggerChildren: 0.7,
+        staggerChildren: 0.1,
       },
     },
   }), []);
@@ -32,7 +33,7 @@ const About: React.FC = () => {
       y: 0,
       scale: 1,
       transition: {
-        duration: 0.7,
+        duration: 0.2,
         ease: "easeOut",
       },
     },
@@ -61,17 +62,15 @@ const About: React.FC = () => {
 
 
   useEffect(() => {
-
-    if (inView) {
-      control1.start("visible");
-      control2.start("visible");
-    }
-    else {
-      control1.start("hidden");
-      control2.start("hidden");
+    const animate = async () => {
+      if (inView) {
+        await control1.start("visible");
+        await control2.start("visible");
+        await control3.start("visible");
+      }
     };
-
-  }, [inView, control1, control2]);
+    animate();
+  }, [inView, control1, control2, control3]);
 
   const cards = [
     {
@@ -101,7 +100,7 @@ const About: React.FC = () => {
     },
     {
       title: "Current Work",
-      text: `I'm currently exploring and working in reinforcement learning to further expand my knowledge in deep learning through reward-based learning—enabling machines to learn efficiently and adaptively.`,
+      text: `I'm currently exploring and working in reinforcement learning to further expand my knowledge in deep learning through reward-based learning enabling machines to learn efficiently and adaptively.`,
       gradient: "from-white via-gray-500 to-indigo-900",
     },
   ];
@@ -116,8 +115,8 @@ const About: React.FC = () => {
       <motion.div
         className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 md:px-20"
         variants={parentVariant as any}
-        // initial="hidden"
-        // animate={control2}
+        initial="hidden"
+        animate={control3}
 
       >
         {cards.map((card, idx) => (
