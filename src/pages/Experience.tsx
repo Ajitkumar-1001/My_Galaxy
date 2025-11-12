@@ -50,7 +50,7 @@ const Experience: React.FC = () => {
                   <motion.img variants={contentVariant}
                     src={exp.logo}
                     alt={`${exp.company_name} logo`}
-                    className="w-30 h-30 rounded-3xl object-contain shadow-3xl"
+                    className="w-30 h-30 rounded-3xl object-contain shadow-3xl brightness-110"
                   />
                 </motion.div>
 
@@ -59,7 +59,7 @@ const Experience: React.FC = () => {
                     {exp.company_name}
                   </motion.h2>
 
-                  <motion.div className="mt-1 font-sans text-center font-bold text-sm text-gray-300" variants={motionContainr}>
+                  <motion.div className="mt-1 font-sans text-center font-bold text-sm text-gray-300 brightness-110" variants={motionContainr}>
                     {exp.period_Start} — {exp.period_end}
                   </motion.div>
 

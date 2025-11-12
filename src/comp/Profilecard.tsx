@@ -23,7 +23,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
   name,
   // role,
   university,
-  address,
+  // address,
   location,
   degree,
   contact,
@@ -110,7 +110,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     // Outermost container to center the card and provide a background
     <div className="min-h-screen bg-transparent flex items-center justify-center p-4 font-sans font-bold relative z-20">
       <div
-        className="w-full max-w-xl min-h-xl p-[1px] rounded-xl bg-gradient-to-br from-black-900 via-gray-800 to-white-900 shadow-xl relative z-20"
+        className="w-full max-w-xl min-h-xl p-[1px] rounded-xl bg-gradient-to-r from-black-900 via-gray-800 to-white-900 shadow-xl relative z-20"
         
       >
         {/* Top section with name and role */}
@@ -120,7 +120,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         viewport = {{once:true}}>
           <motion.h1 className="text-3xl font-extrabold bg-gradient-to-t from-blue-600 to-blue-300 bg-clip-text text-transparent " variants={itemvariants as any}>{university}</motion.h1>
           <motion.p className="text-md bg-gradient-to-t from-white to-blue-650 bg-clip-text text-transparent mt-1 " variants={itemvariants as any}>{degree}</motion.p>
-          <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{address}</motion.p>
+          {/* <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{address}</motion.p> */}
           <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{location}</motion.p>
           <motion.p className='text-md bg-gradient-to-t from-white to-blue-400 bg-clip-text text-transparent ' variants={itemvariants as any}>{contact}</motion.p>
         </motion.div>

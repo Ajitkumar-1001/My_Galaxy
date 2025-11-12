@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
               href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="border border-blue-600 text-indigo-400 hover:text-white font-semibold px-6 py-3 rounded-2xl transition"
+              className="border border-blue-600 text-indigo-400 hover:text-white font-semibold px-6 py-3 rounded-2xl transition brightness-120"
               variants={variant}
               initial="rest"
               whileHover="hover"
