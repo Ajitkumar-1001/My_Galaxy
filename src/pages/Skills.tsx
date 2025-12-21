@@ -348,6 +348,7 @@ import {
   SiStreamlit,
   SiOllama,
   SiSnowflake,
+  SiNextdotjs,
 } from "react-icons/si";
 import { OrbitingCircles } from "../components/ui/orbiting-circles";
 import useMobile from "../hooks/useMobile";
@@ -372,6 +373,7 @@ const skillCategories = {
   ],
   "Tools & Frameworks": [
     { name: "React", icon: FaReact },
+    { name: "Next.js", icon: SiNextdotjs },
     { name: "Tailwind CSS", icon: SiTailwindcss },
     { name: "FastAPI", icon: SiFastapi },
     { name: "Streamlit", icon: SiStreamlit },
