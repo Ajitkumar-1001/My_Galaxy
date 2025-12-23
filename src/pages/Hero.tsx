@@ -149,7 +149,7 @@ const Hero: React.FC = () => {
 
           <motion.a
             variants={controlprops2 as any}
-            href="../.././Ajitkumar_Senthil_Kumar_Resume.pdf"
+            href="../.././Ajitkumar_Senthilkumar_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
@@ -177,8 +177,8 @@ const Hero: React.FC = () => {
           // className= 'p-4 sm:p-6 md:p-4'
 
           degree='Master of Science in Data Science'
-          mainImageUrl="../../DCECC804-932B-4050-893F-334D8DD056E1 2.JPG"
-          profileImageUrl="../../DCECC804-932B-4050-893F-334D8DD056E1 2.JPG"
+          mainImageUrl="../../IMG_5451 2.jpeg"
+          profileImageUrl="../../IMG_5451 2.jpeg"
           profileHandle="ajitkumar"
           isAvailable={true}
 

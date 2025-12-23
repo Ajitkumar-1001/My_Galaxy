@@ -11,7 +11,7 @@ const projects: any = [
     description:
       "Built a Production complete Full-stack end-to-end ML application that predicts the approval rate of Loan , provides a automated LLM generated report according to the response....",
     tech: ["Python", "Typescript", "React", "Tailwindcss", "Sci-kit Learn", "FastAPI", "Docker", "Dagshub", "MLflow",],
-    link: "https://github.com/Ajitkumar-1001/citibike_mlops",
+    link: "https://github.com/Ajitkumar-1001/Loan_prediction_App",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-2",
     demo2: "",
@@ -31,7 +31,7 @@ const projects: any = [
     description:
       "An Application where you upload your chest x-ray images, it detects if the sample is a COVID-19 affected or other lung disease!, useful medical application for both patient and doctors",
     tech: ["PyTorch", "CNN", "RestNet", "ConvNext", "Hyperparameter Tuning", "Explainable AI", "Data Augmentation"],
-    link: "https://github.com/Ajitkumar-1001/MIDAS-Skin-Cancer-Detection",
+    link: "https://github.com/Ajitkumar-1001/Covid-19-detection",
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-3",
     demo2: "",
@@ -41,8 +41,8 @@ const projects: any = [
     description:
       "A Blogs, Journals and detailed Description of all my and upcoming works!, in a blog fashion with AI summarizer!",
     tech: ["React", "TailwindCSS", "TypeScript"],
-    link: "https://github.com/Ajitkumar-1001/My_Galaxy",
-    demo: "https://blogspot-ajit.vercel.app",
+    link: "https://github.com/Ajitkumar-1001/Blogspot",
+    demo: "https://blog.ajitkumar.io",
     source: "https://blog.ajitkumar.io/blogs/",
     demo2: "",
   }, {
@@ -64,7 +64,37 @@ const projects: any = [
     demo: "Live coming soon....",
     source: "https://blog.ajitkumar.io/blogs/featured/blog-6",
     demo2: "",
+  },
+  {
+    title: "Simulation of a Prosthetic Robotic limbs using Reinforcement Learning",
+    description:
+      "Trained a humanoid-V4 robot to walk and balance focusing on the stability and efficiency of the limbs, to aid the physically challenged individuals to walk and perform daily activities with the implementation of Reinforcement Learning.",
+    tech: ["Python", "PyTorch", "Reinforcement Learning", "OpenAI Gym", "TensorBoard",",MuJoCo","Soft Actor-Critic","TD3","PPO"],
+    link: "https://github.com/Tylerrut/CSE-546-RL-Final-Project",
+    demo: "Live coming soon....",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-8",
+    demo2: "",
+  },{
+    title: "AskMyDocSite",
+    description:
+      "A website where you can ask you upload the document and get the response from your desired model it uses RAG techniuqe to answer the questions and the website is built with Next.js and TailwindCSS and TypeScript.",
+    tech: ["Python", "Langchain","Langgraph","Next.js","TailwindCSS","TypeScript","ChromaDB","OpenAI","Google Gemini","Anthropic","Claude","Gemini","Ollama"],
+    link: "https://github.com/Ajitkumar-1001/AskMyDocSite",
+    demo: "Live coming soon",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-9",
+    demo2: "",
+  },{
+    title: "Tutorly",
+    description:
+      "An AI-powered tutoring platform that uses reinforcement learning to personalize curriculum sequencing—where students upload their syllabus, an RL agent dynamically selects optimal topics to teach, an LLM delivers lessons, and adaptive quizzes continuously optimize the learning path.",
+    tech: ["Python", "Langchain","Langgraph","Next.js","TailwindCSS","TypeScript","ChromaDB","Reinforcement Learning","SAC","OpenAI"],
+    link: "https://github.com/Ajitkumar-1001/Tutorly",
+    demo: "Live coming soon",
+    source: "https://blog.ajitkumar.io/blogs/featured/blog-10",
+    demo2: "",
   }
+
+
 
 ];
 
@@ -205,6 +235,7 @@ const Projects: React.FC = () => {
                     </a>
                     <div className="mb-2 text-md brightness-120 transition-spring">
                       {project.demo && hoverIndex === index && (
+                        
                         <h2
                           ref={demoref}
                           onMouseEnter={() => setDemo(project.demo)}
@@ -215,6 +246,7 @@ const Projects: React.FC = () => {
                         >
                          {demo}
                         </h2>
+                        
                       )}
                     </div>
                   </div>

@@ -159,12 +159,12 @@ function App() {
             
             {/* Floating Globe - Centered and responsive */}
             <div className="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
-              <div className="w-[95vh] h-[95vh] sm:w-[75vh] sm:h-[75vh] md:w-[90vmin] md:h-[90vmin] lg:w-[85vmin] lg:h-[85vmin] flex items-center justify-center">
+              <div className="w-full h-full flex items-center justify-center">
               <LazyGlobe 
                 className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-500" 
                 config={{
-                  width: 1200,
-                  height: 1200,
+                  width: 1100,
+                  height: 1100,
                   devicePixelRatio: 2,
                   phi: 0,
                   theta: 0.2,
