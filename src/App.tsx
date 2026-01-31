@@ -14,6 +14,7 @@ import Contact from './pages/Contact';
 import Footer from './comp/Footer';
 import BgMusicButton from './comp/Audio';
 import LazyGlobe from './components/LazyGlobe';
+import { Analytics } from '@vercel/analytics/react';
 // import { Routes , Route } from 'react-router-dom';
 // import NotFound from './comp/Notfound';
 
@@ -203,6 +204,7 @@ function App() {
           </div>
         </>
       )}
+      <Analytics />
     </main>
   );
 
