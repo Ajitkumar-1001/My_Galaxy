@@ -1,6 +1,6 @@
 import React ,{useMemo, useEffect,useRef} from "react";
 import { experience_content } from "../data/data";
-import { containerprops_fade, Containerhide, contentprops_fade, motionVariant, contentMotionVariant } from "../data/animate";
+import { containerprops_fade, Containerhide, contentprops_fade, motionVariant, contentMotionVariant} from "../data/animate";
 import { motion, useInView, useAnimation } from "framer-motion";
 
 const Experience: React.FC = () => {
@@ -53,7 +53,7 @@ const Experience: React.FC = () => {
           {experience_content.map((exp) => (
             <motion.div
               key={exp.id}
-              variants={cardVariant}
+              variants={cardVariant as any}
               initial="hidden"
               animate={control1}
               className="w-full flex flex-col rounded-2xl border-2 border-gray-500 shadow-3xl bg-transparent p-5"
