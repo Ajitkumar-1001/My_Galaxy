@@ -66,9 +66,9 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-indigo-500 bg-clip-text text-transparent text-outline-white'><TextType
+          Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-blue-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
-            typingSpeed={30}
+            typingSpeed={10}
             pauseDuration={1000}
           /></span>
 
@@ -77,8 +77,8 @@ const Hero: React.FC = () => {
         </motion.h1>
         <motion.div className='flex flex-row items-center' variants={middleware as any}>
           <h2 className="mt-6 sm:text-lg md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide">
-            My <span className='text-indigo-300'>Fields</span> of <span className='text-blue-400'>Interests</span>:{" "}
-            <span className='text-blue-300 brightness-110'>
+            My <span className='text-blue-500 brightness-130'>Fields</span> of <span className='text-blue-400'>Interests</span>:{" "}
+            <span className='text-blue-300 brightness-190'>
               <TextType
                 text={["Machine Learning", "Deep Learning", "Artificial Intelligence", "Web Applications!"]}
                 className='text-bold font-sans'
@@ -92,7 +92,7 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div className='flex-flex-row items-center' variants={middleware as any}>
-          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='brightness-120 font-bold bg-gradient-to-t from-blue-500 to-blue-100 bg-clip-text text-transparent'><TextType
+          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='brightness-120 font-bold bg-gradient-to-t from-blue-600 to-blue-400 bg-clip-text text-transparent'><TextType
             text={["Recruiters,", "Managers,", "Visitors,", "Colleagues,"]}
             className='text-bold font-sans '
             typingSpeed={75}
@@ -101,14 +101,14 @@ const Hero: React.FC = () => {
             cursorCharacter="|"
           /></span></h2>
           <h6 className='mt-6 sm:text-md md:text-xl text-start font-sans font-bold text-white leading-relaxed tracking-wide font-capitalise bg-gradient-to-r from-gray-600 to-white bg-clip-text text-transparent'>
-            From the precision of :{"  "}<span className='bg-gradient-to-t sm:text-lg md:text-xl from-blue-300 to-indigo-500 bg-clip-text text-transparent font-extrabold brightness-130'><TextType
+            From the precision of :{"  "}<span className='text-blue-500 sm:text-lg md:text-xl  font-extrabold brightness-130'><TextType
               text={["Mechanical Machines", "Automobiles", "Design Principles", "Thermal Engineering", "Finite Element Analysis"]}
               className='text-bold font-sans '
               typingSpeed={75}
               pauseDuration={3000}
               showCursor={true}
             // cursorCharacter="|"
-            /></span>{"  "} <br></br>To the Logic's of :{"  "}<span className='bg-gradient-to-r from-indigo-500 to-blue-300 sm:text-md md:text-xl bg-clip-text text-transparent font-extrabold brightness-130'><TextType
+            /></span>{"  "} <br></br>To the Logic's of :{"  "}<span className='text-blue-500 sm:text-md md:text-xl  font-extrabold brightness-130'><TextType
               text={["Neural Networks", "Supervised Learning", "Unsupervised Learning", "Data Processing", "Hyperparameter Fine Tuning"]}
               className='text-bold font-sans '
               typingSpeed={75}

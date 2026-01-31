@@ -3,6 +3,7 @@ import createGlobe, { type COBEOptions } from "cobe"
 import { useMotionValue, useSpring } from "motion/react"
 
 import { cn } from "../../lib/utils"
+import { GLOBE_MAX_SIZE, GLOBE_ROTATION_RAD_PER_SEC } from "../../data/globe"
 
 const MOVEMENT_DAMPING = 1400
 
@@ -43,6 +44,7 @@ export function Globe({
 }) {
   let phi = 0
   let width = 0
+  let lastRender = 0
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const pointerInteracting = useRef<number | null>(null)
   const pointerInteractionMovement = useRef(0)
@@ -84,7 +86,12 @@ export function Globe({
       width: width * 2,
       height: width * 2,
       onRender: (state) => {
-        if (!pointerInteracting.current) phi += 0.005
+        const now = performance.now()
+        const dt = lastRender ? (now - lastRender) / 1000 : 0
+        lastRender = now
+        if (!pointerInteracting.current) {
+          phi += GLOBE_ROTATION_RAD_PER_SEC * dt
+        }
         state.phi = phi + rs.get()
         state.width = width * 2
         state.height = width * 2
@@ -101,9 +108,10 @@ export function Globe({
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[900px]",
+        "absolute inset-0 mx-auto aspect-[1/1] w-full",
         className
       )}
+      style={{ maxWidth: GLOBE_MAX_SIZE }}
     >
       <canvas
         className={cn(

@@ -1,0 +1,4 @@
+export const GLOBE_MAX_SIZE = 900
+export const GLOBE_ROTATION_RAD_PER_SEC = 0.3
+export const GLOBE_ROTATION_DEG_PER_SEC =
+  (GLOBE_ROTATION_RAD_PER_SEC * 180) / Math.PI

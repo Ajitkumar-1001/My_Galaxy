@@ -74,16 +74,6 @@ body {
   scroll-behavior: smooth;
 }
 
-/* Optional: Scrollbar Styling */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--color-accent);
-  border-radius: 4px;
-}
-
 /* any element you can link to with an id gets this offset */
 [data-section] { scroll-margin-top: var(--header-h); }
 /* 

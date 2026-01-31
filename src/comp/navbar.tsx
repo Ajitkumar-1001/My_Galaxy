@@ -37,32 +37,32 @@ const Navbar: React.FC = () => {
         <nav className="hidden md:block">
           <ul className="flex flex-row gap-x-8">
             <li
-              className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("about")}
             >
               About
             </li>
             <li
-              className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white  hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("experience")}
             >
               Experience
             </li>
             <li
-              className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("skills")}
             >
               Skills
             </li>
             
             <li
-              className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("projects")}
             >
               Projects
             </li>
             <li
-              className="text-xl font-bold bg-gradient-to-t from-white to-gray-650 bg-clip-text text-transparent hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white  hover:bg-gradient-to-br hover:from-blue-600 hover:to-white hover:bg-clip-text hover:text-transparent transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("contact")}
             >
               Contact

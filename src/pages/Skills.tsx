@@ -400,7 +400,7 @@ const Skills: React.FC = () => {
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
-        className="text-4xl font-bold mt-12 bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent brightness-110"
+        className="text-4xl font-bold mt-12 bg-gradient-to-tr from-blue-900 to-blue-500 bg-clip-text text-transparent brightness-110"
       >
         Skills
       </motion.h2>
