@@ -15,6 +15,7 @@ import Footer from './comp/Footer';
 import BgMusicButton from './comp/Audio';
 import LazyGlobe from './components/LazyGlobe';
 import { Analytics } from '@vercel/analytics/react';
+import { SpeedInsights } from '@vercel/speed-insights/react';
 // import { Routes , Route } from 'react-router-dom';
 // import NotFound from './comp/Notfound';
 
@@ -205,6 +206,7 @@ function App() {
         </>
       )}
       <Analytics />
+      <SpeedInsights />
     </main>
   );
 
