@@ -157,7 +157,7 @@ function App() {
           <div className="relative z-10">
 
             <Navbar />
-            <BgMusicButton src="../../Hayden Folker - Adrift.mp3" />
+            <BgMusicButton src="../../audio2.mp3" />
             
             {/* Floating Globe - Centered and responsive */}
             <div className="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
