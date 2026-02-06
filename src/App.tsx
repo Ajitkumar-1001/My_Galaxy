@@ -14,8 +14,6 @@ import Contact from './pages/Contact';
 import Footer from './comp/Footer';
 import BgMusicButton from './comp/Audio';
 import LazyGlobe from './components/LazyGlobe';
-import { Analytics } from '@vercel/analytics/react';
-import { SpeedInsights } from '@vercel/speed-insights/react';
 // import { Routes , Route } from 'react-router-dom';
 // import NotFound from './comp/Notfound';
 
@@ -157,7 +155,7 @@ function App() {
           <div className="relative z-10">
 
             <Navbar />
-            <BgMusicButton src="../../audio2.mp3" />
+            <BgMusicButton src="../../HaydenFolker.mp3" />
             
             {/* Floating Globe - Centered and responsive */}
             <div className="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
@@ -205,8 +203,6 @@ function App() {
           </div>
         </>
       )}
-      <Analytics />
-      <SpeedInsights />
     </main>
   );
 
