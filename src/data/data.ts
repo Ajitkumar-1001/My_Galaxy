@@ -23,7 +23,7 @@ export const experience_content : Experience_data[] = [
           Built a modular FastAPI + Next.js AI platform orchestrating ingestion, retrieval augmentation, and schema-constrained LLM summarization for leadership-facing intelligence reports.`,
         period_Start : "March-2026",
         period_end : "Present"
-    },,
+    },
     {
         id : 2, 
         logo : "../../hcs.jpeg", 
