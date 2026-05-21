@@ -85,11 +85,11 @@ const Contact: React.FC = () => {
           variants={childVariant}
         >
           {[{
-            href: "mailto:sachinajitkumarpr@gmail.com",
+            href: "mailto:dev@ajitkumar.io",
             Icon: EnvelopeOpenIcon,
             variant: iconVariants[0]
           }, {
-            href: "https://www.linkedin.com/in/ajit-kumar-558693114/",
+            href: "https://www.linkedin.com/in/ajitkumar1001",
             Icon: LinkedInLogoIcon,
             variant: iconVariants[1]
           }, {

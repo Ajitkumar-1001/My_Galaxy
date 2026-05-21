@@ -5,7 +5,7 @@ import Navbar from './comp/navbar';
 import Skills from './pages/Skills';
 import Galaxy from './comp/Galaxy';
 import Particles from './comp/particles';
-import {  motion, useAnimation } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 import Projects from './pages/Project';
 import Experience from './pages/Experience';
 // import SplashCursor from './components/Splashcursor';
@@ -33,11 +33,11 @@ function App() {
 
 
   const welcome = useMemo(() => ({
-    hidden: { },
-    visible: { transition: { staggerChildren: 1} }
+    hidden: {},
+    visible: { transition: { staggerChildren: 1 } }
   }), []);
 
-  const welcome2 = useMemo(() => ( {
+  const welcome2 = useMemo(() => ({
     hidden: { opacity: 0, scale: 0.2 },
     visible: {
       opacity: 1,
@@ -54,18 +54,18 @@ function App() {
   //     transition: { duration: 0.8, ease: "easeOut" }
   //   }
   // }), []);
- 
- 
+
+
 
   useEffect(() => {
     if (welcomeScreen) {
       const runWelcome = async () => {
         await control1.start("visible");
-        await new Promise((res)=>setTimeout(res,500));
+        await new Promise((res) => setTimeout(res, 500));
         await control2.start("visible");
-        await new Promise((res)=> setTimeout(res,500));
+        await new Promise((res) => setTimeout(res, 500));
         await control3.start("visible");
-         
+
 
         setTimeout(() => {
           sessionStorage.setItem('hasVisited', 'true');
@@ -74,8 +74,8 @@ function App() {
       };
       runWelcome();
     }
-  }, [welcomeScreen, control1,control2,control3]);
-  
+  }, [welcomeScreen, control1, control2, control3]);
+
 
   return (
     <main className="relative">
@@ -103,7 +103,7 @@ function App() {
             animate="visible"
             variants={welcome as any}
           >
-           
+
             <motion.h1
               className="text-4xl subpixel-antialiased md:text-6xl text-border-2 font-sans text-white font-extrabold text-center"
               variants={welcome2 as any}
@@ -111,7 +111,7 @@ function App() {
               <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>Welcome</span> to <span className='bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent'>My Galaxy</span>
             </motion.h1>
 
-            
+
             <motion.h5
               className="text-2xl subpixel-antialiased md:text-4xl font-sans text-border-2 text-white border-white font-extrabold  space-y-10 text-center mt-10"
               variants={welcome2 as any}
@@ -120,23 +120,23 @@ function App() {
             >
               A space to host my <span className='bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent'>Personal</span> <span className='text-white'>/</span> <span className='bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent'>Professional</span> works.
             </motion.h5>
-         
-           <motion.h5
+
+            <motion.h5
               className="text-2xl subpixel-antialiased md:text-4xl font-sans text-border-2 text-white border-white font-extrabold  space-y-10 text-center mt-10"
               variants={welcome2 as any}
               initial="hidden"
               animate={control3}
-            
+
             >
-                      Let's Explore !!.... 
-             </motion.h5>
+              Let's Explore !!....
+            </motion.h5>
           </motion.div>
 
 
         </div>
       ) : (
         <>
-          
+
           <div className="fixed inset-0 z-0">
             <Particles
               particleCount={1200}
@@ -146,52 +146,52 @@ function App() {
               particleBaseSize={50}
               speed={0.25}
               cameraDistance={10}
-              disableRotation = {false}
+              disableRotation={false}
               className="w-full h-full brightness-200 "
             />
-            
+
           </div>
 
           <div className="relative z-10">
 
             <Navbar />
             <BgMusicButton src="../../HaydenFolker.mp3" />
-            
+
             {/* Floating Globe - Centered and responsive */}
             <div className="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
               <div className="w-full h-full flex items-center justify-center">
-              <LazyGlobe 
-                className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-500" 
-                config={{
-                  width: 1100,
-                  height: 1100,
-                  devicePixelRatio: 2,
-                  phi: 0,
-                  theta: 0.2,
-                  dark: 0.9,
-                  diffuse: 0.1,
-                  mapSamples: 24000,
-                  mapBrightness: 2,
-                  baseColor: [0.1, 0.2, 0.3],
-                  markerColor: [0.2, 0.4, 0.6],
-                  glowColor: [0.2, 0.3, 0.5],
-                  markers: [
-                    { location: [14.5995, 120.9842], size: 0.03 },
-                    { location: [19.076, 72.8777], size: 0.05 },
-                    { location: [23.8103, 90.4125], size: 0.04 },
-                    { location: [30.0444, 31.2357], size: 0.04 },
-                    { location: [39.9042, 116.4074], size: 0.05 },
-                    { location: [-23.5505, -46.6333], size: 0.05 },
-                    { location: [19.4326, -99.1332], size: 0.05 },
-                    { location: [40.7128, -74.006], size: 0.06 },
-                    { location: [34.6937, 135.5022], size: 0.04 },
-                    { location: [41.0082, 28.9784], size: 0.04 },
-                  ]
-                }}
-              />
+                <LazyGlobe
+                  className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-500"
+                  config={{
+                    width: 1100,
+                    height: 1100,
+                    devicePixelRatio: 2,
+                    phi: 0,
+                    theta: 0.2,
+                    dark: 0.9,
+                    diffuse: 0.1,
+                    mapSamples: 24000,
+                    mapBrightness: 2,
+                    baseColor: [0.1, 0.2, 0.3],
+                    markerColor: [0.2, 0.4, 0.6],
+                    glowColor: [0.2, 0.3, 0.5],
+                    markers: [
+                      { location: [14.5995, 120.9842], size: 0.03 },
+                      { location: [19.076, 72.8777], size: 0.05 },
+                      { location: [23.8103, 90.4125], size: 0.04 },
+                      { location: [30.0444, 31.2357], size: 0.04 },
+                      { location: [39.9042, 116.4074], size: 0.05 },
+                      { location: [-23.5505, -46.6333], size: 0.05 },
+                      { location: [19.4326, -99.1332], size: 0.05 },
+                      { location: [40.7128, -74.006], size: 0.06 },
+                      { location: [34.6937, 135.5022], size: 0.04 },
+                      { location: [41.0082, 28.9784], size: 0.04 },
+                    ]
+                  }}
+                />
               </div>
             </div>
-            
+
             <Hero />
             <About />
             <Experience />
