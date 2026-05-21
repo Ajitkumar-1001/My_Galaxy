@@ -15,9 +15,9 @@ const Experience: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="text-2xl md:text-3xl font-extrabold font-sans bg-gradient-to-tr from-blue-300 via-blue-400 to-blue-500 bg-clip-text text-transparent drop-shadow-lg"
+          className="text-2xl md:text-3xl font-extrabold font-sans bg-gradient-to-tr from-blue-300 via-blue-700 to-blue-500 bg-clip-text text-transparent drop-shadow-lg"
         >
-          My Experience
+          Experience
         </motion.h1>
       </div>
 
@@ -29,7 +29,7 @@ const Experience: React.FC = () => {
           whileInView={{ height: "calc(100% - 100px)" }}
           transition={{ duration: 1.5, ease: "easeInOut" }}
           viewport={{ once: true, amount: 0.1 }}
-          className="absolute z-0 w-[3px] bg-gradient-to-b from-blue-400 via-indigo-500 to-purple-600 left-[40px] md:left-1/2 transform md:-translate-x-1/2 top-4 shadow-[0_0_20px_rgba(59,130,246,0.8)] rounded-full"
+          className="absolute z-0 w-[3px] bg-gradient-to-b from-blue-400 via-transparent to-black-600 left-[40px] md:left-1/2 transform md:-translate-x-1/2 top-4 shadow-[0_0_20px_rgba(59,130,246,0.8)] rounded-full"
         ></motion.div>
 
         {experience_content.map((exp, index) => {

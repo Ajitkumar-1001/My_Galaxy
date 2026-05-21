@@ -12,9 +12,20 @@ export interface Experience_data {
 //so we have defined our interface where the data will be following the interface layout or structure , we need the data list to be exported in a variable 
 
 export const experience_content : Experience_data[] = [ 
-
     {
         id : 1, 
+        logo : "../../ub.jpeg", 
+        company_name : "University at Buffalo", 
+        role: "Research Assistant — AI Systems",
+        role_description: `Architected an LLM-powered research intelligence platform aggregating publications, grants, and academic activity across 80+ faculty members into automated AI-generated weekly digests.
+          Engineered identifier-first retrieval pipelines across 12 academic and federal data sources using ORCID, DBLP, and Semantic Scholar to improve entity resolution and retrieval consistency.
+          Designed a scalable PostgreSQL + Supabase knowledge architecture (12 tables, 6 views, 4 triggers) optimized for low-latency retrieval and structured LLM reporting workflows.
+          Built a modular FastAPI + Next.js AI platform orchestrating ingestion, retrieval augmentation, and schema-constrained LLM summarization for leadership-facing intelligence reports.`,
+        period_Start : "March-2026",
+        period_end : "Present"
+    },,
+    {
+        id : 2, 
         logo : "../../hcs.jpeg", 
         company_name : "Human Cloud Soft Pvt Ltd", 
         role: "Software Developer Intern",
@@ -28,7 +39,7 @@ export const experience_content : Experience_data[] = [
    
 
     {
-        id : 2,
+        id : 3,
         logo : "../../klicknet.jpeg",
         company_name : "Klicknet Info Services Pvt Ltd",
         role : "Frontend Developer",
@@ -41,7 +52,7 @@ export const experience_content : Experience_data[] = [
 
     },
     {
-        id : 3,
+        id : 4,
         logo : "../../L&T.webp",
         company_name : "L&T Rubber Processing Machinery Pvt Ltd",
         role : "Design Engineer",
