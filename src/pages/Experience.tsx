@@ -71,7 +71,7 @@ const Experience: React.FC = () => {
                       <img src={exp.logo} alt={exp.company_name} className="w-full h-full object-contain brightness-110 group-hover:brightness-125 transition-all" />
                     </div>
                     <div className="text-center lg:text-left flex flex-col justify-center">
-                      <h3 className="text-2xl font-bold bg-gradient-to-br from-blue-300 to-indigo-400 bg-clip-text text-transparent mb-2 group-hover:from-blue-200 group-hover:to-purple-300 transition-colors drop-shadow-sm leading-tight">{exp.company_name}</h3>
+                      <h3 className="text-2xl font-bold bg-gradient-to-br from-blue-300 to-indigo-400 bg-clip-text text-transparent mb-2 group-hover:from-white group-hover:to-blue-300 transition-colors drop-shadow-sm leading-tight">{exp.company_name}</h3>
                       <div className="inline-flex items-center justify-center lg:justify-start space-x-2 text-sm font-semibold text-gray-300 bg-white/10 border border-white/5 py-1.5 px-4 rounded-full w-max mx-auto lg:mx-0 shadow-inner">
                         <span>{exp.period_Start}</span>
                         <span className="text-blue-500">—</span>
