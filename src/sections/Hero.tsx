@@ -59,9 +59,9 @@ const Hero: React.FC = () => {
   return (
 
     
-    <section  ref={secView} id="hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-16 md:px-20 bg-inherit">
+    <section  ref={secView} id="hero" className="min-h-screen flex flex-col md:flex-row items-center justify-center gap-10 px-6 py-12 md:px-20 bg-inherit">
       {/* Left: Intro Text */}
-      <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
+      <motion.div className="w-full md:w-1/2" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
           Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-400 text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
@@ -74,12 +74,12 @@ const Hero: React.FC = () => {
 
         </motion.h1>
         <motion.div className='flex flex-row items-center' variants={middleware as any}>
-          <h2 className="mt-6 sm:text-lg md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide">
+          <h2 className="mt-4 sm:text-lg md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide">
             My <span className='text-blue-500 brightness-130'>Fields</span> of <span className='text-blue-400'>Interests</span>:{" "}
             <span className='text-blue-300 brightness-190'>
               <TextType
                 text={["Machine Learning", "Deep Learning", "Artificial Intelligence", "Web Applications!"]}
-                className='text-bold font-sans min-h-[2lh]'
+                className='text-bold font-sans min-h-[1lh]'
                 typingSpeed={75}
                 pauseDuration={2500}
                 showCursor={true}
@@ -90,36 +90,36 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div className='flex-flex-row items-center' variants={middleware as any}>
-          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-300'><TextType
+          <h2 className='mt-4 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-300'><TextType
             text={["Recruiters,", "Managers,", "Visitors,", "Colleagues,"]}
-            className='text-bold font-sans min-h-[2lh]'
+            className='text-bold font-sans min-h-[1lh]'
             typingSpeed={75}
             pauseDuration={2500}
             showCursor={true}
             cursorCharacter="|"
           /></span></h2>
-          <h6 className='mt-6 sm:text-md md:text-xl text-start font-sans font-bold text-gray-300 leading-relaxed tracking-wide font-capitalise'>
+          <h6 className='mt-4 sm:text-md md:text-xl text-start font-sans font-bold text-gray-300 leading-relaxed tracking-wide font-capitalise'>
             From the precision of :{"  "}<span className='text-blue-500 sm:text-lg md:text-xl  font-extrabold brightness-130'><TextType
               text={["Mechanical Machines", "Automobiles", "Design Principles", "Thermal Engineering", "Finite Element Analysis"]}
-              className='text-bold font-sans min-h-[2lh]'
+              className='text-bold font-sans min-h-[1lh]'
               typingSpeed={75}
               pauseDuration={3000}
               showCursor={true}
             // cursorCharacter="|"
             /></span>{"  "} <br></br>To the Logic's of :{"  "}<span className='text-blue-500 sm:text-md md:text-xl  font-extrabold brightness-130'><TextType
               text={["Neural Networks", "Supervised Learning", "Unsupervised Learning", "Data Processing", "Hyperparameter Fine Tuning"]}
-              className='text-bold font-sans min-h-[2lh]'
+              className='text-bold font-sans min-h-[1lh]'
               typingSpeed={75}
               pauseDuration={3000}
               showCursor={true}
             // cursorCharacter="|"
-            /></span> {"  "}<br></br><br></br>
-            <span className='px-5 text-gray-200 sm:text-lg md:text-xl font-bold'>
+            /></span>
+            <span className='block mt-4 text-gray-200 sm:text-lg md:text-xl font-bold'>
               My journey has been anything but ordinary.
               I’m a passionate engineer driven by curiosity, with roots in Mechanical Engineering and a thriving ambition in the world of Data Science, Machine Learning, and Artificial Intelligence.
             </span>
           </h6>
-          <h6 className='font-bold font-sans sm:text-md md:text-xl relative mt-2 text-gray-200 capitalize'>
+          <h6 className='font-bold font-sans sm:text-md md:text-xl relative mt-4 text-gray-200 capitalize'>
             Actively looking for full time opportunities in Machine learning engineer, data scientist roles, I would appreciate you to explore my works! down below
 
           </h6>
@@ -130,7 +130,7 @@ const Hero: React.FC = () => {
 
 
         <motion.div
-          className="mt-8 flex md:flex-row sm:flex-row flex-wrap items-center flex-wrap gap-4  gap-3 sm:gap-4 md:gap-6"
+          className="mt-8 flex flex-wrap items-center gap-4 md:gap-6"
           variants={middleware as any}
         >
           <motion.a

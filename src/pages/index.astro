@@ -46,13 +46,16 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
   <main class="relative">
     <Splash client:load />
 
-    <div class="fixed inset-0 z-0">
+    <!-- Furthest back. pointer-events-none regardless of stacking order, so a
+         viewport gap the content doesn't cover can never eat a click. The hover
+         effect still works because particles.tsx listens on `window`, not this div. -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
       <Particles
         client:idle
         particleCount={1200}
         particleSpread={20}
         particleColors={["#ffffff", "#1ffff", "#3f3f3f", "#fefefe"]}
-        moveParticlesOnHover={true}
+        moveParticlesOnHover={false}
         particleBaseSize={50}
         speed={0.25}
         cameraDistance={10}
@@ -61,19 +64,21 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
       />
     </div>
 
-    <div class="relative z-10">
+    <!-- Same layer as particles: fixed background, no pointer-events, so it
+         never sits above (or steals clicks/hover from) real page content.
+         Globe.tsx re-enables pointer-events on its own capped-size div, so
+         drag-to-rotate still works when the cursor is actually over the globe. -->
+    <div class="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+      <Globe
+        client:idle
+        className="w-full h-full opacity-70"
+        config={globeConfig}
+      />
+    </div>
+
+    <div class="relative z-20">
       <Navbar client:load />
       <BgMusicButton client:load src="/HaydenFolker.mp3" />
-
-      <div class="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
-        <div class="w-full h-full flex items-center justify-center">
-          <Globe
-            client:idle
-            className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-300"
-            config={globeConfig}
-          />
-        </div>
-      </div>
 
       <Hero client:load />
       <About />

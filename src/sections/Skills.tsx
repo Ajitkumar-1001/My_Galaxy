@@ -19,6 +19,12 @@ import {
   SiOllama,
   SiSnowflake,
   SiNextdotjs,
+  SiLangchain,
+  SiLanggraph,
+  
+  SiVercel,
+  SiAstro,
+  SiSupabase,
 } from "react-icons/si";
 import { OrbitingCircles } from "../components/ui/orbiting-circles";
 
@@ -39,10 +45,14 @@ const skillCategories = {
     { name: "Scikit-learn", icon: SiScikitlearn },
     { name: "Ollama", icon: SiOllama },
     { name: "SnowFlake", icon: SiSnowflake },
+    { name: "LangChain", icon: SiLangchain },
+    { name: "LangGraph", icon: SiLanggraph },
+   
   ],
   "Tools & Frameworks": [
     { name: "React", icon: FaReact },
     { name: "Next.js", icon: SiNextdotjs },
+    { name: "Astro", icon: SiAstro },
     { name: "Tailwind CSS", icon: SiTailwindcss },
     { name: "FastAPI", icon: SiFastapi },
     { name: "Streamlit", icon: SiStreamlit },
@@ -51,6 +61,9 @@ const skillCategories = {
     { name: "Git", icon: SiGit },
     { name: "GitHub", icon: SiGithub },
     { name: "Github Actions", icon: SiGithubactions },
+    { name: "Supabase", icon: SiSupabase },
+ 
+    { name : "Vercel", icon: SiVercel },
   ],
 } as const;
 

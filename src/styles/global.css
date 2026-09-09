@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
-/* Geist is declared by Astro's Fonts API (astro.config.mjs) and injected by
-   <Font /> in Layout.astro as --font-geist. Registering it as --font-sans makes
+/* Poppins is declared by Astro's Fonts API (astro.config.mjs) and injected by
+   <Font /> in Layout.astro as --font-poppins. Registering it as --font-sans makes
    Tailwind's `font-sans` and preflight's html font-family use it. */
 @theme inline {
-  --font-sans: var(--font-geist);
+  --font-sans: var(--font-poppins);
 }
 
 @custom-variant dark (&:is(.dark *));
