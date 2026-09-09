@@ -9,7 +9,6 @@ import { EyeOpenIcon } from '@radix-ui/react-icons';
 const Hero: React.FC = () => {
 
   const control1 = useAnimation();
-  const control2 = useAnimation();
 
   // const MotionCard = motion(ProfileCard);
   const secView = useRef(null);
@@ -23,13 +22,13 @@ const Hero: React.FC = () => {
 
       y: 0,
       scale: 1,
-      transition: { duration: 1.2, ease: "easeIn", delay: 0.3, staggerChildren: 0.5 }
+      transition: { duration: 0.6, ease: "easeIn", delay: 0.15, staggerChildren: 0.2 }
     }
   }), []);
 
   const middleware = useMemo(() => ({
     hidden: { opacity: 0, y: 30, scale: 0.8 },
-    visible: { opacity: 1, y: 0, scale: 1, transition: { delay: 0.5, duration: 2.1, ease: "easeInOut" } }
+    visible: { opacity: 1, y: 0, scale: 1, transition: { delay: 0.2, duration: 0.7, ease: "easeInOut" } }
   }), [])
 
   const controlprops2 = useMemo(() => ({
@@ -38,25 +37,21 @@ const Hero: React.FC = () => {
       opacity: 1,
       scale: 1,
       rotate: 0,
-      transition: { delay: 0.2, duration: 0.9, ease: "easeIn" }
+      transition: { delay: 0.1, duration: 0.45, ease: "easeIn" }
     }
   }), []);
 
 
   useEffect(() => {
     if (!onView) return;
-    const run = async () => {
-      await control1.start("visible");
-      await new Promise((res) => setTimeout(res, 1000));
-      await control2.start("visible");
-    };
+    const run = () => control1.start("visible");
     // On a first visit the splash overlay is up; play the entrance after it lifts.
     if (document.documentElement.classList.contains("splash")) {
       window.addEventListener("splash:done", run, { once: true });
       return () => window.removeEventListener("splash:done", run);
     }
     run();
-  }, [onView, control1, control2]);
+  }, [onView, control1]);
 
 
 
@@ -68,8 +63,9 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-300 text-outline-white'><TextType
+          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-400 text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
+            className='min-h-[2lh]'
             typingSpeed={10}
             pauseDuration={1000}
           /></span>
@@ -83,7 +79,7 @@ const Hero: React.FC = () => {
             <span className='text-blue-300 brightness-190'>
               <TextType
                 text={["Machine Learning", "Deep Learning", "Artificial Intelligence", "Web Applications!"]}
-                className='text-bold font-sans'
+                className='text-bold font-sans min-h-[2lh]'
                 typingSpeed={75}
                 pauseDuration={2500}
                 showCursor={true}
@@ -94,9 +90,9 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div className='flex-flex-row items-center' variants={middleware as any}>
-          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-500'><TextType
+          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-300'><TextType
             text={["Recruiters,", "Managers,", "Visitors,", "Colleagues,"]}
-            className='text-bold font-sans '
+            className='text-bold font-sans min-h-[2lh]'
             typingSpeed={75}
             pauseDuration={2500}
             showCursor={true}
@@ -105,14 +101,14 @@ const Hero: React.FC = () => {
           <h6 className='mt-6 sm:text-md md:text-xl text-start font-sans font-bold text-gray-300 leading-relaxed tracking-wide font-capitalise'>
             From the precision of :{"  "}<span className='text-blue-500 sm:text-lg md:text-xl  font-extrabold brightness-130'><TextType
               text={["Mechanical Machines", "Automobiles", "Design Principles", "Thermal Engineering", "Finite Element Analysis"]}
-              className='text-bold font-sans '
+              className='text-bold font-sans min-h-[2lh]'
               typingSpeed={75}
               pauseDuration={3000}
               showCursor={true}
             // cursorCharacter="|"
             /></span>{"  "} <br></br>To the Logic's of :{"  "}<span className='text-blue-500 sm:text-md md:text-xl  font-extrabold brightness-130'><TextType
               text={["Neural Networks", "Supervised Learning", "Unsupervised Learning", "Data Processing", "Hyperparameter Fine Tuning"]}
-              className='text-bold font-sans '
+              className='text-bold font-sans min-h-[2lh]'
               typingSpeed={75}
               pauseDuration={3000}
               showCursor={true}
@@ -141,10 +137,10 @@ const Hero: React.FC = () => {
             variants={controlprops2 as any}
             href="#projects"
             aria-label="View projects"
-            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
-            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
+            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
+            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
               Projects
             </h2>
           </motion.a>
@@ -155,10 +151,10 @@ const Hero: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
-            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
-            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
+            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
+            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
               Resume
             </h2>
           </motion.a>
@@ -168,7 +164,7 @@ const Hero: React.FC = () => {
 
 
 
-      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-blue-500 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
+      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-blue-300 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
         <ProfileCard
           name="Ajitkumar"
           role="Data Scientist / ML Engineer"

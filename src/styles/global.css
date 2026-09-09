@@ -206,10 +206,10 @@ html.js .reveal {
   opacity: 0;
   transform: translateY(40px) scale(0.9);
   transition:
-    opacity 0.7s ease-out,
-    transform 0.7s ease-out,
-    scale 0.4s ease-out,
-    box-shadow 0.4s ease-out;
+    opacity 0.35s ease-out,
+    transform 0.35s ease-out,
+    scale 0.25s ease-out,
+    box-shadow 0.25s ease-out;
 }
 html.js .reveal-left {
   transform: translate(-50px, 30px);
@@ -219,20 +219,24 @@ html.js .reveal-right {
 }
 html.js .reveal-pop {
   transform: scale(0);
-  transition-duration: 0.5s;
+  transition-duration: 0.3s;
 }
+/* Animating `height` directly forces reflow and counts as layout shift (CLS);
+   the box is sized to its final height up front and only `transform: scaleY()`
+   (paint/composite only, excluded from CLS) animates the "growing" look. */
 html.js .reveal-line {
   opacity: 1;
-  height: 0;
-  transform: none;
-  transition: height 1.5s ease-in-out;
+  height: calc(100% - 100px);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.8s ease-in-out;
 }
 html.js .reveal.in {
   opacity: 1;
   transform: none;
 }
 html.js .reveal-line.in {
-  height: calc(100% - 100px);
+  transform: scaleY(1);
 }
 @media (prefers-reduced-motion: reduce) {
   html.js .reveal {
@@ -241,6 +245,6 @@ html.js .reveal-line.in {
     transform: none;
   }
   html.js .reveal-line {
-    height: calc(100% - 100px);
+    transform: none;
   }
 }

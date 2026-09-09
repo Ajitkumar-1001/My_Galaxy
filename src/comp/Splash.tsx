@@ -44,11 +44,11 @@ export default function Splash() {
     setActive(true);
     let cancelled = false;
     (async () => {
-      await wait(500);
+      await wait(250);
       await control2.start("visible");
-      await wait(500);
+      await wait(250);
       await control3.start("visible");
-      await wait(1500);
+      await wait(700);
       if (cancelled) return;
       sessionStorage.setItem("hasVisited", "true");
       html.classList.remove("splash");
@@ -93,8 +93,8 @@ export default function Splash() {
           className="text-4xl subpixel-antialiased md:text-6xl text-border-2 font-sans text-white font-extrabold text-center"
           variants={item}
         >
-          <span className="text-blue-300">Welcome</span> to{" "}
-          <span className="text-blue-300">My Galaxy</span>
+          <span className="text-blue-400">Welcome</span> to{" "}
+          <span className="text-blue-400">My Galaxy</span>
         </motion.h1>
 
         <motion.h5
@@ -104,9 +104,9 @@ export default function Splash() {
           animate={control2}
         >
           A space to host my{" "}
-          <span className="text-blue-500">Personal</span>{" "}
+          <span className="text-blue-300">Personal</span>{" "}
           <span className="text-white">/</span>{" "}
-          <span className="text-blue-500">Professional</span> works.
+          <span className="text-blue-300">Professional</span> works.
         </motion.h5>
 
         <motion.h5

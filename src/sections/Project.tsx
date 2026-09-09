@@ -184,7 +184,7 @@ const Projects: React.FC = () => {
       >
         <motion.h2
           variants={childVariant as any}
-          className="text-4xl font-bold text-blue-300 mb-3"
+          className="text-4xl font-bold text-blue-400 mb-3"
         >
           Projects
         </motion.h2>
@@ -214,7 +214,7 @@ const Projects: React.FC = () => {
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
                 >
-                  <h3 className="text-2xl font-semibold text-blue-300 mb-2">
+                  <h3 className="text-2xl font-semibold text-blue-400 mb-2">
                     {project.title}
                   </h3>
                   <p className="text-md text-gray-300 font-semibold mb-4">
@@ -235,7 +235,7 @@ const Projects: React.FC = () => {
                       <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source} ratio={20/16}/>
                     </div>
                     <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-blue-500 bg-transparent border-blue-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
+                      <DialogDemo className="text-blue-300 bg-transparent border-blue-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
                     </div>
                   </div>
                   <div className="flex flex-col items-center">
@@ -243,7 +243,7 @@ const Projects: React.FC = () => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-500 hover:underline text-sm"
+                      className="text-blue-300 hover:underline text-sm"
                     >
                       Experience or GetSource →
                     </a>
@@ -256,7 +256,7 @@ const Projects: React.FC = () => {
                           onMouseLeave={() =>
                             setDemo("Click here for Live!!")
                           }
-                          className="text-sm font-semibold font-sans text-blue-500 text-center"
+                          className="text-sm font-semibold font-sans text-blue-300 text-center"
                         >
                          {demo}
                         </h2>

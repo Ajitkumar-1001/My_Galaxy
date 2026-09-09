@@ -34,7 +34,7 @@ const About: React.FC = () => {
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center bg-transparent py-10">
       <div className="relative">
-        <h1 className="reveal text-4xl font-extrabold font-sans mx-auto my-20 text-center text-blue-300 cursor-pointer">
+        <h1 className="reveal text-4xl font-extrabold font-sans mx-auto my-20 text-center text-blue-400 cursor-pointer">
           About
         </h1>
 
@@ -42,13 +42,13 @@ const About: React.FC = () => {
           {cards.map((card, idx) => (
             <div
               key={idx}
-              className="reveal relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_15px_#3b82f6,0_0_30px_#60a5fa,0_0_45px_#93c5fd]"
-              style={{ transitionDelay: `${0.3 + idx * 0.1}s` }}
+              className="reveal relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_15px_#60a5fa,0_0_30px_#93c5fd,0_0_45px_#bfdbfe]"
+              style={{ transitionDelay: `${0.1 + idx * 0.05}s` }}
             >
-              <div className="absolute inset-0 z-0 bg-blue-600/20 rounded-[18px] opacity-50" />
+              <div className="absolute inset-0 z-0 bg-blue-500/20 rounded-[18px] opacity-50" />
 
               <div className="relative z-10 bg-black/100 backdrop-blur-sm rounded-2xl p-6 h-full flex flex-col justify-between transition-shadow duration-300 ">
-                <h2 className="text-2xl font-bold text-blue-300 text-center mb-2">
+                <h2 className="text-2xl font-bold text-blue-400 text-center mb-2">
                   {card.title}
                 </h2>
                 <p className="text-gray-300 font-sans font-semibold text-center leading-relaxed text-md capitalize">
