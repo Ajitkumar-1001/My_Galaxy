@@ -60,7 +60,7 @@ const skillCategories = {
 const Skills: React.FC = () => {
   return (
     <section id="skills" className="min-h-screen flex flex-col items-center justify-center px-6 py-16 mt-10">
-      <h2 className="reveal text-4xl font-bold mt-12 bg-gradient-to-tr from-blue-900 to-blue-500 bg-clip-text text-transparent brightness-110">
+      <h2 className="reveal text-4xl font-bold mt-12 text-blue-300">
         Skills
       </h2>
 
@@ -75,9 +75,9 @@ const Skills: React.FC = () => {
             <div className="relative flex h-[420px] w-[420px] items-center justify-center overflow-visible">
               {/* Center circle with category description */}
               <div className="absolute z-20 flex items-center justify-center ">
-                {i === 0 && <span className="text-sm font-bold bg-gradient-to-t from-gray-200 to-white bg-clip-text text-center text-transparent px-2">Programming Languages i use</span>}
-                {i === 1 && <span className="text-sm font-bold bg-gradient-to-t from-gray-400 to-white bg-clip-text text-transparent text-center px-2">ML/AI Libraries</span>}
-                {i === 2 && <span className="text-sm font-bold bg-gradient-to-t from-gray-400 to-white bg-clip-text text-transparent text-center px-2">Tools & Frameworks</span>}
+                {i === 0 && <span className="text-sm font-bold text-gray-200 text-center px-2">Programming Languages i use</span>}
+                {i === 1 && <span className="text-sm font-bold text-gray-200 text-center px-2">ML/AI Libraries</span>}
+                {i === 2 && <span className="text-sm font-bold text-gray-200 text-center px-2">Tools & Frameworks</span>}
               </div>
 
               {/* Orbiting skill icons - Inner ring */}
@@ -140,9 +140,9 @@ const Skills: React.FC = () => {
               {/* Center circle */}
               <div className="absolute z-40 flex  items-center justify-center">
               <div className="absolute z-20 flex items-center justify-center ">
-                {i === 0 && <span className="text-sm font-bold bg-gradient-to-t from-gray-200 to-white bg-clip-text text-center text-transparent px-2"> Languages I use</span>}
-                {i === 1 && <span className="text-sm font-bold bg-gradient-to-t from-gray-400 to-white bg-clip-text text-transparent text-center px-2">  Libraries I  use </span>}
-                {i === 2 && <span className="text-sm font-bold bg-gradient-to-t from-gray-400 to-white bg-clip-text text-transparent text-center px-2"> Tools I use</span>}
+                {i === 0 && <span className="text-sm font-bold text-gray-200 text-center px-2"> Languages I use</span>}
+                {i === 1 && <span className="text-sm font-bold text-gray-200 text-center px-2">  Libraries I  use </span>}
+                {i === 2 && <span className="text-sm font-bold text-gray-200 text-center px-2"> Tools I use</span>}
               </div>
               </div>
 

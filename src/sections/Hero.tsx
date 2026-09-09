@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-blue-500 bg-clip-text text-transparent text-outline-white'><TextType
+          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-300 text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
             typingSpeed={10}
             pauseDuration={1000}
@@ -94,7 +94,7 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div className='flex-flex-row items-center' variants={middleware as any}>
-          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='brightness-120 font-bold bg-gradient-to-t from-blue-600 to-blue-400 bg-clip-text text-transparent'><TextType
+          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-500'><TextType
             text={["Recruiters,", "Managers,", "Visitors,", "Colleagues,"]}
             className='text-bold font-sans '
             typingSpeed={75}
@@ -102,7 +102,7 @@ const Hero: React.FC = () => {
             showCursor={true}
             cursorCharacter="|"
           /></span></h2>
-          <h6 className='mt-6 sm:text-md md:text-xl text-start font-sans font-bold text-white leading-relaxed tracking-wide font-capitalise bg-gradient-to-r from-gray-600 to-white bg-clip-text text-transparent'>
+          <h6 className='mt-6 sm:text-md md:text-xl text-start font-sans font-bold text-gray-300 leading-relaxed tracking-wide font-capitalise'>
             From the precision of :{"  "}<span className='text-blue-500 sm:text-lg md:text-xl  font-extrabold brightness-130'><TextType
               text={["Mechanical Machines", "Automobiles", "Design Principles", "Thermal Engineering", "Finite Element Analysis"]}
               className='text-bold font-sans '
@@ -118,12 +118,12 @@ const Hero: React.FC = () => {
               showCursor={true}
             // cursorCharacter="|"
             /></span> {"  "}<br></br><br></br>
-            <span className='px-5 bg-gradient-to-t from-white to-gray-700 bg-clip-text sm:text-lg md:text-xl font-bold  text-transparent brightness-150'>
+            <span className='px-5 text-gray-200 sm:text-lg md:text-xl font-bold'>
               My journey has been anything but ordinary.
               I’m a passionate engineer driven by curiosity, with roots in Mechanical Engineering and a thriving ambition in the world of Data Science, Machine Learning, and Artificial Intelligence.
             </span>
           </h6>
-          <h6 className='font-bold font-sans sm:text-md md:text-xl relative mt-2 bg-gradient-to-t from-gray-700 to-white bg-clip-text text-transparent brightness-170 capitalize'>
+          <h6 className='font-bold font-sans sm:text-md md:text-xl relative mt-2 text-gray-200 capitalize'>
             Actively looking for full time opportunities in Machine learning engineer, data scientist roles, I would appreciate you to explore my works! down below
 
           </h6>
@@ -141,10 +141,10 @@ const Hero: React.FC = () => {
             variants={controlprops2 as any}
             href="#projects"
             aria-label="View projects"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-white/60 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl" />
-            <h2 className="mx-auto bg-gradient-to-t from-blue-400 to-blue-900 bg-clip-text text-transparent brightness-200 text-base sm:text-lg md:text-xl">
+            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
+            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
               Projects
             </h2>
           </motion.a>
@@ -155,10 +155,10 @@ const Hero: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
-            className="inline-flex items-center gap-2 rounded-xl border border-white/40 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-white/60 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl" />
-            <h2 className="mx-auto bg-gradient-to-br from-blue-500 to-blue-950 bg-clip-text text-transparent brightness-200 text-base sm:text-lg md:text-xl">
+            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
+            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
               Resume
             </h2>
           </motion.a>
@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
 
 
 
-      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-indigo-500 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
+      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-blue-500 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
         <ProfileCard
           name="Ajitkumar"
           role="Data Scientist / ML Engineer"
