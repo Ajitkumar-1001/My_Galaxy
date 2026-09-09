@@ -10,7 +10,7 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
     const el = audioRef.current;
     if (!el) return;
 
-    (async () => {
+    const start = async () => {
       try {
         el.muted = false;
         el.volume = 1;
@@ -40,7 +40,14 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
         window.addEventListener("keydown", unlock, { once: true });
         window.addEventListener("touchstart", unlock, { once: true });
       }
-    })();
+    };
+
+    // On a first visit the splash overlay is up; start music after it lifts.
+    if (document.documentElement.classList.contains("splash")) {
+      window.addEventListener("splash:done", start, { once: true });
+      return () => window.removeEventListener("splash:done", start);
+    }
+    start();
   }, []);
 
   const toggle = () => {
