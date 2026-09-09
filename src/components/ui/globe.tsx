@@ -116,19 +116,23 @@ export function Globe({
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-300 [contain:layout_paint_size]"
+          "size-full touch-none opacity-0 transition-opacity duration-300 [contain:layout_paint_size]"
         )}
         ref={canvasRef}
         onPointerDown={(e) => {
+          e.currentTarget.setPointerCapture(e.pointerId)
           pointerInteracting.current = e.clientX
           updatePointerInteraction(e.clientX)
         }}
-        onPointerUp={() => updatePointerInteraction(null)}
-        onPointerOut={() => updatePointerInteraction(null)}
-        onMouseMove={(e) => updateMovement(e.clientX)}
-        onTouchMove={(e) =>
-          e.touches[0] && updateMovement(e.touches[0].clientX)
-        }
+        onPointerUp={(e) => {
+          e.currentTarget.releasePointerCapture(e.pointerId)
+          updatePointerInteraction(null)
+        }}
+        onPointerCancel={(e) => {
+          e.currentTarget.releasePointerCapture(e.pointerId)
+          updatePointerInteraction(null)
+        }}
+        onPointerMove={(e) => updateMovement(e.clientX)}
       />
     </div>
   )
