@@ -135,7 +135,11 @@ const Particles: React.FC<ParticlesProps> = ({
     };
 
     if (moveParticlesOnHover) {
-      container.addEventListener("mousemove", handleMouseMove);
+      // Listen on window, not the container: the container is pointer-events-none
+      // (it now paints above page content and must let clicks through to it),
+      // so it never receives mousemove directly. handleMouseMove already reads
+      // the container's own rect, so this is a drop-in target change.
+      window.addEventListener("mousemove", handleMouseMove);
     }
 
     const count = particleCount;
@@ -215,7 +219,7 @@ const Particles: React.FC<ParticlesProps> = ({
     return () => {
       window.removeEventListener("resize", resize);
       if (moveParticlesOnHover) {
-        container.removeEventListener("mousemove", handleMouseMove);
+        window.removeEventListener("mousemove", handleMouseMove);
       }
       cancelAnimationFrame(animationFrameId);
       if (container.contains(gl.canvas)) {
