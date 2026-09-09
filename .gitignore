@@ -26,3 +26,6 @@ dist-ssr
 
 .astro/
 .gstack/
+
+CLAUDE.md
+PLAN.md
