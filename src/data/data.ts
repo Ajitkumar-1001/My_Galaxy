@@ -14,7 +14,7 @@ export interface Experience_data {
 export const experience_content : Experience_data[] = [ 
     {
         id : 1, 
-        logo : "../../ub.jpeg", 
+        logo : "/ub.jpeg", 
         company_name : "University at Buffalo", 
         role: "Research Assistant — AI Systems",
         role_description: `Architected an LLM-powered research intelligence platform aggregating publications, grants, and academic activity across 80+ faculty members into automated AI-generated weekly digests.
@@ -26,7 +26,7 @@ export const experience_content : Experience_data[] = [
     },
     {
         id : 2, 
-        logo : "../../hcs.jpeg", 
+        logo : "/hcs.jpeg", 
         company_name : "Human Cloud Soft Pvt Ltd", 
         role: "Software Developer Intern",
         role_description: `Developed and maintained web applications using .NET Framework, C#, and ASP.NET MVC.
@@ -40,7 +40,7 @@ export const experience_content : Experience_data[] = [
 
     {
         id : 3,
-        logo : "../../klicknet.jpeg",
+        logo : "/klicknet.jpeg",
         company_name : "Klicknet Info Services Pvt Ltd",
         role : "Frontend Developer",
         role_description : `Responsible for maintaining dynamic updation of the ui components.
@@ -53,7 +53,7 @@ export const experience_content : Experience_data[] = [
     },
     {
         id : 4,
-        logo : "../../L&T.webp",
+        logo : "/L&T.webp",
         company_name : "L&T Rubber Processing Machinery Pvt Ltd",
         role : "Design Engineer",
         role_description : `Worked in the Mechanical design parts of the Hydraulic Tyre Curing and Processing section

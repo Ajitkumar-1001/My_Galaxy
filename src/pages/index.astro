@@ -1,0 +1,87 @@
+---
+import type { COBEOptions } from "cobe";
+import Layout from "../layouts/Layout.astro";
+import Splash from "../comp/Splash";
+import Particles from "../comp/particles";
+import Navbar from "../comp/navbar";
+import BgMusicButton from "../comp/Audio";
+import { Globe } from "../components/ui/globe";
+import Hero from "../sections/Hero";
+import About from "../sections/About";
+import Experience from "../sections/Experience";
+import Skills from "../sections/Skills";
+import Projects from "../sections/Project";
+import Contact from "../sections/Contact";
+import Footer from "../comp/Footer";
+
+const globeConfig: Omit<COBEOptions, "onRender"> = {
+  width: 1100,
+  height: 1100,
+  devicePixelRatio: 2,
+  phi: 0,
+  theta: 0.2,
+  dark: 0.9,
+  diffuse: 0.1,
+  mapSamples: 24000,
+  mapBrightness: 2,
+  baseColor: [0.1, 0.2, 0.3],
+  markerColor: [0.2, 0.4, 0.6],
+  glowColor: [0.2, 0.3, 0.5],
+  markers: [
+    { location: [14.5995, 120.9842], size: 0.03 },
+    { location: [19.076, 72.8777], size: 0.05 },
+    { location: [23.8103, 90.4125], size: 0.04 },
+    { location: [30.0444, 31.2357], size: 0.04 },
+    { location: [39.9042, 116.4074], size: 0.05 },
+    { location: [-23.5505, -46.6333], size: 0.05 },
+    { location: [19.4326, -99.1332], size: 0.05 },
+    { location: [40.7128, -74.006], size: 0.06 },
+    { location: [34.6937, 135.5022], size: 0.04 },
+    { location: [41.0082, 28.9784], size: 0.04 },
+  ],
+};
+---
+
+<Layout>
+  <main class="relative">
+    <Splash client:load />
+
+    <div class="fixed inset-0 z-0">
+      <Particles
+        client:idle
+        particleCount={1200}
+        particleSpread={20}
+        particleColors={["#ffffff", "#1ffff", "#3f3f3f", "#fefefe"]}
+        moveParticlesOnHover={true}
+        particleBaseSize={50}
+        speed={0.25}
+        cameraDistance={10}
+        disableRotation={false}
+        className="w-full h-full brightness-200 "
+      />
+    </div>
+
+    <div class="relative z-10">
+      <Navbar client:load />
+      <BgMusicButton client:load src="/HaydenFolker.mp3" />
+
+      <div class="fixed inset-0 w-screen h-screen pointer-events-none z-0 flex items-center justify-center">
+        <div class="w-full h-full flex items-center justify-center">
+          <Globe
+            client:idle
+            className="w-full h-full opacity-70 hover:opacity-10 transition-opacity duration-500"
+            config={globeConfig}
+          />
+        </div>
+      </div>
+
+      <Hero client:load />
+      <About />
+      <Experience />
+      <Skills />
+      <Projects client:visible={{ rootMargin: "200px" }} />
+      <Contact />
+      <Footer />
+    </div>
+  </main>
+</Layout>

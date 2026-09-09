@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react"
 import createGlobe, { type COBEOptions } from "cobe"
-import { useMotionValue, useSpring } from "motion/react"
+import { useMotionValue, useSpring } from "framer-motion"
 
 import { cn } from "../../lib/utils"
 import { GLOBE_MAX_SIZE, GLOBE_ROTATION_RAD_PER_SEC } from "../../data/globe"
@@ -40,7 +40,8 @@ export function Globe({
   config = GLOBE_CONFIG,
 }: {
   className?: string
-  config?: COBEOptions
+  // onRender is supplied inside the effect below; callers pass plain data.
+  config?: Omit<COBEOptions, "onRender">
 }) {
   let phi = 0
   let width = 0

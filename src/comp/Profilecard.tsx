@@ -103,6 +103,11 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     
 
       }
+      // On a first visit the splash overlay is up; play the entrance after it lifts.
+      if (document.documentElement.classList.contains("splash")) {
+        window.addEventListener("splash:done", sequence, { once: true });
+        return () => window.removeEventListener("splash:done", sequence);
+      }
       sequence();
     },[control1,control2,control3])
 

@@ -1,4 +1,3 @@
-"use client";
 
 import { type ElementType, useEffect, useRef, useState, createElement } from "react";
 import { gsap } from "gsap";
