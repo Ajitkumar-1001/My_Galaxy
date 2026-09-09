@@ -140,7 +140,7 @@ const Hero: React.FC = () => {
             className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
             <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
-            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
+            <h2 className="mx-auto text-white text-base sm:text-lg md:text-xl">
               Projects
             </h2>
           </motion.a>
@@ -154,7 +154,7 @@ const Hero: React.FC = () => {
             className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
             <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
-            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
+            <h2 className="mx-auto text-white text-base sm:text-lg md:text-xl">
               Resume
             </h2>
           </motion.a>
