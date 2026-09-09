@@ -49,7 +49,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
       hidden: { scale: 1 },
       visible: {
         scale: 1.1,
-        boxShadow: "0 0 15px #f5f5f5, 0 0 25px #3b82f6, 0 0 40px #1d4ed8",
+        boxShadow: "0 0 15px #f5f5f5, 0 0 25px #60a5fa, 0 0 40px #2563eb",
         transition: { duration: 0.5, ease: "easeIn" }
       }
     }), []);
@@ -123,7 +123,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
         initial="hidden"
         animate ={control1}
         viewport = {{once:true}}>
-          <motion.h1 className="text-3xl font-extrabold text-blue-300 " variants={itemvariants as any}>{university}</motion.h1>
+          <motion.h1 className="text-3xl font-extrabold text-blue-400 " variants={itemvariants as any}>{university}</motion.h1>
           <motion.p className="text-md text-white mt-1 " variants={itemvariants as any}>{degree}</motion.p>
           {/* <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{address}</motion.p> */}
           <motion.p className="text-md text-white mt-2 tracking-widest " variants={itemvariants as any}>{location}</motion.p>
@@ -166,7 +166,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
               
               src={profileImageUrl}
               alt={name}
-              className="w-14 h-14 p-[3px] rounded-full  bg-blue-500 animate-pulse object-cover "
+              className="w-14 h-14 p-[3px] rounded-full  bg-blue-300 animate-pulse object-cover "
               onError={(e) => {
                 (e.target as HTMLImageElement).src = `src/assets/892724AE-DA9C-4F9F-8AB4-ED853900ACA1.JPG`;
               }}

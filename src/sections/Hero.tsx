@@ -68,7 +68,7 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-300 text-outline-white'><TextType
+          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='text-blue-400 text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
             typingSpeed={10}
             pauseDuration={1000}
@@ -94,7 +94,7 @@ const Hero: React.FC = () => {
         </motion.div>
 
         <motion.div className='flex-flex-row items-center' variants={middleware as any}>
-          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-500'><TextType
+          <h2 className='mt-6 sm:text-md md:text-2xl font-sans font-bold text-white leading-relaxed tracking-wide'> Dear <span className='font-bold text-blue-300'><TextType
             text={["Recruiters,", "Managers,", "Visitors,", "Colleagues,"]}
             className='text-bold font-sans '
             typingSpeed={75}
@@ -141,10 +141,10 @@ const Hero: React.FC = () => {
             variants={controlprops2 as any}
             href="#projects"
             aria-label="View projects"
-            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
-            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
+            <EyeOpenIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
+            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
               Projects
             </h2>
           </motion.a>
@@ -155,10 +155,10 @@ const Hero: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
-            className="inline-flex items-center gap-2 rounded-xl border border-blue-600/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-500/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
+            className="inline-flex items-center gap-2 rounded-xl border border-blue-500/50 bg-white/5 px-4 py-2 text-sm font-sans font-bold text-white shadow-lg backdrop-blur-sm transition duration-300 hover:scale-105 hover:border-blue-300/70 hover:bg-white/10 md:px-6 md:py-3 md:text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-0"
           >
-            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-600" />
-            <h2 className="mx-auto text-blue-600 text-base sm:text-lg md:text-xl">
+            <DownloadIcon className="mx-1 h-5 w-5 sm:h-6 sm:w-6 md:h-7 md:w-7 rounded-xl text-blue-500" />
+            <h2 className="mx-auto text-blue-500 text-base sm:text-lg md:text-xl">
               Resume
             </h2>
           </motion.a>
@@ -168,7 +168,7 @@ const Hero: React.FC = () => {
 
 
 
-      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-blue-500 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
+      <motion.div className="w-full md:max-w-lg sm:max-w-lg md:w-1/2 flex md:flex-col justify-center text-blue-300 font-bold bg-transparent" variants={controlprops2 as any} initial="hidden" animate={control1}>
         <ProfileCard
           name="Ajitkumar"
           role="Data Scientist / ML Engineer"

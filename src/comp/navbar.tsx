@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-transparent shadow-lg px-6 py-4">
       <div className="flex items-center justify-between">
-        <h1 onClick={() => handleScroll("hero")} className="text-xl font-bold text-blue-300 hover:text-blue-500 hover:scale-110 transition duration-300 cursor-pointer">
+        <h1 onClick={() => handleScroll("hero")} className="text-xl font-bold text-blue-400 hover:text-blue-300 hover:scale-110 transition duration-300 cursor-pointer">
           AK
         </h1>
 
@@ -37,32 +37,32 @@ const Navbar: React.FC = () => {
         <nav className="hidden md:block">
           <ul className="flex flex-row gap-x-8">
             <li
-              className="text-xl font-bold text-white hover:text-blue-500 transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:text-blue-300 transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("about")}
             >
               About
             </li>
             <li
-              className="text-xl font-bold text-white  hover:text-blue-500 transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white  hover:text-blue-300 transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("experience")}
             >
               Experience
             </li>
             <li
-              className="text-xl font-bold text-white hover:text-blue-500 transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:text-blue-300 transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("skills")}
             >
               Skills
             </li>
             
             <li
-              className="text-xl font-bold text-white hover:text-blue-500 transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white hover:text-blue-300 transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("projects")}
             >
               Projects
             </li>
             <li
-              className="text-xl font-bold text-white  hover:text-blue-500 transition duration-300 cursor-pointer hover:scale-110"
+              className="text-xl font-bold text-white  hover:text-blue-300 transition duration-300 cursor-pointer hover:scale-110"
               onClick={() => handleScroll("contact")}
             >
               Contact
@@ -73,7 +73,7 @@ const Navbar: React.FC = () => {
        
         <button
           onClick={() => setIsMobile(!ismobile)}
-          className="md:hidden p-2 text-white hover:text-blue-500 transition-colors duration-300"
+          className="md:hidden p-2 text-white hover:text-blue-300 transition-colors duration-300"
           aria-label="Toggle mobile menu"
         >
           {ismobile ? (
@@ -95,7 +95,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => handleScroll("about")}
-                className="w-full text-left text-lg font-medium text-white hover:text-blue-500 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
+                className="w-full text-left text-lg font-medium text-white hover:text-blue-300 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
               >
                 About
               </button>
@@ -103,7 +103,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => handleScroll("experience")}
-                className="w-full text-left text-lg font-medium text-white hover:text-blue-500 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
+                className="w-full text-left text-lg font-medium text-white hover:text-blue-300 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
               >
                 Experience
               </button>
@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => handleScroll("skills")}
-                className="w-full text-left text-lg font-medium text-white hover:text-blue-500 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
+                className="w-full text-left text-lg font-medium text-white hover:text-blue-300 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
               >
                 Skills
               </button>
@@ -119,7 +119,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => handleScroll("projects")}
-                className="w-full text-left text-lg font-medium text-white hover:text-blue-500 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
+                className="w-full text-left text-lg font-medium text-white hover:text-blue-300 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
               >
                 Projects
               </button>
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
             <li>
               <button
                 onClick={() => handleScroll("contact")}
-                className="w-full text-left text-lg font-medium text-white hover:text-blue-500 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
+                className="w-full text-left text-lg font-medium text-white hover:text-blue-300 transition-colors duration-300 py-2 px-4 rounded-lg hover:bg-white/10"
               >
                 Contact
               </button>

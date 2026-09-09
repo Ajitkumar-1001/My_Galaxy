@@ -11,7 +11,7 @@ const Experience: React.FC = () => {
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[800px] bg-blue-600/10 rounded-[100%] blur-[120px] pointer-events-none -z-10"></div>
 
       <div className="text-center mb-24 relative z-20">
-        <h1 className="reveal text-2xl md:text-3xl font-extrabold font-sans text-blue-300 drop-shadow-lg">
+        <h1 className="reveal text-2xl md:text-3xl font-extrabold font-sans text-blue-400 drop-shadow-lg">
           Experience
         </h1>
       </div>
@@ -54,7 +54,7 @@ const Experience: React.FC = () => {
                       <img src={exp.logo} alt={exp.company_name} className="w-full h-full object-contain brightness-110 group-hover:brightness-125 transition-all" />
                     </div>
                     <div className="text-center lg:text-left flex flex-col justify-center">
-                      <h3 className="text-2xl font-bold text-gray-200 mb-2 group-hover:text-blue-300 transition-colors drop-shadow-sm leading-tight">{exp.company_name}</h3>
+                      <h3 className="text-2xl font-bold text-gray-200 mb-2 group-hover:text-blue-400 transition-colors drop-shadow-sm leading-tight">{exp.company_name}</h3>
                       <div className="inline-flex items-center justify-center lg:justify-start space-x-2 text-sm font-semibold text-gray-300 bg-white/10 border border-white/5 py-1.5 px-4 rounded-full w-max mx-auto lg:mx-0 shadow-inner">
                         <span>{exp.period_Start}</span>
                         <span className="text-blue-500">—</span>

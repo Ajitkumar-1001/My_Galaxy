@@ -60,7 +60,7 @@ const skillCategories = {
 const Skills: React.FC = () => {
   return (
     <section id="skills" className="min-h-screen flex flex-col items-center justify-center px-6 py-16 mt-10">
-      <h2 className="reveal text-4xl font-bold mt-12 text-blue-300">
+      <h2 className="reveal text-4xl font-bold mt-12 text-blue-400">
         Skills
       </h2>
 
