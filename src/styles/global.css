@@ -178,3 +178,15 @@ body {
     @apply bg-background text-foreground;
   }
 } */
+
+/* Splash overlay: only shown when the head script marked a first visit.
+   Default (no JS, crawlers) is no overlay and a scrollable page. */
+#splash {
+  display: none;
+}
+html.splash #splash {
+  display: block;
+}
+html.splash {
+  overflow: hidden;
+}

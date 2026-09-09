@@ -11,6 +11,16 @@ import "../styles/global.css";
     <title>Ajitkumar Senthil Kumar – Portfolio</title>
     <meta name="description" content="Professional Portfolio of Mine! AK" />
     <link rel="canonical" href="https://ajitkumar.io/" />
+    <!-- Runs before first paint: `js` gates the scroll-reveal CSS; `splash` shows the
+         one-time welcome overlay only on a first visit (see #splash in global.css). -->
+    <script is:inline>
+      document.documentElement.classList.add("js");
+      try {
+        if (sessionStorage.getItem("hasVisited") !== "true") {
+          document.documentElement.classList.add("splash");
+        }
+      } catch {}
+    </script>
     <!-- Google Tag Manager -->
     <script is:inline>
       (function (w, d, s, l, i) {

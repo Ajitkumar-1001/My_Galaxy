@@ -1,6 +1,6 @@
 import React, { useMemo, useEffect, useRef } from 'react';
-import ProfileCard from '../comp/Profilecard.tsx';
-import TextType from '../comp/Texttype.tsx';
+import ProfileCard from '../comp/Profilecard';
+import TextType from '../comp/Texttype';
 import { motion, useAnimation, useInView } from "framer-motion";
 import { DownloadIcon, } from 'lucide-react';
 import { EyeOpenIcon } from '@radix-ui/react-icons';
@@ -44,16 +44,18 @@ const Hero: React.FC = () => {
 
 
   useEffect(() => {
-
-    const contain = async () => {
-      if (onView) {
-        await control1.start("visible");
-        await new Promise((res) => setTimeout(res, 1000));
-        await control2.start("visible");
-      };
+    if (!onView) return;
+    const run = async () => {
+      await control1.start("visible");
+      await new Promise((res) => setTimeout(res, 1000));
+      await control2.start("visible");
+    };
+    // On a first visit the splash overlay is up; play the entrance after it lifts.
+    if (document.documentElement.classList.contains("splash")) {
+      window.addEventListener("splash:done", run, { once: true });
+      return () => window.removeEventListener("splash:done", run);
     }
-
-    contain();
+    run();
   }, [onView, control1, control2]);
 
 
@@ -66,13 +68,13 @@ const Hero: React.FC = () => {
       {/* Left: Intro Text */}
       <motion.div className=" w-full md:w-1/2 mx-5" variants={controlprops as any} initial="hidden" animate={control1} >
         <motion.h1 className="sm:text-lg md:text-2xl text-white sm:text-3xl font-extrabold leading-tight" variants={middleware as any}>
-          Hi, I am  <h2 className='sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-blue-500 bg-clip-text text-transparent text-outline-white'><TextType
+          Hi, I am <span className="sr-only">Ajitkumar Senthil Kumar</span> <span className='block sm:text-xl md:text-5xl font-sans font-extrabold brightness-110'><span className='bg-gradient-to-br from-blue-400 to-blue-500 bg-clip-text text-transparent text-outline-white'><TextType
             text={["AJITKUMAR SENTHIL KUMAR", "or", "AJITKUMAR", "even", "AJIT!", "sometimes..", "Ak!"]}
             typingSpeed={10}
             pauseDuration={1000}
           /></span>
 
-          </h2>
+          </span>
 
         </motion.h1>
         <motion.div className='flex flex-row items-center' variants={middleware as any}>
@@ -149,7 +151,7 @@ const Hero: React.FC = () => {
 
           <motion.a
             variants={controlprops2 as any}
-            href="../.././Ajitkumar_senthilkumar_AI.pdf"
+            href="/Ajitkumar_senthilkumar_AI.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
@@ -177,8 +179,8 @@ const Hero: React.FC = () => {
           // className= 'p-4 sm:p-6 md:p-4'
 
           degree='Master of Science in Data Science'
-          mainImageUrl="../../IMG_5451 2.jpeg"
-          profileImageUrl="../../IMG_5451 2.jpeg"
+          mainImageUrl="/IMG_5451 2.jpeg"
+          profileImageUrl="/IMG_5451 2.jpeg"
           profileHandle="ajitkumar"
           isAvailable={true}
 
