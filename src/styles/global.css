@@ -190,3 +190,50 @@ html.splash #splash {
 html.splash {
   overflow: hidden;
 }
+
+/* Scroll reveal for the static sections. Only active when JS is present
+   (html.js is set by the head script), so no-JS readers see everything.
+   scale and box-shadow are listed so Tailwind hover:scale-* / hover:shadow-*
+   on the same element still ease (Tailwind v4 sets the standalone `scale` property). */
+html.js .reveal {
+  opacity: 0;
+  transform: translateY(40px) scale(0.9);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out,
+    scale 0.4s ease-out,
+    box-shadow 0.4s ease-out;
+}
+html.js .reveal-left {
+  transform: translate(-50px, 30px);
+}
+html.js .reveal-right {
+  transform: translate(50px, 30px);
+}
+html.js .reveal-pop {
+  transform: scale(0);
+  transition-duration: 0.5s;
+}
+html.js .reveal-line {
+  opacity: 1;
+  height: 0;
+  transform: none;
+  transition: height 1.5s ease-in-out;
+}
+html.js .reveal.in {
+  opacity: 1;
+  transform: none;
+}
+html.js .reveal-line.in {
+  height: calc(100% - 100px);
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .reveal {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+  html.js .reveal-line {
+    height: calc(100% - 100px);
+  }
+}

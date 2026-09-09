@@ -47,5 +47,17 @@ import "../styles/global.css";
     >
     <!-- End Google Tag Manager (noscript) -->
     <slot />
+    <!-- Scroll reveal for the static sections: adds .in once per .reveal element. -->
+    <script>
+      const io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in");
+            io.unobserve(entry.target);
+          }
+        }
+      });
+      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    </script>
   </body>
 </html>

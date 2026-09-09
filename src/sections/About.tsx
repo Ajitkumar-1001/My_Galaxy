@@ -1,76 +1,8 @@
-import React, { useEffect, useMemo, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
-import { Containerhide } from "../data/animate";
+import React from "react";
 
+// Rendered to static HTML at build time (no client directive). Reveal
+// animations come from the `reveal` classes in global.css + the observer in Layout.astro.
 const About: React.FC = () => {
-
-  const secRef = useRef(null);
-  const control1 = useAnimation();
-  const control2 = useAnimation();
-  const control3 = useAnimation();
-  const threshold: any = 0.3;
-  const inView = useInView(secRef, threshold);
-  const hideContainer = useMemo(() => (Containerhide), []);
-
-  const parentVariant: any = useMemo(() => ({
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-        when: "beforeChildren",
-        staggerChildren: 0.1,
-      },
-    },
-  }), []);
-
-  const childVariant: any = useMemo(() => ({
-    hidden: { opacity: 0, y: 40, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.2,
-        ease: "easeOut",
-      },
-    },
-    hover: {
-      scale: 1.03,
-      boxShadow: "0 0 15px #3b82f6, 0 0 30px #8b5cf6, 0 0 45px #a855f7",
-      transition: { duration: 0.4, ease: "easeOut" }
-    },
-    rest: {
-      scale: 1,
-      boxshadow: "0 0 0 #ffffff",
-      transition: { duration: 0.4, ease: "easeInOut" }
-
-    },
-
-
-  }), []);
-
-  // const handleHover = useCallback(()=>{
-  //   controls.start("hover");
-  // },[controls])
-
-  // const handleMover = useCallback(()=>{
-  //   controls.start("rest");
-  // },[controls])
-
-
-  useEffect(() => {
-    const animate = async () => {
-      if (inView) {
-        await control1.start("visible");
-        await control2.start("visible");
-        await control3.start("visible");
-      }
-    };
-    animate();
-  }, [inView, control1, control2, control3]);
 
   const cards = [
     {
@@ -106,44 +38,34 @@ const About: React.FC = () => {
   ];
 
   return (
-    <section id="about" ref={secRef} className="min-h-screen flex flex-col justify-center bg-transparent py-10">
-      <motion.div className="relative" variants={hideContainer} initial="hidden" animate={control1}>
-       <motion.h1 className="text-4xl font-extrabold font-sans mx-auto my-20 text-center bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent cursor-pointer" variants={parentVariant} initial="hidden" animate={control2}>
-        About
-      </motion.h1>
+    <section id="about" className="min-h-screen flex flex-col justify-center bg-transparent py-10">
+      <div className="relative">
+        <h1 className="reveal text-4xl font-extrabold font-sans mx-auto my-20 text-center bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent cursor-pointer">
+          About
+        </h1>
 
-      <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 md:px-20"
-        variants={parentVariant as any}
-        initial="hidden"
-        animate={control3}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-10 md:px-20">
+          {cards.map((card, idx) => (
+            <div
+              key={idx}
+              className="reveal relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_15px_#3b82f6,0_0_30px_#8b5cf6,0_0_45px_#a855f7]"
+              style={{ transitionDelay: `${0.3 + idx * 0.1}s` }}
+            >
+              <div className={`absolute inset-0 z-0 bg-gradient-to-tl ${card.gradient} rounded-[18px] brightness-120 opacity-50`} />
 
-      >
-        {cards.map((card, idx) => (
-          <motion.div
-            key={idx}
-            className="relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl"
-            variants={childVariant as any}
-            whileHover="hover"
-
-          >
-
-            <div className={`absolute inset-0 z-0 bg-gradient-to-tl ${card.gradient} rounded-[18px] brightness-120 opacity-50`} />
-
-
-            <div className="relative z-10 bg-black/100 backdrop-blur-sm rounded-2xl p-6 h-full flex flex-col justify-between transition-shadow duration-300 ">
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent text-center mb-2">
-                {card.title}
-              </h2>
-              <p className="bg-gradient-to-tr from-white to-gray-600 bg-clip-text text-transparent font-sans font-semibold text-center leading-relaxed text-md capitalize">
-                {card.text}
-              </p>
+              <div className="relative z-10 bg-black/100 backdrop-blur-sm rounded-2xl p-6 h-full flex flex-col justify-between transition-shadow duration-300 ">
+                <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent text-center mb-2">
+                  {card.title}
+                </h2>
+                <p className="bg-gradient-to-tr from-white to-gray-600 bg-clip-text text-transparent font-sans font-semibold text-center leading-relaxed text-md capitalize">
+                  {card.text}
+                </p>
+              </div>
             </div>
-          </motion.div>
-        ))}
-      </motion.div>
-    </motion.div>
-    </section >
+          ))}
+        </div>
+      </div>
+    </section>
   );
 };
 
