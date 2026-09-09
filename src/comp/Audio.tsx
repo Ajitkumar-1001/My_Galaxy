@@ -11,38 +11,34 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
     if (!el) return;
 
     (async () => {
-
-    //  await new Promise((r)=> setTimeout(r,1200)); 
       try {
-   
         el.muted = false;
         el.volume = 1;
-        
-        await el.play();          
+        await el.play();
         setIsMuted(false);
+        return;
       } catch {
-      
+        // Unmuted autoplay was blocked. Play muted (browsers always allow this)
+        // and unmute on the very first user interaction anywhere on the page —
+        // not just a click on the mute button, which the splash overlay covers
+        // and makes unclickable for its whole duration.
         el.muted = true;
         el.volume = 0;
-        try {
-        //   await new Promise((r)=> setTimeout(r,1200)); 
-          await el.play();
-          setIsMuted(true);
-        } catch {
-         
-          const unlock = () => {
-            el.muted = false;
-            el.volume = 1;
-            new Promise((r)=> setTimeout(r,1200)); 
-            el.play().catch(() => {});
-            window.removeEventListener("pointerdown", unlock);
-            window.removeEventListener("keydown", unlock);
-            window.removeEventListener("touchstart", unlock);
-          };
-          window.addEventListener("pointerdown", unlock, { once: true });
-          window.addEventListener("keydown", unlock, { once: true });
-          window.addEventListener("touchstart", unlock, { once: true });
-        }
+        el.play().catch(() => {});
+        setIsMuted(true);
+
+        const unlock = () => {
+          el.muted = false;
+          el.volume = 1;
+          el.play().catch(() => {});
+          setIsMuted(false);
+          window.removeEventListener("pointerdown", unlock);
+          window.removeEventListener("keydown", unlock);
+          window.removeEventListener("touchstart", unlock);
+        };
+        window.addEventListener("pointerdown", unlock, { once: true });
+        window.addEventListener("keydown", unlock, { once: true });
+        window.addEventListener("touchstart", unlock, { once: true });
       }
     })();
   }, []);

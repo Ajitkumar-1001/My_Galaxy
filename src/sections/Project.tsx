@@ -184,7 +184,7 @@ const Projects: React.FC = () => {
       >
         <motion.h2
           variants={childVariant as any}
-          className="text-4xl font-bold bg-gradient-to-tr from-blue-500 to-indigo-600 bg-clip-text text-transparent mb-3 brightness-120"
+          className="text-4xl font-bold text-blue-300 mb-3"
         >
           Projects
         </motion.h2>
@@ -214,17 +214,17 @@ const Projects: React.FC = () => {
                   onMouseEnter={() => setHoverIndex(index)}
                   onMouseLeave={() => setHoverIndex(null)}
                 >
-                  <h3 className="text-2xl font-semibold bg-gradient-to-tr from-indigo-300 to-blue-600 bg-clip-text text-transparent mb-2">
+                  <h3 className="text-2xl font-semibold text-blue-300 mb-2">
                     {project.title}
                   </h3>
-                  <p className="text-md bg-gradient-to-bl from-gray-600 to-white bg-clip-text text-transparent font-semibold mb-4">
+                  <p className="text-md text-gray-300 font-semibold mb-4">
                     {project.description}
                   </p>
                   <div className="flex flex-wrap gap-2 justify-center mb-4">
                     {project.tech.map((tech:any, idx:number) => (
                       <span
                         key={idx}
-                        className="bg-indigo-200 text-indigo-800 text-xs px-3 py-1 rounded-full"
+                        className="bg-blue-200 text-blue-800 text-xs px-3 py-1 rounded-full"
                       >
                         {tech}
                       </span>
@@ -235,7 +235,7 @@ const Projects: React.FC = () => {
                       <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source} ratio={20/16}/>
                     </div>
                     <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-indigo-500 bg-transparent border-indigo-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
+                      <DialogDemo className="text-blue-500 bg-transparent border-blue-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
                     </div>
                   </div>
                   <div className="flex flex-col items-center">
@@ -243,7 +243,7 @@ const Projects: React.FC = () => {
                       href={project.link}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-indigo-400 hover:underline text-sm"
+                      className="text-blue-500 hover:underline text-sm"
                     >
                       Experience or GetSource →
                     </a>
@@ -256,7 +256,7 @@ const Projects: React.FC = () => {
                           onMouseLeave={() =>
                             setDemo("Click here for Live!!")
                           }
-                          className="text-sm font-semibold font-sans bg-gradient-to-r from-blue-600 to-gray-300 bg-clip-text text-transparent text-center"
+                          className="text-sm font-semibold font-sans text-blue-500 text-center"
                         >
                          {demo}
                         </h2>

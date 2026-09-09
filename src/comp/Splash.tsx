@@ -93,8 +93,8 @@ export default function Splash() {
           className="text-4xl subpixel-antialiased md:text-6xl text-border-2 font-sans text-white font-extrabold text-center"
           variants={item}
         >
-          <span className="bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent">Welcome</span> to{" "}
-          <span className="bg-gradient-to-r from-blue-300 to-indigo-600 bg-clip-text text-transparent">My Galaxy</span>
+          <span className="text-blue-300">Welcome</span> to{" "}
+          <span className="text-blue-300">My Galaxy</span>
         </motion.h1>
 
         <motion.h5
@@ -104,9 +104,9 @@ export default function Splash() {
           animate={control2}
         >
           A space to host my{" "}
-          <span className="bg-gradient-to-r from-blue-300 to-blue-600 bg-clip-text text-transparent">Personal</span>{" "}
+          <span className="text-blue-500">Personal</span>{" "}
           <span className="text-white">/</span>{" "}
-          <span className="bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent">Professional</span> works.
+          <span className="text-blue-500">Professional</span> works.
         </motion.h5>
 
         <motion.h5

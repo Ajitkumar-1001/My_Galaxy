@@ -1058,7 +1058,7 @@ Claude-Session: https://claude.ai/code/session_016fzuBG2ns53C7wgM2ZWCvD"
 
 ### Task 5: Deploy preview and final verification
 
-- [ ] **Step 1: Push and get a Vercel preview**
+- [x] **Step 1: Push and get a Vercel preview**
 
 ```bash
 git push -u origin astro-migration
@@ -1066,7 +1066,7 @@ git push -u origin astro-migration
 
 In the Vercel project settings confirm: Framework Preset = Astro, Build Command = `npm run build`, Output Directory = `dist`, Node.js version = 22.x. Open the preview URL.
 
-- [ ] **Step 2: Automated checks on the built output**
+- [x] **Step 2: Automated checks on the built output**
 
 ```bash
 npm run build && npm run lint
@@ -1077,7 +1077,7 @@ grep -l "Human Cloud Soft" dist/_astro/*.js || echo "static sections not in JS: 
 du -ch dist/_astro/*.js | tail -1                                                                  # vs BASELINE_JS
 ```
 
-- [ ] **Step 3: Manual parity checklist** (preview URL and local, at 1440 and 375 wide)
+- [x] **Step 3: Manual parity checklist** (preview URL and local, at 1440 and 375 wide)
 
 - First visit: overlay from first paint, no content flash, page not scrollable, overlay removes itself, Hero and ProfileCard animate after it. Reload: no splash. Chrome DevTools "Disable JavaScript" + reload: every section readable, no overlay.
 - Particles and globe render; globe fades in and drags; the wrapper's hover dims it.
@@ -1089,7 +1089,7 @@ du -ch dist/_astro/*.js | tail -1                                               
 - Network tab: no 404s (`ub.jpeg`, `hcs.jpeg`, `klicknet.jpeg`, `L&T.webp`, `IMG_5451 2.jpeg`, `favicon.ico`, `gtm.js`).
 - Console: zero hydration warnings. `view-source:` shows section text.
 
-- [ ] **Step 4: Open the PR**
+- [x] **Step 4: Open the PR**
 
 ```bash
 gh pr create --base main --head astro-migration --title "Migrate from Vite SPA to Astro 7 with React islands" --body "$(cat <<'EOF'
