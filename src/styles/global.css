@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* Geist is declared by Astro's Fonts API (astro.config.mjs) and injected by
+   <Font /> in Layout.astro as --font-geist. Registering it as --font-sans makes
+   Tailwind's `font-sans` and preflight's html font-family use it. */
+@theme inline {
+  --font-sans: var(--font-geist);
+}
+
 @custom-variant dark (&:is(.dark *));
 /* @import "tw-animate-css"; */
 /* @plugin "tailwindcss-animate"; */
@@ -14,7 +21,7 @@
   --color-text: #1f2937;
   --color-accent: #5c5db2;
 
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   font-weight: 400;
 
