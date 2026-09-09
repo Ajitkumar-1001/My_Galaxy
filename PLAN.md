@@ -48,7 +48,7 @@
 **Files:**
 - Modify: `.gitignore` (revert working-tree change only)
 
-- [ ] **Step 1: Revert the uncommitted `public/` ignore line and branch**
+- [x] **Step 1: Revert the uncommitted `public/` ignore line and branch**
 
 ```bash
 git checkout -- .gitignore
@@ -56,7 +56,7 @@ git checkout -b astro-migration
 git status --short   # expect only ?? CLAUDE.md and ?? public/*.png|jpeg
 ```
 
-- [ ] **Step 2: Record the Vite baseline**
+- [x] **Step 2: Record the Vite baseline**
 
 ```bash
 npm run build 2>&1 | tail -5
@@ -65,7 +65,7 @@ du -ch dist/assets/*.js | tail -1        # write this number down: BASELINE_JS
 npm run lint 2>&1 | tail -3              # expect "62 problems (54 errors, 8 warnings)"
 ```
 
-- [ ] **Step 3: Capture reference screenshots**
+- [x] **Step 3: Capture reference screenshots**
 
 `npm run preview`, open http://localhost:4173 in a browser at widths 1440, 1024, 375. Screenshot the first visit (splash) and the reload (no splash), plus each section scrolled into view. Keep them for Task 5.
 
@@ -86,7 +86,7 @@ Proves Astro 7 + Vite 8 + Tailwind v4 + React 19 + ogl/cobe work together before
 **Interfaces:**
 - Produces: `Layout.astro` with a default `<slot />`; `src/styles/global.css` as the single global stylesheet; `src/sections/*` as the new home of section components.
 
-- [ ] **Step 1: Install Astro, remove the standalone Vite toolchain**
+- [x] **Step 1: Install Astro, remove the standalone Vite toolchain**
 
 ```bash
 npm i astro @astrojs/react @astrojs/check
@@ -94,7 +94,7 @@ npm uninstall vite @vitejs/plugin-react @vitejs/plugin-react-swc
 node -p "require('astro/package.json').version"   # 7.x
 ```
 
-- [ ] **Step 2: Write `astro.config.mjs`**
+- [x] **Step 2: Write `astro.config.mjs`**
 
 ```js
 // @ts-check
@@ -109,7 +109,7 @@ export default defineConfig({
 });
 ```
 
-- [ ] **Step 3: Replace `tsconfig.json` (single config) and delete the two project references**
+- [x] **Step 3: Replace `tsconfig.json` (single config) and delete the two project references**
 
 ```json
 {
@@ -129,7 +129,7 @@ export default defineConfig({
 git rm tsconfig.app.json tsconfig.node.json src/vite-env.d.ts vite.config.ts index.html src/main.tsx
 ```
 
-- [ ] **Step 4: Update `package.json` scripts**
+- [x] **Step 4: Update `package.json` scripts**
 
 ```json
 "scripts": {
@@ -140,11 +140,11 @@ git rm tsconfig.app.json tsconfig.node.json src/vite-env.d.ts vite.config.ts ind
 }
 ```
 
-- [ ] **Step 5: Ignore Astro's generated folder in ESLint and git**
+- [x] **Step 5: Ignore Astro's generated folder in ESLint and git**
 
 In `eslint.config.js` change `{ ignores: ['dist'] }` to `{ ignores: ['dist', '.astro'] }`. Append `.astro/` to `.gitignore`.
 
-- [ ] **Step 6: Move the section components and the stylesheet**
+- [x] **Step 6: Move the section components and the stylesheet**
 
 ```bash
 mkdir -p src/sections src/styles
@@ -165,7 +165,7 @@ import Contact from './sections/Contact';
 
 (`./comp/...` and `./components/...` imports are unchanged.)
 
-- [ ] **Step 7: Write `src/layouts/Layout.astro`** (head copied from the old `index.html`; GTM must be `is:inline`)
+- [x] **Step 7: Write `src/layouts/Layout.astro`** (head copied from the old `index.html`; GTM must be `is:inline`)
 
 ```astro
 ---
@@ -211,7 +211,7 @@ import "../styles/global.css";
 </html>
 ```
 
-- [ ] **Step 8: Write `src/pages/index.astro`** (temporary: whole app as a client-only island because `App.tsx:26` reads `sessionStorage` during render)
+- [x] **Step 8: Write `src/pages/index.astro`** (temporary: whole app as a client-only island because `App.tsx:26` reads `sessionStorage` during render)
 
 ```astro
 ---
@@ -224,7 +224,7 @@ import App from "../App";
 </Layout>
 ```
 
-- [ ] **Step 9: Build and probe whether `astro check` type-checks `.tsx`**
+- [x] **Step 9: Build and probe whether `astro check` type-checks `.tsx`**
 
 ```bash
 npm run build 2>&1 | tail -15         # expect 0 errors, dist/ produced
@@ -232,7 +232,7 @@ npm run build 2>&1 | tail -15         # expect 0 errors, dist/ produced
 
 Probe: add `import { useId } from "react";` (unused) to the top of `src/comp/Footer.tsx`, run `npx astro check`. If it reports the unused import, remove the line and move on. If it does **not**, remove the line and change the build script to `"build": "astro check && tsc --noEmit && astro build"` so `noUnusedLocals` still gates the build.
 
-- [ ] **Step 10: Visual parity check**
+- [x] **Step 10: Visual parity check**
 
 ```bash
 npm run preview   # http://localhost:4321
@@ -240,7 +240,7 @@ npm run preview   # http://localhost:4321
 
 Compare with Task 0 screenshots: splash on first visit, none on reload, particles, globe, all sections, mobile menu at 375. `view-source:` shows an `<astro-island>` with no section text inside; expected at this checkpoint.
 
-- [ ] **Step 11: Commit**
+- [x] **Step 11: Commit**
 
 ```bash
 git add -A
@@ -263,7 +263,7 @@ Claude-Session: https://claude.ai/code/session_016fzuBG2ns53C7wgM2ZWCvD"
 - Produces: `html.splash` class (set by the head script on first visit, removed by `Splash` when done); `window` event `"splash:done"`; `Globe` prop `config?: Omit<COBEOptions, "onRender">`.
 - Consumes: `Layout.astro` slot, `src/sections/*`.
 
-- [ ] **Step 1: Add the blocking head script to `Layout.astro`**
+- [x] **Step 1: Add the blocking head script to `Layout.astro`**
 
 Insert directly after `<link rel="canonical" ... />`:
 
@@ -280,7 +280,7 @@ Insert directly after `<link rel="canonical" ... />`:
 
 `js` is consumed by Task 3's reveal CSS. `splash` gates the overlay below.
 
-- [ ] **Step 2: Add the splash rules to the end of `src/styles/global.css`**
+- [x] **Step 2: Add the splash rules to the end of `src/styles/global.css`**
 
 ```css
 /* Splash overlay: only shown when the head script marked a first visit.
@@ -296,7 +296,7 @@ html.splash {
 }
 ```
 
-- [ ] **Step 3: Create `src/comp/Splash.tsx`** (extracted from the splash branch of `App.tsx`; `Galaxy` mounts only for first-time visitors so returning visitors never create a WebGL context)
+- [x] **Step 3: Create `src/comp/Splash.tsx`** (extracted from the splash branch of `App.tsx`; `Galaxy` mounts only for first-time visitors so returning visitors never create a WebGL context)
 
 ```tsx
 import { useEffect, useState } from "react";
@@ -407,7 +407,7 @@ export default function Splash() {
 }
 ```
 
-- [ ] **Step 4: Widen the Globe config prop and use one animation runtime** (`src/components/ui/globe.tsx`)
+- [x] **Step 4: Widen the Globe config prop and use one animation runtime** (`src/components/ui/globe.tsx`)
 
 Line 3: `import { useMotionValue, useSpring } from "motion/react"` → `import { useMotionValue, useSpring } from "framer-motion"`.
 
@@ -425,7 +425,7 @@ export function Globe({
 
 Nothing else changes; the component already overrides `onRender` inside `createGlobe(...)`.
 
-- [ ] **Step 5: Hero fixes** (`src/sections/Hero.tsx`)
+- [x] **Step 5: Hero fixes** (`src/sections/Hero.tsx`)
 
 a. Lines 2-3, drop the `.tsx` suffixes:
 
@@ -462,7 +462,7 @@ c. Lines 46-57, gate the entrance on the splash finishing:
 
 d. Asset paths: line 152 `href="../.././Ajitkumar_senthilkumar_AI.pdf"` → `href="/Ajitkumar_senthilkumar_AI.pdf"`; lines 180-181 `"../../IMG_5451 2.jpeg"` → `"/IMG_5451 2.jpeg"` (both props).
 
-- [ ] **Step 6: ProfileCard gate** (`src/comp/Profilecard.tsx`, the effect at lines 89-106)
+- [x] **Step 6: ProfileCard gate** (`src/comp/Profilecard.tsx`, the effect at lines 89-106)
 
 ```tsx
     useEffect(()=>{
@@ -485,7 +485,7 @@ d. Asset paths: line 152 `href="../.././Ajitkumar_senthilkumar_AI.pdf"` → `hre
     },[control1,control2,control3])
 ```
 
-- [ ] **Step 7: Replace `src/pages/index.astro`** (same wrapper divs and z-index layering as `App.tsx`; the four `client:visible` on About/Experience/Skills/Contact are temporary and removed in Task 3)
+- [x] **Step 7: Replace `src/pages/index.astro`** (same wrapper divs and z-index layering as `App.tsx`; the four `client:visible` on About/Experience/Skills/Contact are temporary and removed in Task 3)
 
 ```astro
 ---
@@ -577,13 +577,13 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
 </Layout>
 ```
 
-- [ ] **Step 8: Delete the old composition root**
+- [x] **Step 8: Delete the old composition root**
 
 ```bash
 git rm src/App.tsx src/App.css src/components/LazyGlobe.tsx
 ```
 
-- [ ] **Step 9: Build and verify static HTML**
+- [x] **Step 9: Build and verify static HTML**
 
 ```bash
 npm run build 2>&1 | tail -15
@@ -591,14 +591,14 @@ grep -c "University at Buffalo" dist/index.html        # > 0
 grep -c '<astro-island' dist/index.html                  # 11 (7 real + 4 temporary)
 ```
 
-- [ ] **Step 10: Browser verification (`npm run preview`)**
+- [x] **Step 10: Browser verification (`npm run preview`)**
 
 - DevTools console: **zero** hydration / "recoverable error" messages. Any such message means invalid HTML nesting inside an island (Profilecard, Project, Spotlightcard, Dialog were not scanned); fix by swapping the offending tag for a `span`/`div` with the same classes.
 - DevTools → Application → Session Storage → clear; Network throttling Slow 3G; reload. Expect: black overlay from first paint, no page content flashing underneath, page not scrollable, overlay lifts after ~3 s, then Hero and ProfileCard animate in.
 - Reload normally: no overlay at any point.
 - Site matches Task 0 screenshots otherwise.
 
-- [ ] **Step 11: Commit**
+- [x] **Step 11: Commit**
 
 ```bash
 git add -A
@@ -622,7 +622,7 @@ After this task About, Experience, Skills, Contact and Footer ship zero JS. Reve
 - Produces: CSS classes `reveal`, `reveal-left`, `reveal-right`, `reveal-pop`, `reveal-line`; the observer adds `in`.
 - Consumes: `html.js` from Task 2.
 
-- [ ] **Step 1: Reveal CSS, appended to `src/styles/global.css`**
+- [x] **Step 1: Reveal CSS, appended to `src/styles/global.css`**
 
 ```css
 /* Scroll reveal for the static sections. Only active when JS is present
@@ -673,7 +673,7 @@ html.js .reveal-line.in {
 }
 ```
 
-- [ ] **Step 2: Reveal script in `Layout.astro`**, inserted just before `</body>` (a bundled module script; runs after the DOM is parsed):
+- [x] **Step 2: Reveal script in `Layout.astro`**, inserted just before `</body>` (a bundled module script; runs after the DOM is parsed):
 
 ```astro
     <script>
@@ -689,7 +689,7 @@ html.js .reveal-line.in {
     </script>
 ```
 
-- [ ] **Step 3: Replace `src/sections/Experience.tsx`**
+- [x] **Step 3: Replace `src/sections/Experience.tsx`**
 
 ```tsx
 import React from "react";
@@ -773,7 +773,7 @@ const Experience: React.FC = () => {
 export default Experience;
 ```
 
-- [ ] **Step 4: `src/sections/About.tsx`**
+- [x] **Step 4: `src/sections/About.tsx`**
 
 a. Replace the imports (lines 1-3) with:
 
@@ -816,7 +816,7 @@ c. Replace the JSX from `<section id="about" ...>` to the end of the component w
     </section>
 ```
 
-- [ ] **Step 5: `src/sections/Contact.tsx`**
+- [x] **Step 5: `src/sections/Contact.tsx`**
 
 a. Imports become:
 
@@ -880,7 +880,7 @@ c. Replace the JSX from `<section` to the end of the component with:
     </section>
 ```
 
-- [ ] **Step 6: `src/sections/Skills.tsx`**
+- [x] **Step 6: `src/sections/Skills.tsx`**
 
 a. Delete lines 1 through the line before `import { motion } from "framer-motion";` (the ~330-line commented-out earlier version; Tailwind scans comments and emits CSS for classes in them).
 
@@ -933,11 +933,11 @@ Close them with `</div>` instead of `</motion.div>`, and replace the branch's tr
 
 e. Mobile branch: same treatment. `{isMobile && (<motion.div className="grid grid-cols-1 gap-12 max-w-sm w-full z-20 py-15" ...>` becomes `<div className="reveal grid grid-cols-1 gap-12 max-w-sm w-full z-20 py-15 lg:hidden">`; the per-category `motion.div` becomes `<div key={category} className="reveal flex flex-col items-center space-y-10" style={{ transitionDelay: `${i * 0.2}s` }}>`; closers become `</div>`; drop the `)}`.
 
-- [ ] **Step 7: Asset paths in `src/data/data.ts`**
+- [x] **Step 7: Asset paths in `src/data/data.ts`**
 
 Lines 17, 29, 43, 56: `"../../ub.jpeg"` → `"/ub.jpeg"`, `"../../hcs.jpeg"` → `"/hcs.jpeg"`, `"../../klicknet.jpeg"` → `"/klicknet.jpeg"`, `"../../L&T.webp"` → `"/L&T.webp"`.
 
-- [ ] **Step 8: Remove the temporary directives and the orphaned modules**
+- [x] **Step 8: Remove the temporary directives and the orphaned modules**
 
 In `src/pages/index.astro` change `<About client:visible />`, `<Experience client:visible />`, `<Skills client:visible />`, `<Contact client:visible />` to `<About />`, `<Experience />`, `<Skills />`, `<Contact />`. `Projects` keeps its directive.
 
@@ -945,7 +945,7 @@ In `src/pages/index.astro` change `<About client:visible />`, `<Experience clien
 git rm src/hooks/useMobile.ts src/data/animate.ts
 ```
 
-- [ ] **Step 9: Build and verify**
+- [x] **Step 9: Build and verify**
 
 ```bash
 npm run build 2>&1 | tail -15
@@ -956,7 +956,7 @@ grep -c 'class="reveal' dist/index.html                               # > 20
 
 `npm run preview`: sections fade/slide in on scroll at 1440 and 375; the Experience timeline line grows; About cards glow and scale on hover; Contact icons glow; Skills orbits spin, tooltips show on hover, desktop layout at >= 1024px and mobile layout below; `astro check` 0 errors; console clean.
 
-- [ ] **Step 10: Commit**
+- [x] **Step 10: Commit**
 
 ```bash
 git add -A
@@ -974,7 +974,7 @@ Claude-Session: https://claude.ai/code/session_016fzuBG2ns53C7wgM2ZWCvD"
 - Delete: `src/comp/Notfound.tsx`, `src/comp/BlurText.tsx`, `src/comp/IconCloud.tsx`, `src/comp/Perspectivecarousel.tsx`, `src/comp/Scrambletext.tsx`, `src/comp/Scrambletext.css`, `src/comp/Shinnytext.tsx`, `src/comp/TiltedCard.tsx`, `src/comp/Profilecard.css`, `src/data/controls.ts`
 - Modify: `src/comp/Texttype.tsx:1`, `components.json`, `package.json`, `CLAUDE.md`
 
-- [ ] **Step 1: Delete dead files and the stray directive**
+- [x] **Step 1: Delete dead files and the stray directive**
 
 ```bash
 git rm src/comp/Notfound.tsx src/comp/BlurText.tsx src/comp/IconCloud.tsx src/comp/Perspectivecarousel.tsx src/comp/Scrambletext.tsx src/comp/Scrambletext.css src/comp/Shinnytext.tsx src/comp/TiltedCard.tsx src/comp/Profilecard.css src/data/controls.ts
@@ -982,18 +982,18 @@ git rm src/comp/Notfound.tsx src/comp/BlurText.tsx src/comp/IconCloud.tsx src/co
 
 Delete line 1 of `src/comp/Texttype.tsx` (`"use client";`).
 
-- [ ] **Step 2: Uninstall zero-importer packages**
+- [x] **Step 2: Uninstall zero-importer packages**
 
 ```bash
 npm uninstall three @types/three @react-three/fiber @react-three/drei react-globe.gl @vercel/analytics @vercel/speed-insights @radix-ui/react-label radix-ui react-router-dom motion @types/node
 grep -rn "motion/react\|react-router\|LazyGlobe\|useMobile\|three" src   # expect no output
 ```
 
-- [ ] **Step 3: Point shadcn at the moved stylesheet**
+- [x] **Step 3: Point shadcn at the moved stylesheet**
 
 In `components.json`, `"css": "src/index.css"` → `"css": "src/styles/global.css"`.
 
-- [ ] **Step 4: Rewrite `CLAUDE.md`** (the current one documents the Vite layout)
+- [x] **Step 4: Rewrite `CLAUDE.md`** (the current one documents the Vite layout)
 
 ```markdown
 # CLAUDE.md
@@ -1036,7 +1036,7 @@ A single-page Astro 7 portfolio deployed statically on Vercel at ajitkumar.io. R
 **Known pre-existing issues, left alone:** every project has `demo2: ""` so "View Demo" opens an empty iframe; `Profilecard.tsx` onError falls back to a non-existent `src/assets/` path.
 ```
 
-- [ ] **Step 5: Build, lint, size**
+- [x] **Step 5: Build, lint, size**
 
 ```bash
 npm run build 2>&1 | tail -5
@@ -1044,7 +1044,7 @@ npm run lint 2>&1 | tail -3          # no more than 54 errors / 8 warnings
 du -ch dist/_astro/*.js | tail -1    # compare with BASELINE_JS from Task 0
 ```
 
-- [ ] **Step 6: Commit**
+- [x] **Step 6: Commit**
 
 ```bash
 git add -A
