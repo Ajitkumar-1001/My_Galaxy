@@ -44,11 +44,11 @@ export default function Splash() {
     setActive(true);
     let cancelled = false;
     (async () => {
-      await wait(500);
+      await wait(250);
       await control2.start("visible");
-      await wait(500);
+      await wait(250);
       await control3.start("visible");
-      await wait(1500);
+      await wait(700);
       if (cancelled) return;
       sessionStorage.setItem("hasVisited", "true");
       html.classList.remove("splash");

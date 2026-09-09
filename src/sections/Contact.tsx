@@ -36,14 +36,14 @@ const Contact: React.FC = () => {
 
         <p
           className="reveal sm:text-lg md:text-2xl leading-relaxed font-bold text-gray-300"
-          style={{ transitionDelay: "0.3s" }}
+          style={{ transitionDelay: "0.15s" }}
         >
           Whether you're interested in collaborating, hiring, or just want to connect —feel free to reach out. I'm always open to new opportunities in AI, machine learning, and full-stack development.
         </p>
 
         <div
           className="reveal flex flex-row justify-center items-center gap-6 mt-6"
-          style={{ transitionDelay: "0.6s" }}
+          style={{ transitionDelay: "0.3s" }}
         >
           {links.map(({ href, Icon, glow }, i) => (
             <a

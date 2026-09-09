@@ -41,16 +41,14 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
     }
   };
     const [isHovered , setIsHovered] = useState<boolean>(false);
-    const control1 = useAnimation(); 
-    const control2 = useAnimation(); 
-    const control3 = useAnimation();
+    const control1 = useAnimation();
 
     const hoverGlow = useMemo(() => ({
       hidden: { scale: 1 },
       visible: {
         scale: 1.1,
         boxShadow: "0 0 15px #f5f5f5, 0 0 25px #60a5fa, 0 0 40px #2563eb",
-        transition: { duration: 0.5, ease: "easeIn" }
+        transition: { duration: 0.3, ease: "easeIn" }
       }
     }), []);
 
@@ -66,50 +64,35 @@ const ProfileCard: React.FC<ProfileCardProps> = ({
 
     const cardvariants = useMemo(() => ({
       hidden : {opacity:0, y: 20 , z: 30},
-      visible : {opacity:1, y:0,z:0 , transition : {duration:1 , delay:2 , ease:"easeIn", staggerChildren : 0.5}}
+      visible : {opacity:1, y:0,z:0 , transition : {duration:0.5 , delay:0.4 , ease:"easeIn", staggerChildren : 0.2}}
     }),[])
 
     const itemvariants = useMemo(()=>({
       hidden : {opacity : 0, y:30, z: 20},
-      visible : {opacity : 1, y:0 , z: 0, transition: {duration:1, ease:"easeInOut"}}
+      visible : {opacity : 1, y:0 , z: 0, transition: {duration:0.5, ease:"easeInOut"}}
     }),[])
 
     const itemvariants2 = useMemo(() => ({
 
        hidden : {opacity: 0 , y:40, z:50},
-       visible : {opacity :1 , y:0 , z:0 , transition : {duration : 1.5, ease:"easeOut"}}
+       visible : {opacity :1 , y:0 , z:0 , transition : {duration : 0.7, ease:"easeOut"}}
     }), [])
 
     const itemvariants3 = useMemo(() => ({
 
       hidden : {opacity: 0 , y:40, z:50},
-      visible : {opacity :1 , y:0 , z:0 , transition : {duration : 1.7, ease:"easeOut"}}
+      visible : {opacity :1 , y:0 , z:0 , transition : {duration : 0.8, ease:"easeOut"}}
    }), [])
 
     useEffect(()=>{
-      
-      const sequence = async() => {
-
-        await control1.start("visible");
-        await new Promise((res)=> setTimeout(res,1000));
-        await control2.start("visible"); 
-
-        if (isHovered === true) { 
-          await control3.start("visible");
-        }
-        else{ 
-          control3.start("hidden")
-        }
-    
-
-      }
+      const sequence = () => control1.start("visible");
       // On a first visit the splash overlay is up; play the entrance after it lifts.
       if (document.documentElement.classList.contains("splash")) {
         window.addEventListener("splash:done", sequence, { once: true });
         return () => window.removeEventListener("splash:done", sequence);
       }
       sequence();
-    },[control1,control2,control3])
+    },[control1])
 
   return (
     // Outermost container to center the card and provide a background

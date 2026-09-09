@@ -43,7 +43,7 @@ const About: React.FC = () => {
             <div
               key={idx}
               className="reveal relative w-full max-w-2xl mx-auto p-[2px] rounded-2xl hover:scale-[1.03] hover:shadow-[0_0_15px_#60a5fa,0_0_30px_#93c5fd,0_0_45px_#bfdbfe]"
-              style={{ transitionDelay: `${0.3 + idx * 0.1}s` }}
+              style={{ transitionDelay: `${0.1 + idx * 0.05}s` }}
             >
               <div className="absolute inset-0 z-0 bg-blue-500/20 rounded-[18px] opacity-50" />
 

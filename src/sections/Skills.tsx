@@ -70,7 +70,7 @@ const Skills: React.FC = () => {
           <div
             key={category}
             className="reveal flex flex-col items-center space-y-8 px-4 py-8"
-            style={{ transitionDelay: `${i * 0.2}s` }}
+            style={{ transitionDelay: `${i * 0.08}s` }}
           >
             <div className="relative flex h-[420px] w-[420px] items-center justify-center overflow-visible">
               {/* Center circle with category description */}
@@ -134,7 +134,7 @@ const Skills: React.FC = () => {
           <div
             key={category}
             className="reveal flex flex-col items-center space-y-10"
-            style={{ transitionDelay: `${i * 0.2}s` }}
+            style={{ transitionDelay: `${i * 0.08}s` }}
           >
             <div className="relative w-72 h-72 flex items-center justify-center ">
               {/* Center circle */}
