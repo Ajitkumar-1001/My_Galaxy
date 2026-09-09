@@ -66,7 +66,7 @@ export default function AutoPlayMusic({ src, loop = true, className }: Props) {
 
   return (
     <>
-      <audio ref={audioRef} src={src} autoPlay loop={loop} playsInline preload="auto" />
+      <audio ref={audioRef} src={src} loop={loop} playsInline preload="auto" />
       <button
         onClick={toggle}
         aria-label={isMuted ? "Unmute background music" : "Mute background music"}
