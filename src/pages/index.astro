@@ -82,7 +82,7 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
 
       <Hero client:load />
       <About />
-      <Experience />
+      <Experience client:visible={{ rootMargin: "200px" }} />
       <Skills />
       <Projects client:visible={{ rootMargin: "200px" }} />
       <Contact />
