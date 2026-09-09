@@ -109,7 +109,7 @@ export function Globe({
   return (
     <div
       className={cn(
-        "absolute inset-0 mx-auto aspect-[1/1] w-full",
+        "absolute inset-0 mx-auto aspect-[1/1] w-full pointer-events-auto",
         className
       )}
       style={{ maxWidth: GLOBE_MAX_SIZE }}

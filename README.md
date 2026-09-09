@@ -26,7 +26,7 @@
 | | |
 |---|---|
 | 🚀 **One-time welcome** | A shader-driven galaxy (ogl) greets first-time visitors, then steps aside. Returning visitors never see it, and neither do crawlers. |
-| 🌍 **Living background** | 1,200 particles that react to the cursor, and a slowly rotating dotted globe (cobe) with location markers. |
+| 🌍 **Living background** | 1,200 ambient particles, and a slowly rotating dotted globe (cobe) with location markers. |
 | ⌨️ **Typing headline** | Cycling typed text for name, interests and audience, with a gsap-blinked cursor. |
 | 🪐 **Orbiting skills** | Languages, ML/AI libraries and tools orbit in pure CSS rings, with hover tooltips. Separate desktop and mobile layouts. |
 | 🗂️ **Projects** | Tilt-on-hover spotlight cards. "Read More" opens the matching post from [blog.ajitkumar.io](https://blog.ajitkumar.io) in a dialog. |
@@ -69,7 +69,7 @@ Two small conventions worth knowing:
 - **Splash gate.** A blocking script in `<head>` adds `html.splash` on a first visit, so the overlay is visible before first paint and scroll is locked. When the animation ends it sets `sessionStorage.hasVisited`, removes the class and fires a `splash:done` event that Hero waits for.
 - **Scroll reveal.** Give any static element `class="reveal"` (plus `reveal-left`, `reveal-right`, `reveal-pop` or `reveal-line`) and an optional `transitionDelay`. One observer adds `.in` when it scrolls into view. The rules are gated on `html.js`, so readers without JavaScript see everything.
 
-`CLAUDE.md` has the fuller architecture notes; `PLAN.md` records the Vite-to-Astro migration and the decisions behind it.
+`CLAUDE.md` has the fuller architecture notes.
 
 ## 🚀 Run it locally
 

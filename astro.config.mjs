@@ -12,9 +12,11 @@ export default defineConfig({
   fonts: [
     {
       provider: fontProviders.google(),
-      name: "Geist",
-      cssVariable: "--font-geist",
-      weights: ["100 900"],
+      name: "Poppins",
+      cssVariable: "--font-poppins",
+      // Poppins isn't a variable font on Google Fonts, so list the weights the
+      // site actually uses (font-normal through font-extrabold) instead of a range.
+      weights: [400, 600],
       styles: ["normal"],
       subsets: ["latin"],
     },

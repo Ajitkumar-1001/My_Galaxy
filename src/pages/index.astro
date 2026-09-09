@@ -64,19 +64,21 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
       />
     </div>
 
+    <!-- Same layer as particles: fixed background, no pointer-events, so it
+         never sits above (or steals clicks/hover from) real page content.
+         Globe.tsx re-enables pointer-events on its own capped-size div, so
+         drag-to-rotate still works when the cursor is actually over the globe. -->
+    <div class="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+      <Globe
+        client:idle
+        className="w-full h-full opacity-70"
+        config={globeConfig}
+      />
+    </div>
+
     <div class="relative z-20">
       <Navbar client:load />
       <BgMusicButton client:load src="/HaydenFolker.mp3" />
-
-      <div class="fixed inset-0 w-screen h-screen z-10 flex items-center justify-center">
-        <div class="w-full h-full flex items-center justify-center">
-          <Globe
-            client:idle
-            className="w-full h-full opacity-70"
-            config={globeConfig}
-          />
-        </div>
-      </div>
 
       <Hero client:load />
       <About />
