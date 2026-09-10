@@ -30,7 +30,7 @@
 | ⌨️ **Typing headline** | Cycling typed text for name, interests and audience, with a gsap-blinked cursor. |
 | 🪐 **Orbiting skills** | Languages, ML/AI libraries and tools orbit in pure CSS rings, with hover tooltips. Separate desktop and mobile layouts. |
 | 🗂️ **Projects** | Tilt-on-hover spotlight cards. "Read More" opens the matching post from [blog.ajitkumar.io](https://blog.ajitkumar.io) in a dialog. |
-| 🕒 **Experience timeline** | A glowing vertical axis with alternating cards that slide in as you scroll. |
+| 🕒 **Experience carousel** | Roles orbit in a 3D ring — drag, scroll-wheel, or step through them — around the same background globe rather than a second instance of it. |
 | 🎵 **Background music** | Autoplays where the browser allows it, otherwise unlocks on first interaction. One-tap mute. |
 
 <div align="center">
@@ -51,14 +51,14 @@
 
 ## 🧭 How it's put together
 
-The page is composed in `src/pages/index.astro`. Seven React islands hydrate: **Splash**, **Navbar**, **Particles**, **Globe**, **Audio**, **Hero** and **Projects**. Everything else (**About**, **Experience**, **Skills**, **Contact**, **Footer**) stays `.tsx` but renders with no client directive, so Astro emits plain HTML for it at build time and sends no JavaScript.
+The page is composed in `src/pages/index.astro`. Eight React islands hydrate: **Splash**, **Navbar**, **Particles**, **Globe**, **Audio**, **Hero**, **Experience** (the carousel needs pointer/resize/intersection APIs) and **Projects**. Everything else (**About**, **Skills**, **Contact**, **Footer**) stays `.tsx` but renders with no client directive, so Astro emits plain HTML for it at build time and sends no JavaScript.
 
 ```
 src/
 ├── pages/index.astro        composition root (the only route)
 ├── layouts/Layout.astro     <head>, GTM, global CSS, splash gate + reveal observer scripts
 ├── sections/                Hero · About · Experience · Skills · Project · Contact
-├── comp/                    hand-written islands and pieces (Splash, particles, Galaxy, Texttype, ...)
+├── comp/                    hand-written islands and pieces (Splash, particles, Galaxy, Texttype, ExperienceCarousel, ...)
 ├── components/ui/           shadcn/magicui-generated (dialog, button, globe, orbiting-circles)
 ├── data/data.ts             experience entries
 └── styles/global.css        Tailwind import, theme tokens, splash + reveal rules
