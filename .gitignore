@@ -26,6 +26,10 @@ dist-ssr
 
 .astro/
 .gstack/
+.cursor/
+.claude/
+.vscode/
+.agents/
 
 CLAUDE.md
 PLAN.md
