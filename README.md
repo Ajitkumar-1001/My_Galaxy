@@ -69,7 +69,8 @@ Two small conventions worth knowing:
 - **Splash gate.** A blocking script in `<head>` adds `html.splash` on a first visit, so the overlay is visible before first paint and scroll is locked. When the animation ends it sets `sessionStorage.hasVisited`, removes the class and fires a `splash:done` event that Hero waits for.
 - **Scroll reveal.** Give any static element `class="reveal"` (plus `reveal-left`, `reveal-right`, `reveal-pop` or `reveal-line`) and an optional `transitionDelay`. One observer adds `.in` when it scrolls into view. The rules are gated on `html.js`, so readers without JavaScript see everything.
 
-`CLAUDE.md` has the fuller architecture notes.
+`CLAUDE.md` -- Hidden
+
 
 ## 🚀 Run it locally
 
