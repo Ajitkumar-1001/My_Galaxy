@@ -50,6 +50,7 @@ interface Geo {
 
 const PERSPECTIVE = 1400; // must match the `perspective` set on each card layer below
 const ROTATE_SECONDS = 28; // ponytail: was a design-tool slider (12-60s); hardcoded, tune here if the drift feels off
+const GUTTER = 16; // matches the wrap div's px-4 below; stageW is that div's clientWidth, which INCLUDES this padding
 const SPREAD = 1;
 const GLOBE_SCALE = 0.7;
 const GLOBE_REVEAL = 0.9;
@@ -80,7 +81,11 @@ function toCarouselItems(items: Experience_data[]): CarouselItem[] {
 }
 
 function computeGeo(stageW: number, innerH: number): Geo {
-  const W = stageW || 960;
+  // stageW is the wrap div's clientWidth, which includes its own px-4 gutter
+  // (border-box). Without subtracting it, cardW below was set to the full
+  // padded width, so the card overflowed that gutter by GUTTER px on each
+  // side — corners flush against the viewport edge instead of inset.
+  const W = (stageW || 960) - GUTTER * 2;
   const narrow = W < 720;
   const cardW = narrow ? W : Math.round(Math.min(520, Math.max(320, W * 0.54)));
   const pad = narrow ? 24 : 32;
@@ -89,7 +94,11 @@ function computeGeo(stageW: number, innerH: number): Geo {
   const G = Math.round(cardW * GLOBE_SCALE * (narrow ? 0.8 : 1));
   const R = narrow ? cardW * 0.85 : cardW * 1.25 * SPREAD;
   const reveal = Math.min(1, Math.max(0.5, GLOBE_REVEAL));
-  const T = cardH / 2 + (reveal - 0.5) * G; // how much of the globe peeks above the front card
+  // On narrow there's no room to see the ring shape anyway, so skip the
+  // globe-reveal offset that pushes the front card down to expose the globe
+  // above it — it only costs scroll length on a phone. Card sits centered
+  // on the stage's own vertical reservation instead.
+  const T = narrow ? cardH / 2 : cardH / 2 + (reveal - 0.5) * G; // how much of the globe peeks above the front card
   const sSide = PERSPECTIVE / (PERSPECTIVE + R);
   const top = Math.min(-G / 2, (-sSide * cardH) / 2);
   const bottom = T + cardH / 2;
@@ -147,6 +156,15 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
   useEffect(() => {
     reducedRef.current = !!reducedMotion;
   }, [reducedMotion]);
+
+  // Touch has no hover to pause the drift on, so a coarse-pointer reader gets
+  // torn away from a card mid-read every ROTATE_SECONDS/count seconds.
+  // ponytail: checked once on mount, not re-evaluated live — pointer type
+  // essentially never changes on a running page.
+  const coarseRef = useRef(false);
+  useEffect(() => {
+    coarseRef.current = window.matchMedia?.("(pointer: coarse)").matches ?? false;
+  }, []);
 
   const [size, setSize] = useState({ stageW: 0, innerH: 0 });
   const geo = useMemo(() => computeGeo(size.stageW, size.innerH), [size.stageW, size.innerH]);
@@ -221,6 +239,7 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
       const s = ring.current;
       const paused =
         reducedRef.current ||
+        coarseRef.current ||
         s.hover ||
         dragRef.current !== null ||
         document.hidden ||
@@ -421,7 +440,7 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
                         </h3>
                         <p className="m-0 text-sm font-bold text-white">{item.role}</p>
                       </div>
-                      <span className="rounded-full bg-white/10 border border-white/5 px-3.5 py-1.5 text-xs font-semibold text-white tabular-nums whitespace-nowrap shadow-inner">
+                      <span className="rounded-full bg-white/10 border border-white/5 px-3.5 py-1.5 text-sm md:text-xs font-semibold text-white tabular-nums whitespace-nowrap shadow-inner">
                         {item.period}
                       </span>
                     </div>
@@ -430,7 +449,7 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
                       {item.bullets.map((text, n) => (
                         <div key={n} className="grid grid-cols-[26px_1fr] gap-2.5 items-baseline">
                           <span className="text-[11px] font-extrabold text-blue-500 tabular-nums tracking-wider">{pad2(n + 1)}</span>
-                          <p className="m-0 text-sm font-semibold leading-relaxed text-white/90">{text}</p>
+                          <p className="m-0 text-base md:text-sm font-semibold leading-relaxed text-white/90">{text}</p>
                         </div>
                       ))}
                     </div>
@@ -441,6 +460,14 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
           })}
         </div>
       </div>
+
+      {/* Years live next to each dot at md+ (below); at that width the dots
+          carry no visible label on their own, so give mobile a position/company
+          readout instead. Decorative — the dots' aria-labels already cover
+          screen readers. */}
+      <p className="md:hidden m-0 text-center text-sm font-bold tracking-wide text-white/70 tabular-nums" aria-hidden="true">
+        {active + 1} / {count} · {cards[active]?.company}
+      </p>
 
       <div className="flex items-center justify-center gap-4 flex-wrap">
         <button
