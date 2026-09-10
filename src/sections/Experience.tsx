@@ -1,5 +1,6 @@
 import React from "react";
 import { experience_content } from "../data/data";
+
 import ExperienceCarousel from "../comp/ExperienceCarousel";
 
 // Client island (see index.astro) — ExperienceCarousel needs pointer/resize/
