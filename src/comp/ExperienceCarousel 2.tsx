@@ -90,10 +90,8 @@ function computeGeo(stageW: number, innerH: number): Geo {
   // side — corners flush against the viewport edge instead of inset.
   const W = (stageW || 960) - GUTTER * 2;
   const narrow = W < 640; // matches the Orbit v6 Phone spec's `phone = W < 640`
-  // ponytail: 0.94 inset gives the mobile card visible side margin instead of
-  // spanning the full stage edge-to-edge; tune here if the draft wants more/less.
-  const cardW = narrow ? Math.round(W * 0.94) : Math.round(Math.min(520, Math.max(320, W * 0.54)));
-  const pad = narrow ? 16 : 32;
+  const cardW = narrow ? W : Math.round(Math.min(520, Math.max(320, W * 0.54)));
+  const pad = narrow ? 20 : 32;
   const measured = innerH > 0;
   const cardH = measured ? innerH + pad * 2 + 2 : Math.round(cardW * (narrow ? 1.1 : 0.9));
   const G = Math.round(cardW * GLOBE_SCALE * (narrow ? 0.66 : 1));
@@ -464,34 +462,26 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
                     }}
                     className="flex flex-col"
                   >
-                    <div className={`flex items-center flex-wrap ${geo.narrow ? "gap-3" : "gap-4"}`}>
-                      <div
-                        className={`shrink-0 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center overflow-hidden ${
-                          geo.narrow ? "w-11 h-11 p-2" : "w-14 h-14 p-2.5"
-                        }`}
-                      >
+                    <div className="flex items-center gap-4 flex-wrap">
+                      <div className="w-14 h-14 shrink-0 rounded-2xl bg-white/5 border border-white/10 p-2.5 flex items-center justify-center overflow-hidden">
                         <img src={item.logo} alt={item.company} className="w-full h-full object-contain brightness-110" />
                       </div>
-                      <div className="flex flex-col gap-1 min-w-[140px] flex-1">
-                        <h3 className={`m-0 font-bold leading-tight text-blue-400 ${geo.narrow ? "text-base" : "text-lg"}`}>
+                      <div className="flex flex-col gap-1 min-w-0 flex-1">
+                        <h3 className="m-0 text-lg font-bold leading-tight bg-gradient-to-r from-blue-400 to-indigo-500 bg-clip-text text-transparent">
                           {item.company}
                         </h3>
-                        <p className={`m-0 font-bold text-white ${geo.narrow ? "text-xs" : "text-sm"}`}>{item.role}</p>
+                        <p className="m-0 text-sm font-bold text-white">{item.role}</p>
                       </div>
-                      <span
-                        className={`rounded-full bg-white/10 border border-white/5 font-semibold text-white tabular-nums whitespace-nowrap shadow-inner ${
-                          geo.narrow ? "text-xs px-3 py-1" : "text-sm md:text-xs px-3.5 py-1.5"
-                        }`}
-                      >
+                      <span className="rounded-full bg-white/10 border border-white/5 px-3.5 py-1.5 text-sm md:text-xs font-semibold text-white tabular-nums whitespace-nowrap shadow-inner">
                         {item.period}
                       </span>
                     </div>
-                    <div className={`h-px bg-white/10 ${geo.narrow ? "my-3" : "my-5"}`} />
-                    <div className={`flex flex-col ${geo.narrow ? "gap-2" : "gap-3"}`}>
+                    <div className="h-px bg-white/10 my-5" />
+                    <div className="flex flex-col gap-3">
                       {(geo.narrow && !expanded ? item.bullets.slice(0, MOBILE_BULLETS) : item.bullets).map((text, n) => (
                         <div key={n} className="grid grid-cols-[26px_1fr] gap-2.5 items-baseline">
                           <span className="text-[11px] font-extrabold text-blue-500 tabular-nums tracking-wider">{pad2(n + 1)}</span>
-                          <p className="m-0 text-base md:text-sm font-semibold leading-relaxed text-gray-300">{text}</p>
+                          <p className="m-0 text-base md:text-sm font-semibold leading-relaxed text-white/90">{text}</p>
                         </div>
                       ))}
                     </div>
@@ -536,7 +526,7 @@ const ExperienceCarousel: React.FC<ExperienceCarouselProps> = ({ items }) => {
           carry no visible label on their own, so give mobile a position/company
           readout instead. Decorative — the dots' aria-labels already cover
           screen readers. */}
-      <p className="md:hidden m-0 text-center text-sm font-bold tracking-wide text-gray-300 tabular-nums" aria-hidden="true">
+      <p className="md:hidden m-0 text-center text-sm font-bold tracking-wide text-white/70 tabular-nums" aria-hidden="true">
         {active + 1} / {count} · {cards[active]?.company}
       </p>
 
