@@ -17,10 +17,12 @@ export const experience_content : Experience_data[] = [
         logo : "/ub.jpeg", 
         company_name : "University at Buffalo", 
         role: "Research Assistant — AI Systems",
-        role_description: `Architected an LLM-powered research intelligence platform aggregating publications, grants, and academic activity across 80+ faculty members into automated AI-generated weekly digests.
-          Engineered identifier-first retrieval pipelines across 12 academic and federal data sources using ORCID, DBLP, and Semantic Scholar to improve entity resolution and retrieval consistency.
-          Designed a scalable PostgreSQL + Supabase knowledge architecture (12 tables, 6 views, 4 triggers) optimized for low-latency retrieval and structured LLM reporting workflows.
-          Built a modular FastAPI + Next.js AI platform orchestrating ingestion, retrieval augmentation, and schema-constrained LLM summarization for leadership-facing intelligence reports.`,
+        role_description: `MyVictor: Shipped a production university-advising chatbot backed by ~300 automated tests, with async APIs, stateless SSE streaming and non-blocking conversation persistence, all without breaking the existing public API contract.
+          MyVictor: Cut LLM calls to zero for common list and count questions by running structured database queries directly, and improved answer grounding with Neo4j + Qdrant hybrid retrieval, reranking and self-correcting query repair, evaluated on 37 QA cases.
+          MyVictor: Locked access down to approved users with allowlisted authentication and ownership-scoped, private conversation history, plus an audited read-only admin view for oversight.
+          MyVictor: Deployed on OpenShift, standardizing delivery through container orchestration, routing and release management on the university's infrastructure.
+          Faculty Monitoring: Built a research-intelligence platform tracking 80+ UB faculty across 12 academic and federal sources, using automated ingestion, entity resolution and provenance-aware PostgreSQL/Supabase storage.
+          Faculty Monitoring: Delivered FastAPI + Next.js workflows that turn retrieval-grounded LLM synthesis into human-reviewable weekly reports on publications and grants, with Gmail/Slack alerts automated through Composio.`,
         period_Start : "March-2026",
         period_end : "Present"
     },
@@ -28,11 +30,11 @@ export const experience_content : Experience_data[] = [
         id : 2, 
         logo : "/hcs.jpeg", 
         company_name : "Human Cloud Soft Pvt Ltd", 
-        role: "Software Developer Intern",
-        role_description: `Developed and maintained web applications using .NET Framework, C#, and ASP.NET MVC.
-          Designed and implemented database schemas, stored procedures, and queries in Microsoft SQL Server for application backends.
-          Built and integrated user interfaces with server-side logic, ensuring optimal performance and maintainability.
-          Collaborated with senior developers in debugging, code reviews, and deploying applications to production environments.`,
+        role: "Software Developer",
+        role_description: `Built 18 REST API endpoints giving 4 operational teams one place to track inventory, update stock and retrieve records.
+          Raised inventory accuracy by 35% by replacing manual recordkeeping with React.js interfaces and ASP.NET MVC logic that validates every stock transaction.
+          Cut inventory audit time by 40% with T-SQL stored procedures, indexed-query tuning and database-driven stock reconciliation.
+          Hardened the APIs with server-side validation, input sanitization and Postman testing, on SQL Server persistence with AWS deployment support.`,
         period_Start : "May-2023",
         period_end : "June-2024"
     },
@@ -42,11 +44,9 @@ export const experience_content : Experience_data[] = [
         id : 3,
         logo : "/klicknet.jpeg",
         company_name : "Klicknet Info Services Pvt Ltd",
-        role : "Frontend Developer",
-        role_description : `Responsible for maintaining dynamic updation of the ui components.
-                            designed a scalable and mobile first design for the applications in react.
-                            Implemented dynamic UI components with state management.
-                            Optimized performance through code splitting, lazy loading, and reusable component patterns.`,
+        role : "Junior Software Developer",
+        role_description : `Created reusable React.js and JavaScript functional components for client-facing web apps, standardizing responsive layouts by almost 70% and removing duplicate UI work.
+                            Connected Flask REST APIs to frontend workflows, backed by unit and API-to-database integration tests that checked business logic, data persistence and error handling before each release.`,
         period_Start : "April-2022",
         period_end : "April-2023"
 
