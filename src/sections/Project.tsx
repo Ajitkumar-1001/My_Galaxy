@@ -234,9 +234,11 @@ const Projects: React.FC = () => {
                     <div className="flex justify-center mb-2">
                       <DialogDemo className="text-white rounded-full" button="Read More.." source={project.source} ratio={20/16}/>
                     </div>
-                    <div className="flex justify-center mb-2">
-                      <DialogDemo className="text-blue-300 bg-transparent border-blue-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
-                    </div>
+                    {project.demo2 && (
+                      <div className="flex justify-center mb-2">
+                        <DialogDemo className="text-blue-300 bg-transparent border-blue-200 border-2 rounded-full" button="View Demo" source={project.demo2} ratio={20/16}/>
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-col items-center">
                     <a

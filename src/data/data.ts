@@ -46,7 +46,10 @@ export const experience_content : Experience_data[] = [
         company_name : "Klicknet Info Services Pvt Ltd",
         role : "Junior Software Developer",
         role_description : `Created reusable React.js and JavaScript functional components for client-facing web apps, standardizing responsive layouts by almost 70% and removing duplicate UI work.
-                            Connected Flask REST APIs to frontend workflows, backed by unit and API-to-database integration tests that checked business logic, data persistence and error handling before each release.`,
+                            Connected Flask REST APIs to frontend workflows, backed by unit and API-to-database integration tests that checked business logic, data persistence and error handling before each release.
+                            Built data-driven React views (forms, lists and detail pages) on top of those Flask endpoints, with explicit loading, empty and error states so a failed API call showed a clear message instead of a broken screen.
+                            Validated inputs on both sides of the API contract, with client-side checks for fast feedback and server-side Flask validation for enforcement, so bad payloads were rejected before reaching the database.
+                            Ran the integration tests and a cross-device responsive check on the shared components before each release, so a fix to one component could not regress the client apps that reused it.`,
         period_Start : "April-2022",
         period_end : "April-2023"
 

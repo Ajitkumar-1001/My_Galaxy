@@ -147,7 +147,7 @@ const Hero: React.FC = () => {
 
           <motion.a
             variants={controlprops2 as any}
-            href="/Ajitkumar_senthilkumar_AI.pdf"
+            href="/AJIT-RESUME.pdf"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open resume in a new tab"
