@@ -1,0 +1,81 @@
+---
+// First-visit intro: welcome lines → our Milky Way → a dive to the Sun → the solar system → Earth,
+// which becomes the live globe. A port of the approved HyperFrames previz (SPEC.md pass 3); the
+// motion lives in src/lib/intro/. Shown only under html.splash (set by Layout.astro's head script on
+// a first visit, see #splash in global.css); the script removes the overlay when it is done.
+// Imagery: NASA/JPL-Caltech/R. Hurt (galaxy), ESO/S. Brunier (sky), Solar System Scope (planets);
+// credited in Footer.tsx.
+---
+
+<div id="splash" class="fixed inset-0 z-[100] overflow-hidden bg-black">
+  <div id="intro-ground" class="absolute inset-0 bg-black"></div>
+  <div id="intro-stage" class="absolute inset-0 overflow-hidden opacity-0">
+    <div id="intro-plane" class="absolute left-0 top-0 h-[4096px] w-[4096px] will-change-transform">
+      <!-- 4096 CSS px whatever the file's size: the plane maths is in 4096 image px. src is set by
+           the script on a first visit only, so returning visitors never download it. -->
+      <img
+        id="intro-galaxy"
+        alt=""
+        width="4096"
+        height="4096"
+        decoding="async"
+        data-src="/intro/milkyway.webp"
+        class="block h-[4096px] w-[4096px] max-w-none will-change-transform"
+      />
+    </div>
+    <div id="intro-bulge" class="absolute left-0 top-0 size-[100px] rounded-full opacity-0 mix-blend-screen"></div>
+  </div>
+  <!-- The star shader writes dim colour at high alpha; screen only ever adds light over the galaxy. -->
+  <canvas id="intro-stars" class="absolute inset-0 block size-full mix-blend-screen"></canvas>
+  <canvas id="intro-solar" class="absolute inset-0 block size-full"></canvas>
+
+  <div class="absolute inset-0 z-10 flex items-center justify-center">
+    <div id="intro-copy" class="flex flex-col items-center">
+      <h1
+        id="intro-l1"
+        class="text-4xl subpixel-antialiased md:text-6xl text-border-2 font-sans text-white font-extrabold text-center opacity-0"
+      >
+        <span class="text-blue-400">Welcome</span> to <span class="text-blue-400">My Galaxy</span>
+      </h1>
+      <p
+        id="intro-l2"
+        class="text-2xl subpixel-antialiased md:text-4xl font-sans text-border-2 text-white border-white font-extrabold space-y-10 text-center mt-10"
+      >
+        <span class="intro-w opacity-0">A</span> <span class="intro-w opacity-0">space</span> <span class="intro-w opacity-0">to</span> <span class="intro-w opacity-0">host</span> <span class="intro-w opacity-0">my</span> <span class="intro-w opacity-0 text-blue-300">Personal</span> <span class="intro-w opacity-0 text-white">/</span> <span class="intro-w opacity-0 text-blue-300">Professional</span> <span class="intro-w opacity-0">works.</span>
+      </p>
+      <p
+        id="intro-l3"
+        class="text-2xl subpixel-antialiased md:text-4xl font-sans text-border-2 text-white border-white font-extrabold space-y-10 text-center mt-10 opacity-0"
+      >
+        Let's Explore !!....
+      </p>
+    </div>
+  </div>
+
+  <button
+    id="intro-skip"
+    type="button"
+    class="absolute right-[6vw] bottom-[6vh] z-20 inline-flex min-h-11 cursor-pointer items-center rounded-full border border-white/30 bg-black/40 px-4 text-sm font-normal text-white/80 transition-colors hover:border-white/60 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-300"
+  >
+    Skip intro
+  </button>
+</div>
+
+<style>
+  /* The bar has height: a camera-facing glow over the painted bar, so tilting never flattens it. */
+  #intro-bulge {
+    background: radial-gradient(
+      closest-side,
+      rgb(255 240 214 / 0.9),
+      rgb(255 228 188 / 0.45) 40%,
+      rgb(255 216 172 / 0.12) 72%,
+      transparent
+    );
+  }
+</style>
+
+<script>
+  import { startIntro } from "../lib/intro/controller";
+
+  startIntro();
+</script>
