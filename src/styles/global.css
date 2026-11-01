@@ -197,6 +197,20 @@ html.splash #splash {
 html.splash {
   overflow: hidden;
 }
+/* While the intro plays (src/components/Intro.astro), the page waits under it and fades in when
+   html.splash goes. The globe wrapper has no transition: the intro drives its opacity and scale
+   inline for the handoff from Earth, and Skip lands it at once. */
+#page-content {
+  transition: opacity 0.4s;
+}
+#intro-particles-wrap {
+  transition: opacity 0.5s;
+}
+html.splash #page-content,
+html.splash #intro-particles-wrap,
+html.splash #intro-globe-wrap {
+  opacity: 0;
+}
 
 /* Scroll reveal for the static sections. Only active when JS is present
    (html.js is set by the head script), so no-JS readers see everything.

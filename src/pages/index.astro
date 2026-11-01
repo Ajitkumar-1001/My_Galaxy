@@ -1,7 +1,7 @@
 ---
 import type { COBEOptions } from "cobe";
 import Layout from "../layouts/Layout.astro";
-import Splash from "../comp/Splash";
+import Intro from "../components/Intro.astro";
 import Particles from "../comp/particles";
 import Navbar from "../comp/navbar";
 import BgMusicButton from "../comp/Audio";
@@ -44,12 +44,12 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
 
 <Layout>
   <main class="relative">
-    <Splash client:load />
+    <Intro />
 
     <!-- Furthest back. pointer-events-none regardless of stacking order, so a
          viewport gap the content doesn't cover can never eat a click. The hover
          effect still works because particles.tsx listens on `window`, not this div. -->
-    <div class="fixed inset-0 z-0 pointer-events-none">
+    <div id="intro-particles-wrap" class="fixed inset-0 z-0 pointer-events-none">
       <Particles
         client:idle
         particleCount={1200}
@@ -68,7 +68,7 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
          never sits above (or steals clicks/hover from) real page content.
          Globe.tsx re-enables pointer-events on its own capped-size div, so
          drag-to-rotate still works when the cursor is actually over the globe. -->
-    <div class="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
+    <div id="intro-globe-wrap" class="fixed inset-0 z-0 pointer-events-none flex items-center justify-center">
       <Globe
         client:idle
         className="w-full h-full opacity-70"
@@ -76,7 +76,7 @@ const globeConfig: Omit<COBEOptions, "onRender"> = {
       />
     </div>
 
-    <div class="relative z-20">
+    <div id="page-content" class="relative z-20">
       <Navbar client:load />
       <BgMusicButton client:load src="/HaydenFolker.mp3" />
 

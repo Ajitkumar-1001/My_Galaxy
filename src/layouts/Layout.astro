@@ -20,6 +20,14 @@ import "../styles/global.css";
       try {
         if (sessionStorage.getItem("hasVisited") !== "true") {
           document.documentElement.classList.add("splash");
+          // Safety net: if the intro script never starts (failed to load), reveal the page anyway.
+          setTimeout(function () {
+            var h = document.documentElement;
+            if (h.classList.contains("splash") && !window.__introAlive) {
+              h.classList.remove("splash");
+              window.dispatchEvent(new Event("splash:done"));
+            }
+          }, 20000);
         }
       } catch {}
     </script>
