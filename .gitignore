@@ -33,3 +33,7 @@ dist-ssr
 
 CLAUDE.md
 PLAN.md
+
+# Local tooling: npm (package-lock.json) is the committed lockfile
+pnpm-lock.yaml
+skills-lock.json

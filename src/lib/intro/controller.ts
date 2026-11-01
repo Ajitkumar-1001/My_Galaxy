@@ -31,13 +31,13 @@ declare global {
   }
 }
 
-type FinishReason = "end" | "skip" | "escape" | "reduced" | "webgl" | "assets" | "resize" | "watchdog";
+type FinishReason = "end" | "escape" | "reduced" | "webgl" | "assets" | "resize" | "watchdog";
 type AssetState = "pending" | "ready" | "failed";
 
 const WATCHDOG_MS = 15000;
 const ASSET_GRACE_MS = 4000;
 
-function collect(overlay: HTMLElement): (IntroElements & { skip: HTMLButtonElement }) | null {
+function collect(overlay: HTMLElement): IntroElements | null {
   const one = <T extends Element>(sel: string): T | null => overlay.querySelector<T>(sel);
   const ground = one<HTMLElement>("#intro-ground");
   const stage = one<HTMLElement>("#intro-stage");
@@ -49,12 +49,11 @@ function collect(overlay: HTMLElement): (IntroElements & { skip: HTMLButtonEleme
   const copy = one<HTMLElement>("#intro-copy");
   const l1 = one<HTMLElement>("#intro-l1");
   const l3 = one<HTMLElement>("#intro-l3");
-  const skip = one<HTMLButtonElement>("#intro-skip");
   const l2Words = Array.from(overlay.querySelectorAll<HTMLElement>("#intro-l2 .intro-w"));
-  if (!ground || !stage || !plane || !galaxy || !bulge || !starsCanvas || !solarCanvas || !copy || !l1 || !l3 || !skip) {
+  if (!ground || !stage || !plane || !galaxy || !bulge || !starsCanvas || !solarCanvas || !copy || !l1 || !l3) {
     return null;
   }
-  return { overlay, ground, stage, plane, galaxy, bulge, starsCanvas, solarCanvas, copy, l1, l2Words, l3, skip };
+  return { overlay, ground, stage, plane, galaxy, bulge, starsCanvas, solarCanvas, copy, l1, l2Words, l3 };
 }
 
 export function startIntro(): void {
@@ -146,7 +145,7 @@ export function startIntro(): void {
     overlay?.remove();
     if (globeWrap) {
       if (reason === "end" && view) landGlobe(globeWrap, view);
-      else clearGlobe(globeWrap); // Skip & co. land the globe at scale 1
+      else clearGlobe(globeWrap); // Esc & co. land the globe at scale 1
     }
     if (import.meta.env.DEV) delete window.__introSeek;
   }
@@ -158,7 +157,6 @@ export function startIntro(): void {
   }
   if (page) page.inert = true;
 
-  els.skip.addEventListener("click", () => finish("skip"));
   window.addEventListener("keydown", onKey);
   window.addEventListener("resize", onResize);
   window.addEventListener("orientationchange", onResize);
