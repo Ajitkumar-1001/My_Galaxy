@@ -3,6 +3,10 @@
 // every path — sets sessionStorage.hasVisited, removes html.splash, dispatches `splash:done` once
 // (Hero, ProfileCard and Audio wait for it) and un-inerts #page-content, then tears the intro down.
 import { gsap } from "gsap";
+import { AUDIO_START, createTravelAudio } from "./audio";
+import type { TravelAudio } from "./audio";
+import { createGalaxy } from "./galaxy";
+import type { Galaxy } from "./galaxy";
 import { createSolar } from "./solar";
 import type { Solar } from "./solar";
 import { createStarfield } from "./starfield";
@@ -15,6 +19,8 @@ import {
   computeView,
   createRenderer,
   createState,
+  film,
+  GC,
   journeyJ,
   seamCamera,
   textOrigin,
@@ -36,24 +42,24 @@ type AssetState = "pending" | "ready" | "failed";
 
 const WATCHDOG_MS = 15000;
 const ASSET_GRACE_MS = 4000;
+/** The welcome lines are in (L3 lands at 2.2 s): GPU uploads from here cannot stall an entrance. */
+const T_WARM = 2.3;
 
 function collect(overlay: HTMLElement): IntroElements | null {
   const one = <T extends Element>(sel: string): T | null => overlay.querySelector<T>(sel);
   const ground = one<HTMLElement>("#intro-ground");
   const stage = one<HTMLElement>("#intro-stage");
-  const plane = one<HTMLElement>("#intro-plane");
-  const galaxy = one<HTMLImageElement>("#intro-galaxy");
-  const bulge = one<HTMLElement>("#intro-bulge");
+  const galaxyCanvas = one<HTMLCanvasElement>("#intro-galaxy");
   const starsCanvas = one<HTMLCanvasElement>("#intro-stars");
   const solarCanvas = one<HTMLCanvasElement>("#intro-solar");
   const copy = one<HTMLElement>("#intro-copy");
   const l1 = one<HTMLElement>("#intro-l1");
   const l3 = one<HTMLElement>("#intro-l3");
   const l2Words = Array.from(overlay.querySelectorAll<HTMLElement>("#intro-l2 .intro-w"));
-  if (!ground || !stage || !plane || !galaxy || !bulge || !starsCanvas || !solarCanvas || !copy || !l1 || !l3) {
+  if (!ground || !stage || !galaxyCanvas || !starsCanvas || !solarCanvas || !copy || !l1 || !l3) {
     return null;
   }
-  return { overlay, ground, stage, plane, galaxy, bulge, starsCanvas, solarCanvas, copy, l1, l2Words, l3 };
+  return { overlay, ground, stage, galaxyCanvas, starsCanvas, solarCanvas, copy, l1, l2Words, l3 };
 }
 
 export function startIntro(): void {
@@ -80,6 +86,8 @@ export function startIntro(): void {
   const W0 = window.innerWidth;
   const H0 = window.innerHeight;
   let view: View | null = null;
+  let galaxy: Galaxy | null = null;
+  let travel: TravelAudio | null = null;
 
   const onKey = (e: KeyboardEvent): void => {
     if (e.key === "Escape") finish("escape");
@@ -91,7 +99,7 @@ export function startIntro(): void {
   const onContextLost = (): void => finish("webgl");
   let onVisible: (() => void) | null = null;
 
-  /** Lands the globe after splash:done exactly as the timeline would have (S6 runs to 11.6). */
+  /** Lands the globe after splash:done exactly as the timeline would have (S6 runs to T_LANDED). */
   const landGlobe = (wrap: HTMLElement, v: View): void => {
     wrap.style.removeProperty("opacity"); // html.splash is gone, so the wrapper is visible
     const p = { t: T_DONE };
@@ -137,11 +145,14 @@ export function startIntro(): void {
     window.removeEventListener("orientationchange", onResize);
     if (onVisible) document.removeEventListener("visibilitychange", onVisible);
     if (els) {
+      els.galaxyCanvas.removeEventListener("webglcontextlost", onContextLost);
       els.starsCanvas.removeEventListener("webglcontextlost", onContextLost);
       els.solarCanvas.removeEventListener("webglcontextlost", onContextLost);
     }
     for (const gl of contexts) gl.getExtension("WEBGL_lose_context")?.loseContext();
-    if (els?.galaxy.hasAttribute("src")) els.galaxy.src = "";
+    galaxy?.dispose();
+    if (reason === "end") travel?.release(); // the eclipse tail rings out past splash:done
+    else travel?.stop();
     overlay?.remove();
     if (globeWrap) {
       if (reason === "end" && view) landGlobe(globeWrap, view);
@@ -202,16 +213,29 @@ export function startIntro(): void {
   const v = computeView(W, H, globeCanvas ? globeCanvas.getBoundingClientRect() : null);
   view = v;
 
-  // WebGL: the star field (drawing buffer capped at ~1 MP) and the solar system (dpr ≤ 1.5).
+  // WebGL: the Milky Way (dpr ≤ 2; its photo starts downloading now), the star field (drawing buffer
+  // capped at ~1 MP) and the solar system (dpr ≤ 1.5).
   const starScale = Math.min(1, Math.sqrt(1e6 / (W * H)));
   let stars: Starfield | null = null;
   let solar: Solar | null = null;
   try {
-    stars = createStarfield(els.starsCanvas, {
-      width: Math.max(1, Math.round(W * starScale)),
-      height: Math.max(1, Math.round(H * starScale)),
-      focal: [v.F[0] / W, 1 - v.F[1] / H],
+    galaxy = createGalaxy(els.galaxyCanvas, {
+      W,
+      H,
+      FL: v.FL,
+      focal: v.F,
+      gc: GC,
+      src: "/intro/milkyway.webp",
+      dpr: Math.min(window.devicePixelRatio || 1, 2),
     });
+    if (galaxy) {
+      contexts.push(galaxy.gl);
+      stars = createStarfield(els.starsCanvas, {
+        width: Math.max(1, Math.round(W * starScale)),
+        height: Math.max(1, Math.round(H * starScale)),
+        focal: [v.F[0] / W, 1 - v.F[1] / H],
+      });
+    }
     if (stars) {
       contexts.push(stars.gl);
       solar = createSolar(els.solarCanvas, {
@@ -232,9 +256,11 @@ export function startIntro(): void {
   }
 
   // No WebGL: show the text, hold, then finish — never block splash:done.
-  if (!stars || !solar) {
+  if (!galaxy || !stars || !solar) {
     for (const gl of contexts) gl.getExtension("WEBGL_lose_context")?.loseContext();
     contexts.length = 0;
+    galaxy?.dispose();
+    galaxy = null;
     const w = gsap.timeline({ paused: true });
     addWelcome(w, els);
     w.fromTo(overlay, { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.inOut" }, T_GATE);
@@ -243,44 +269,53 @@ export function startIntro(): void {
     begin(w);
     return;
   }
+  els.galaxyCanvas.addEventListener("webglcontextlost", onContextLost);
   els.starsCanvas.addEventListener("webglcontextlost", onContextLost);
   els.solarCanvas.addEventListener("webglcontextlost", onContextLost);
-  const layers = { stars, solar };
+  const layers = { galaxy, stars, solar };
 
   // The ground div is black from here; the overlay's own background would hide the globe handoff.
   overlay.classList.remove("bg-black");
 
+  const S = createState();
+  const t = gsap.timeline({ paused: true });
+  tl = t;
+  buildIntroTimeline(t, S, els);
+
   // Fetch and decode the galaxy and every solar texture now; the timeline waits at 3.85 s if needed.
+  // The GPU work (uploads, mipmaps, shader warm-up) waits for T_WARM so it cannot stall an entrance.
   let assets: AssetState = "pending";
+  let decoded = false;
   let waiting = false;
   const fadeOutAndFinish = (): void => {
     if (finished || fade) return;
     tl?.pause();
     fade = gsap.to(overlay, { opacity: 0, duration: 0.4, ease: "power1.inOut", onComplete: () => finish("assets") });
   };
-  const galaxySrc = els.galaxy.dataset.src;
-  if (galaxySrc) els.galaxy.src = galaxySrc;
-  Promise.all([els.galaxy.decode(), solar.ready])
+  const warm = (): void => {
+    if (finished || !decoded || assets !== "pending") return;
+    layers.galaxy.upload(); // the photo to the GPU, mipmapped, and every pipeline built: not at 4.4 s
+    layers.solar.warmup(); // and the planets, sky and shaders: not at the seam
+    assets = "ready";
+    if (waiting) {
+      waiting = false;
+      window.clearTimeout(graceTimer);
+      t.play();
+    }
+  };
+  Promise.all([layers.galaxy.ready, layers.solar.ready])
     .then(() => {
       if (finished) return;
-      solar.warmup(); // textures to the GPU and shaders primed now, not at the seam
-      assets = "ready";
-      if (waiting) {
-        waiting = false;
-        window.clearTimeout(graceTimer);
-        tl?.play();
-      }
+      decoded = true;
+      if (t.time() >= T_WARM) warm();
     })
     .catch((err: unknown) => {
+      if (finished) return;
       console.warn("[intro] assets failed:", err);
       assets = "failed";
       if (waiting) fadeOutAndFinish();
     });
-
-  const S = createState();
-  const t = gsap.timeline({ paused: true });
-  tl = t;
-  buildIntroTimeline(t, S, els);
+  t.call(warm, undefined, T_WARM);
   t.call(
     () => {
       if (assets === "ready") return;
@@ -299,16 +334,22 @@ export function startIntro(): void {
   );
   t.call(() => finish("end"), undefined, T_DONE);
 
+  // Travel audio: preloads now, starts with the launch cue and follows the clock (audio.ts).
+  const sound = createTravelAudio("/intro/travel.mp3");
+  travel = sound;
+  t.call(() => sound.start(t.time()), undefined, AUDIO_START);
+
   // The text block flies past the camera about F: measure it untransformed (again once fonts settle).
   els.copy.style.transformOrigin = textOrigin(els.copy, v);
   document.fonts?.ready.then(() => {
-    if (!finished && S.time < 4.6) els.copy.style.transformOrigin = textOrigin(els.copy, v);
+    if (!finished && S.time < film(4.6)) els.copy.style.transformOrigin = textOrigin(els.copy, v);
   });
 
   const render = createRenderer(S, v, els, layers, globeWrap);
   tick = () => {
     S.time = t.time();
     render();
+    if (!t.paused()) sound.sync(S.time);
   };
   gsap.ticker.add(tick);
   render();

@@ -1,8 +1,9 @@
 ---
 // First-visit intro: welcome lines → our Milky Way → a dive to the Sun → the solar system → Earth,
-// which becomes the live globe. A port of the approved HyperFrames previz (SPEC.md pass 3); the
-// motion lives in src/lib/intro/. Shown only under html.splash (set by Layout.astro's head script on
-// a first visit, see #splash in global.css); the script removes the overlay when it is done.
+// which becomes the live globe. A port of the approved HyperFrames previz (SPEC.md passes 3–6: the
+// Milky Way in WebGL, the K = 0.85 pace, the travel audio); the motion lives in src/lib/intro/. Shown
+// only under html.splash (set by Layout.astro's head script on a first visit, see #splash in
+// global.css); the script removes the overlay when it is done. Esc ends it early.
 // Imagery: NASA/JPL-Caltech/R. Hurt (galaxy), ESO/S. Brunier (sky), Solar System Scope (planets);
 // credited in Footer.tsx.
 ---
@@ -10,20 +11,9 @@
 <div id="splash" class="fixed inset-0 z-[100] overflow-hidden bg-black">
   <div id="intro-ground" class="absolute inset-0 bg-black"></div>
   <div id="intro-stage" class="absolute inset-0 overflow-hidden opacity-0">
-    <div id="intro-plane" class="absolute left-0 top-0 h-[4096px] w-[4096px] will-change-transform">
-      <!-- 4096 CSS px whatever the file's size: the plane maths is in 4096 image px. src is set by
-           the script on a first visit only, so returning visitors never download it. -->
-      <img
-        id="intro-galaxy"
-        alt=""
-        width="4096"
-        height="4096"
-        decoding="async"
-        data-src="/intro/milkyway.webp"
-        class="block h-[4096px] w-[4096px] max-w-none will-change-transform"
-      />
-    </div>
-    <div id="intro-bulge" class="absolute left-0 top-0 size-[100px] rounded-full opacity-0 mix-blend-screen"></div>
+    <!-- galaxy.ts: the photo is fetched by the script on a first visit only, so returning visitors
+         never download it. -->
+    <canvas id="intro-galaxy" class="absolute inset-0 block size-full"></canvas>
   </div>
   <!-- The star shader writes dim colour at high alpha; screen only ever adds light over the galaxy. -->
   <canvas id="intro-stars" class="absolute inset-0 block size-full mix-blend-screen"></canvas>
@@ -52,19 +42,6 @@
     </div>
   </div>
 </div>
-
-<style>
-  /* The bar has height: a camera-facing glow over the painted bar, so tilting never flattens it. */
-  #intro-bulge {
-    background: radial-gradient(
-      closest-side,
-      rgb(255 240 214 / 0.9),
-      rgb(255 228 188 / 0.45) 40%,
-      rgb(255 216 172 / 0.12) 72%,
-      transparent
-    );
-  }
-</style>
 
 <script>
   import { startIntro } from "../lib/intro/controller";
