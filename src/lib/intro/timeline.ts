@@ -5,13 +5,14 @@
 import { gsap } from "gsap";
 import { GLOBE_MAX_SIZE } from "../../data/globe";
 import { bodyPosition, EARTH_R } from "./solar";
+import type { Galaxy } from "./galaxy";
 import type { Solar, SolarCam } from "./solar";
 import type { Starfield } from "./starfield";
 
 const DEG = Math.PI / 180;
 
-// Milky Way plane, in 4096 "image px" (the <img> is 4096 CSS px square whatever its file size).
-const GC = [2048, 2048] as const;
+// Milky Way plane, in 4096 "image px" (galaxy.ts draws the photo 4096 px square whatever its file size).
+export const GC = [2048, 2048] as const;
 const SUN_PX = [2043, 2835] as const;
 const M0_1080 = 0.00285; // magnification at J = 0 at 1920x1080 (11 px disc; ~1160 px on arrival)
 const SPIN = 2; // deg/s, clockwise about GC
@@ -168,10 +169,9 @@ export function journeyJ(t: number): number {
 export interface IntroElements {
   overlay: HTMLElement;
   ground: HTMLElement;
+  /** holds the galaxy canvas; its opacity is the galaxy's fade in and out */
   stage: HTMLElement;
-  plane: HTMLElement;
-  galaxy: HTMLImageElement;
-  bulge: HTMLElement;
+  galaxyCanvas: HTMLCanvasElement;
   starsCanvas: HTMLCanvasElement;
   solarCanvas: HTMLCanvasElement;
   /** the text block (all three lines) */
@@ -274,6 +274,7 @@ export function clearGlobe(globeWrap: HTMLElement): void {
 }
 
 export interface Layers {
+  galaxy: Galaxy;
   stars: Starfield;
   solar: Solar;
 }
@@ -307,12 +308,9 @@ export function createRenderer(
   // The bottom-up clearing of the near disc is screen-space: scale its 1080 px schedule to H.
   const SWEEP = (1150 * view.H) / 1080;
   const SWEEP_EDGE = (260 * view.H) / 1080;
-  els.stage.style.perspective = `${FL}px`;
-  els.stage.style.perspectiveOrigin = `${F[0]}px ${F[1]}px`;
   const solarGl = layers.solar.gl;
   let solarDrawn = false;
   let globeStyled = false;
-  let stageMasked = false;
   let starsMasked = false;
 
   return function render(): void {
@@ -335,7 +333,8 @@ export function createRenderer(
     const tx = GC[0] + (sunX - GC[0]) * S.gTarget;
     const ty = GC[1] + (sunY - GC[1]) * S.gTarget;
 
-    // A point on the plane, projected exactly as CSS does (scale, rotateX, rotateZ, perspective about F).
+    // A point on the plane, projected exactly as the old CSS-3D plane was (scale, rotateX, rotateZ,
+    // perspective about F); galaxy.ts projects the photo's corners the same way.
     const toScreen = (px: number, py: number): [number, number] => {
       const ux = (px - tx) * s;
       const uy = (py - ty) * s;
@@ -350,38 +349,38 @@ export function createRenderer(
     const sunFocal: readonly [number, number] = S.gTarget < 1 ? toScreen(sunX, sunY) : F;
 
     if (t >= STAGE_FROM && t <= STAGE_TO) {
-      els.plane.style.transformOrigin = `${tx}px ${ty}px`;
-      els.plane.style.transform =
-        `translate3d(${F[0] - tx}px,${F[1] - ty}px,${tz}px) rotateZ(${S.roll}deg) rotateX(${S.tilt}deg) scale(${s})`;
-      els.galaxy.style.transform = `rotate(${spin}deg)`;
-
       // Bulge: the bar's two ends (spun with the disc) projected like the Sun; a glow 1.05x the projected
       // bar long and 0.36x as tall, so it keeps its height as the disc tilts toward edge-on.
       const ba = a + BAR_ANGLE;
       const e1 = toScreen(GC[0] + BAR_HALF * Math.cos(ba), GC[1] + BAR_HALF * Math.sin(ba));
       const e2 = toScreen(GC[0] - BAR_HALF * Math.cos(ba), GC[1] - BAR_HALF * Math.sin(ba));
       const bl = Math.hypot(e1[0] - e2[0], e1[1] - e2[1]) * 1.05;
-      const bang = Math.atan2(e1[1] - e2[1], e1[0] - e2[0]);
       const tiltK = Math.min(1, Math.max(0, (S.tilt - 46) / 20));
       // raised along the disc's projected normal so the bulge rises above the plane, not a decal on it
       const lift = 0.22 * bl * 0.36 * tiltK;
       const nx = Math.sin(S.roll * DEG);
       const ny = -Math.cos(S.roll * DEG);
-      els.bulge.style.transform =
-        `translate(${(e1[0] + e2[0]) / 2 - 50 + nx * lift}px,${(e1[1] + e2[1]) / 2 - 50 + ny * lift}px) ` +
-        `rotate(${bang}rad) scale(${bl / 100},${(bl * 0.36) / 100})`;
-      els.bulge.style.opacity = String(0.3 + 0.45 * tiltK * tiltK * (3 - 2 * tiltK));
 
       // The near disc passes beneath the camera: the arm clears from the bottom edge upward, while the
       // far disc and the bar hold at the horizon until the last fade.
-      const sweep = S.sweep * SWEEP;
-      if (sweep > 1) {
-        setMask(els.stage, `linear-gradient(to top, transparent ${sweep}px, #000 ${sweep + SWEEP_EDGE}px)`);
-        stageMasked = true;
-      } else if (stageMasked) {
-        setMask(els.stage, null);
-        stageMasked = false;
-      }
+      layers.galaxy.draw({
+        tx,
+        ty,
+        tz,
+        s,
+        spin: a,
+        tilt: S.tilt,
+        roll: S.roll,
+        sweep: S.sweep * SWEEP,
+        edge: SWEEP_EDGE,
+        bulge: {
+          x: (e1[0] + e2[0]) / 2 + nx * lift,
+          y: (e1[1] + e2[1]) / 2 + ny * lift,
+          len: bl,
+          ang: Math.atan2(e1[1] - e2[1], e1[0] - e2[0]),
+          opacity: 0.3 + 0.45 * tiltK * tiltK * (3 - 2 * tiltK),
+        },
+      });
     }
 
     // Near star field: base drift at the site's rate + a boost that follows the camera's zoom.
