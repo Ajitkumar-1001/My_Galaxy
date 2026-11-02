@@ -46,7 +46,6 @@
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) (CSS-first, no config file) |
 | Motion | framer-motion in the islands, CSS transitions + one IntersectionObserver for static sections |
 | WebGL | [ogl](https://github.com/oframe/ogl) for particles and the splash shader, [cobe](https://cobe.vercel.app) for the globe |
-| UI bits | shadcn/magicui-generated `dialog`, `button`, `orbiting-circles`; Radix + Lucide + react-icons |
 | Hosting | Vercel |
 
 ## 🧭 How it's put together
