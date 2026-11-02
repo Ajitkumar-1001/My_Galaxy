@@ -199,7 +199,7 @@ html.splash {
 }
 /* While the intro plays (src/components/Intro.astro), the page waits under it and fades in when
    html.splash goes. The globe wrapper has no transition: the intro drives its opacity and scale
-   inline for the handoff from Earth, and Skip lands it at once. */
+   inline for the handoff from Earth, and an early exit lands it at once. */
 #page-content {
   transition: opacity 0.4s;
 }
